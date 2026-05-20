@@ -2,7 +2,9 @@ module org.example.ihm_tierlist {
     requires javafx.controls;
     requires javafx.fxml;
 
+    opens tierlist to javafx.fxml, javafx.graphics;
 
-    opens org.example.ihm_tierlist to javafx.fxml;
-    exports org.example.ihm_tierlist;
+    opens tierlist.controller to javafx.fxml;
+
+    exports tierlist;
 }
