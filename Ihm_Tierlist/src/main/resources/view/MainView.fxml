@@ -83,7 +83,7 @@
                         <Insets left="110.0" top="30.0" />
                      </VBox.margin>
                      <image>
-                        <Image url="@../../../../téléchargement.jpg" />
+                        <Image url="@../Img/téléchargement.jpg" />
                      </image>
                   </ImageView>
                   <Button mnemonicParsing="false" style="-fx-background-color: black; -fx-border-color: white;" text=". . ." textFill="WHITE">
@@ -114,7 +114,7 @@
                         <Insets left="110.0" top="30.0" />
                      </VBox.margin>
                      <image>
-                        <Image url="@../../../../umamusume-pretty-derby_s25r.jpg" />
+                        <Image url="@../Img/umamusume-pretty-derby_s25r.jpg" />
                      </image>
                   </ImageView>
                   <Button mnemonicParsing="false" style="-fx-background-color: black; -fx-border-color: white;" text=". . ." textFill="WHITE">
@@ -145,7 +145,7 @@
                         <Insets left="110.0" top="30.0" />
                      </VBox.margin>
                      <image>
-                        <Image url="@../../../../nom-de-rappeur-imea.jpg" />
+                        <Image url="@../Img/nom-de-rappeur-imea.jpg" />
                      </image>
                   </ImageView>
                   <Button mnemonicParsing="false" style="-fx-background-color: black; -fx-border-color: white;" text=". . ." textFill="WHITE">
@@ -176,7 +176,7 @@
                         <Insets left="110.0" top="30.0" />
                      </VBox.margin>
                      <image>
-                        <Image url="@../../../../images.jpeg" />
+                        <Image url="@../Img/images.jpeg" />
                      </image>
                   </ImageView>
                   <Button mnemonicParsing="false" style="-fx-background-color: black; -fx-border-color: white;" text=". . ." textFill="WHITE">
