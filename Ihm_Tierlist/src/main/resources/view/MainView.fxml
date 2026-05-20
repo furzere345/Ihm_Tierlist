@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-
+<?import javafx.scene.text.Text?>
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -14,7 +14,7 @@
          <children>
             <HBox prefHeight="52.0" prefWidth="600.0">
                <children>
-                  <Button mnemonicParsing="false" text="Créer Tier List">
+                  <Button mnemonicParsing="false" style="-fx-background-color: #3D81FF;" text="Créer Tier List" textFill="WHITE">
                      <HBox.margin>
                         <Insets left="30.0" top="20.0" />
                      </HBox.margin>
@@ -22,7 +22,7 @@
                         <Font name="Roboto" size="14.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" text="Importer">
+                  <Button mnemonicParsing="false" style="-fx-background-color: black; -fx-border-color: white;" text="Importer" textFill="WHITE">
                      <HBox.margin>
                         <Insets left="40.0" top="20.0" />
                      </HBox.margin>
@@ -30,7 +30,7 @@
                         <Font name="Roboto" size="14.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" text="Clair">
+                  <Button mnemonicParsing="false" style="-fx-background-color: black; -fx-border-color: white;" text="Sombre" textFill="WHITE">
                      <HBox.margin>
                         <Insets left="260.0" top="20.0" />
                      </HBox.margin>
@@ -40,12 +40,25 @@
                   </Button>
                </children>
             </HBox>
-            <Separator prefWidth="200.0">
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </Separator>
          </children>
       </VBox>
+      <Separator prefWidth="200.0">
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </Separator>
+      <VBox prefHeight="53.0" prefWidth="600.0">
+         <children>
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Vos Tiers Lists :" wrappingWidth="152.13671875">
+               <font>
+                  <Font name="Roboto" size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="30.0" top="15.0" />
+               </VBox.margin>
+            </Text>
+         </children>
+      </VBox>
+      <Separator prefWidth="200.0" />
    </children>
 </VBox>
