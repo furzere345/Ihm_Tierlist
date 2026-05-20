@@ -11,7 +11,7 @@ public class StartTierListView extends Application {
     public void start(Stage stage) throws Exception {
 
         // Charge ton fichier FXML (adapte le chemin si besoin)
-        Parent root = FXMLLoader.load(getClass().getResource("/view/TierListView2.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/view/TierListView.fxml"));
 
         Scene scene = new Scene(root, 800, 600);
         stage.setScene(scene);
