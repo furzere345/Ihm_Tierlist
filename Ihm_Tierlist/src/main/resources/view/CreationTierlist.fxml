@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="655.0" prefWidth="857.0" style="-fx-background-color: #181616;" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1049.0" style="-fx-background-color: #181616;" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="625.0" prefWidth="600.0" style="-fx-background-color: #181616;" BorderPane.alignment="CENTER">
          <content>
@@ -26,10 +26,10 @@
                               <Insets left="5.0" top="15.0" />
                            </HBox.margin>
                            <font>
-                              <Font size="14.0" />
+                              <Font size="18.0" />
                            </font>
                         </Button>
-                        <Region prefHeight="65.0" prefWidth="583.0" />
+                        <Region prefHeight="65.0" prefWidth="867.0" />
                         <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 23;">
                            <HBox.margin>
                               <Insets top="10.0" />
@@ -64,6 +64,7 @@
                         </VBox>
                      </children>
                   </HBox>
+                  <VBox prefHeight="369.0" prefWidth="1047.0" />
                </children>
             </VBox>
          </content>
