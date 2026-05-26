@@ -13,9 +13,9 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: FF0000;" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <center>
-      <ScrollPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: 1E1E1E;" BorderPane.alignment="CENTER">
+      <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: 1E1E1E;" BorderPane.alignment="CENTER">
          <content>
-            <VBox prefHeight="398.0" prefWidth="598.0" style="-fx-background-color: #181616;">
+            <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #181616;">
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="598.0" spacing="15.0" style="-fx-border-color: #000000; -fx-background-color: #181616; -fx-border-width: 0 0 1 0; -fx-border-color: #FFFFFF;">
                      <children>

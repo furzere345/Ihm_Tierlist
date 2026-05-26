@@ -12,7 +12,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
 
         // Charge ton fichier FXML (adapte le chemin si besoin)
-        Parent root = FXMLLoader.load(getClass().getResource("/view/MainView.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/view/Accueil.fxml"));
 
         primaryStage.setTitle("Test JavaFX FXML");
         primaryStage.setScene(new Scene(root));

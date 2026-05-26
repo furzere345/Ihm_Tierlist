@@ -10,5 +10,4 @@ public class ControllerAccueil {
     @FXML
     private FlowPane tierListContainer;
     HBox Tierlist = new HBox();
-    TierList.setAlignement(Pos.CENTER_LEFT);
 }

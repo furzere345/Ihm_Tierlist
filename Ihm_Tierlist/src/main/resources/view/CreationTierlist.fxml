@@ -1,14 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="CONTROLLER_NAME"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="655.0" prefWidth="857.0" style="-fx-background-color: #181616;" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="625.0" prefWidth="600.0" style="-fx-background-color: #181616;" BorderPane.alignment="CENTER">
+         <content>
+            <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="619.0" prefWidth="598.0" style="-fx-background-color: #181616;">
+               <children>
+                  <HBox prefHeight="66.0" prefWidth="509.0" spacing="15.0" style="-fx-border-color: #FFFFFF; -fx-border-width: 0 0 1 0;">
+                     <children>
+                        <Button alignment="CENTER" mnemonicParsing="false" prefHeight="41.0" prefWidth="94.0" style="-fx-border-radius: 10; -fx-background-color: #3D81FF;" text="Accueil" textFill="WHITE">
+                           <HBox.margin>
+                              <Insets left="5.0" top="15.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                        <Region prefHeight="65.0" prefWidth="583.0" />
+                        <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 23;">
+                           <HBox.margin>
+                              <Insets top="10.0" />
+                           </HBox.margin></Button>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="218.0" prefWidth="598.0">
+                     <children>
+                        <ImageView fitHeight="194.0" fitWidth="194.0" pickOnBounds="true" preserveRatio="true">
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin></ImageView>
+                        <VBox prefHeight="150.0" prefWidth="265.0">
+                           <children>
+                              <Label text="Nom de la Tier-List :" textFill="WHITE">
+                                 <VBox.margin>
+                                    <Insets top="7.0" />
+                                 </VBox.margin></Label>
+                              <TextField style="-fx-background-color: lightgray;">
+                                 <VBox.margin>
+                                    <Insets top="7.0" />
+                                 </VBox.margin></TextField>
+                              <Label text="Description de la Tier-List :" textFill="WHITE">
+                                 <VBox.margin>
+                                    <Insets top="7.0" />
+                                 </VBox.margin></Label>
+                              <TextArea prefHeight="105.0" prefWidth="265.0" style="-fx-control-inner-background: lightgray;">
+                                 <VBox.margin>
+                                    <Insets top="7.0" />
+                                 </VBox.margin></TextArea>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
+   </center>
+</BorderPane>
