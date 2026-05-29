@@ -25,7 +25,7 @@
             <TextField fx:id="tierlistNameField" prefHeight="35.0" prefWidth="180.0" promptText="Nom de la tierlist" style="-fx-background-radius: 5;                                   -fx-font-size: 14px;">
 
                <VBox.margin>
-                  <Insets left="35.0" top="35.0" />
+                  <Insets left="35.0" right="400.0" top="35.0" />
                </VBox.margin>
 
             </TextField>
