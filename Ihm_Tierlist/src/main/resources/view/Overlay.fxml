@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="230.0" prefWidth="400.0" style="-fx-background-color: #111111;" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1">
+
+   <!-- CENTRE -->
+   <center>
+
+      <HBox prefHeight="180.0" prefWidth="400.0" spacing="25.0" style="-fx-background-color: #111111;">
+
+         <!-- ROUE -->
+         <children>
+
+            <VBox alignment="CENTER" prefHeight="180.0" prefWidth="170.0">
+
+               <children>
+
+                  <ImageView fx:id="wheelImage" fitHeight="104.0" fitWidth="187.0" pickOnBounds="true" preserveRatio="true">
+
+                     <image>
+                        <Image url="@../Img/roue-chromatique-removebg-preview.png" />
+                     </image>
+
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+
+                  </ImageView>
+
+               </children>
+
+            </VBox>
+
+            <!-- PARTIE DROITE -->
+            <VBox prefHeight="180.0" prefWidth="170.0" spacing="15.0">
+
+               <children>
+
+                  <!-- NOM -->
+                  <VBox spacing="5.0">
+
+                     <children>
+
+                        <Label text="Nom du Tier :" textFill="WHITE">
+
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+
+                        </Label>
+
+                        <TextField fx:id="tierField" prefWidth="130.0" promptText="Nom du tier" />
+
+                     </children>
+
+                     <VBox.margin>
+                        <Insets top="25.0" />
+                     </VBox.margin>
+
+                  </VBox>
+
+                  <!-- COULEUR -->
+                  <VBox spacing="5.0">
+
+                     <children>
+
+                        <Label text="Couleur :" textFill="WHITE">
+
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+
+                        </Label>
+
+                        <TextField fx:id="hexField" prefWidth="130.0" promptText="Couleur en hexadecimal" />
+
+                     </children>
+
+                  </VBox>
+
+               </children>
+
+            </VBox>
+
+         </children>
+
+      </HBox>
+
+   </center>
+
+   <!-- BARRE BAS -->
+   <bottom>
+
+      <HBox alignment="CENTER" prefHeight="50.0" prefWidth="400.0" style="-fx-background-color: #2B2727;">
+
+         <children>
+
+            <!-- SUPPRIMER -->
+            <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="90.0" style="-fx-background-color: white;                                -fx-background-radius: 8;" text="Supprimer" textFill="#333333">
+
+               <HBox.margin>
+                  <Insets left="15.0" />
+               </HBox.margin>
+
+            </Button>
+
+            <!-- ESPACE -->
+            <Region HBox.hgrow="ALWAYS" />
+
+            <!-- CONFIRMER -->
+            <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="90.0" style="-fx-background-color: #3D81FF;                                -fx-background-radius: 8;" text="Confirmer" textFill="WHITE">
+
+               <HBox.margin>
+                  <Insets right="15.0" />
+               </HBox.margin>
+
+            </Button>
+
+         </children>
+
+      </HBox>
+
+   </bottom>
+
+</BorderPane>
