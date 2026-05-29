@@ -74,48 +74,48 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1436.0" prefWidth="1120.0" style="-fx-background-color: #111111;" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="945.0" prefWidth="650.0" style="-fx-background-color: #111111;" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1">
 
    <!-- CONTENU -->
    <center>
 
-      <VBox spacing="35.0" style="-fx-background-color: #111111;">
+      <VBox spacing="22.0" style="-fx-background-color: #111111;">
 
          <children>
 
             <!-- NOM -->
-            <TextField fx:id="tierlistNameField" prefHeight="45.0" prefWidth="320.0" promptText="Nom de la tierlist" style="-fx-background-radius: 6;                                   -fx-font-size: 18px;">
+            <TextField fx:id="tierlistNameField" prefHeight="35.0" prefWidth="180.0" promptText="Nom de la tierlist" style="-fx-background-radius: 5;                                   -fx-font-size: 14px;">
 
                <VBox.margin>
-                  <Insets left="60.0" top="60.0" />
+                  <Insets left="35.0" top="35.0" />
                </VBox.margin>
 
             </TextField>
 
             <!-- DESCRIPTION -->
-            <TextArea fx:id="descriptionArea" prefHeight="220.0" prefWidth="1000.0" promptText="Description" style="-fx-background-radius: 6;                                  -fx-font-size: 18px;" wrapText="true">
+            <TextArea fx:id="descriptionArea" prefHeight="140.0" prefWidth="580.0" promptText="Description" style="-fx-background-radius: 5;                                  -fx-font-size: 14px;" wrapText="true">
 
                <VBox.margin>
-                  <Insets left="60.0" right="60.0" />
+                  <Insets left="35.0" right="35.0" />
                </VBox.margin>
 
             </TextArea>
 
             <!-- BOUTONS -->
-            <HBox spacing="90.0">
+            <HBox spacing="25.0">
 
                <children>
 
                   <!-- SAVE -->
-                  <Button fx:id="saveButton" mnemonicParsing="false" prefHeight="70.0" prefWidth="360.0" style="-fx-background-color: #BDBDBD;                                        -fx-background-radius: 8;                                        -fx-font-size: 24px;" text="Sauvegarder la tier-list" textFill="WHITE" />
+                  <Button fx:id="saveButton" mnemonicParsing="false" prefHeight="42.0" prefWidth="220.0" style="-fx-background-color: #BDBDBD;                                        -fx-background-radius: 6;                                        -fx-font-size: 16px;" text="Sauvegarder la tier-list" textFill="WHITE" />
 
                   <!-- DOWNLOAD -->
-                  <Button fx:id="downloadButton" mnemonicParsing="false" prefHeight="70.0" prefWidth="470.0" style="-fx-background-color: #3D81FF;                                        -fx-background-radius: 8;                                        -fx-font-size: 24px;" text="Télécharger comme image" textFill="WHITE" />
+                  <Button fx:id="downloadButton" mnemonicParsing="false" prefHeight="42.0" prefWidth="290.0" style="-fx-background-color: #3D81FF;                                        -fx-background-radius: 6;                                        -fx-font-size: 16px;" text="Télécharger comme image" textFill="WHITE" />
 
                </children>
 
                <VBox.margin>
-                  <Insets left="60.0" />
+                  <Insets left="35.0" />
                </VBox.margin>
 
             </HBox>
@@ -124,24 +124,24 @@
             <Label text="Aperçu :" textFill="WHITE">
 
                <font>
-                  <Font size="24.0" />
+                  <Font size="16.0" />
                </font>
 
                <VBox.margin>
-                  <Insets left="130.0" />
+                  <Insets left="75.0" />
                </VBox.margin>
 
             </Label>
 
             <!-- IMAGE -->
-            <ImageView fx:id="previewImage" fitHeight="720.0" fitWidth="720.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="previewImage" fitHeight="420.0" fitWidth="420.0" pickOnBounds="true" preserveRatio="true">
 
                <image>
                   <Image url="@../Img/Tier_list_fruits.jpg" />
                </image>
 
                <VBox.margin>
-                  <Insets left="200.0" />
+                  <Insets left="110.0" />
                </VBox.margin>
 
             </ImageView>
@@ -150,11 +150,11 @@
             <Label text="(Image de référence d'une vrai tier list)" textFill="WHITE">
 
                <font>
-                  <Font size="16.0" />
+                  <Font size="11.0" />
                </font>
 
                <VBox.margin>
-                  <Insets left="300.0" />
+                  <Insets left="180.0" />
                </VBox.margin>
 
             </Label>
