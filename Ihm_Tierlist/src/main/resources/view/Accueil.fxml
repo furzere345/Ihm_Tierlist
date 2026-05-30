@@ -76,7 +76,7 @@
                                     <ImageView fitHeight="172.0" fitWidth="204.0" pickOnBounds="true" preserveRatio="true">
                                        <VBox.margin>
                                           <Insets left="40.0" top="10.0" />
-                                       </VBox.margin>+
+                                       </VBox.margin>
                                        <image>
                                           <Image url="@../Img/ClashRoyal.jpg" />
                                        </image>
