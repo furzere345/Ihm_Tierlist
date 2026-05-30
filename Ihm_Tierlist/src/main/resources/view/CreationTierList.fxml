@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane
+    prefHeight="600.0"
+    prefWidth="720.0"
+    style="-fx-background-color: #181616;"
+    xmlns="http://javafx.com/javafx/21.0.1"
+    xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="tierlist.controller.CreationTierListController">
+
+    <top>
+        <HBox
+            alignment="CENTER_LEFT"
+            prefHeight="55.0"
+            style="-fx-background-color: #181616; -fx-border-color: #FFFFFF; -fx-border-width: 0 0 1 0;">
+            <padding><Insets left="12.0" right="12.0" /></padding>
+
+            <Button
+                fx:id="btnAccueil"
+                mnemonicParsing="false"
+                prefHeight="32.0"
+                prefWidth="90.0"
+                style="-fx-background-color: #3D81FF; -fx-background-radius: 6; -fx-border-radius: 6;"
+                text="Accueil"
+                textFill="WHITE"
+                onAction="#onAccueil">
+                <font><Font size="14.0" /></font>
+            </Button>
+
+        </HBox>
+    </top>
+
+    <center>
+        <VBox spacing="0" style="-fx-background-color: #181616;">
+
+            <!-- Titre section -->
+            <HBox
+                prefHeight="55.0"
+                alignment="CENTER_LEFT"
+                style="-fx-border-color: #FFFFFF; -fx-border-width: 0 0 1 0;">
+                <padding><Insets left="30.0" /></padding>
+                <Label
+                    text="Création de Tier-Lists :"
+                    textFill="WHITE">
+                    <font><Font size="20.0" /></font>
+                </Label>
+            </HBox>
+
+            <!-- Contenu principal -->
+            <HBox spacing="25.0">
+                <padding><Insets bottom="30.0" left="30.0" right="30.0" top="40.0" /></padding>
+
+                <!-- Image de couverture -->
+                <StackPane
+                    fx:id="coverImagePane"
+                    prefHeight="200.0"
+                    prefWidth="200.0"
+                    style="-fx-background-color: #2a2a2a; -fx-border-color: #3D81FF; -fx-border-width: 2; -fx-cursor: hand;"
+                    onMouseClicked="#onSelectCover">
+
+                    <Label
+                        fx:id="coverLabel"
+                        text="280 × 280"
+                        textFill="#888888">
+                        <font><Font size="14.0" /></font>
+                    </Label>
+
+                </StackPane>
+
+                <!-- Champs texte -->
+                <VBox spacing="15.0" HBox.hgrow="ALWAYS">
+
+                    <TextField
+                        fx:id="nomField"
+                        prefHeight="35.0"
+                        promptText="Nom de la Tier-List"
+                        style="-fx-background-color: #2a2a2a; -fx-text-fill: white; -fx-prompt-text-fill: #888888; -fx-border-color: #555555; -fx-border-radius: 5; -fx-background-radius: 5; -fx-font-size: 14px;">
+                    </TextField>
+
+                    <TextArea
+                            fx:id="descriptionArea"
+                            prefHeight="120.0"
+                            promptText="Description de la Tier-List"
+                            wrapText="true"
+                            style="-fx-control-inner-background: #2a2a2a;
+                                   -fx-text-fill: white;
+                                   -fx-prompt-text-fill: #888888;
+                                   -fx-border-color: #555555;
+                                   -fx-border-radius: 5;
+                                   -fx-background-radius: 5;
+                                   -fx-font-size: 14px;">
+                    </TextArea>
+
+                </VBox>
+
+            </HBox>
+
+        </VBox>
+    </center>
+
+    <bottom>
+        <HBox
+            alignment="CENTER_LEFT"
+            prefHeight="70.0"
+            style="-fx-background-color: #181616; -fx-border-color: #333333; -fx-border-width: 1 0 0 0;">
+            <padding><Insets left="30.0" /></padding>
+
+            <Button
+                fx:id="btnCommencer"
+                mnemonicParsing="false"
+                prefHeight="38.0"
+                prefWidth="200.0"
+                style="-fx-background-color: #3D81FF; -fx-background-radius: 6; -fx-border-radius: 6;"
+                text="Commencer la tier list !"
+                textFill="WHITE"
+                onAction="#onCommencer">
+                <font><Font size="14.0" /></font>
+            </Button>
+
+        </HBox>
+    </bottom>
+
+</BorderPane>

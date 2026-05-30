@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: FF0000;" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: FF0000;" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tierlist.controller.AccueilController">
    <center>
       <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: 1E1E1E;" BorderPane.alignment="CENTER">
          <content>
@@ -21,7 +21,7 @@
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="73.0" prefWidth="1198.0" spacing="15.0" style="-fx-border-color: #000000; -fx-background-color: #181616; -fx-border-width: 0 0 1 0; -fx-border-color: #FFFFFF;">
                      <children>
-                        <Button fx:id="buttonCrreTierlist" mnemonicParsing="false" prefHeight="37.0" prefWidth="147.0" style="-fx-background-color: #3D81FF; -fx-border-radius: 10;" text="Créer Tier List" textFill="WHITE">
+                        <Button fx:id="buttonCrreTierlist" mnemonicParsing="false" onAction="#onCreerTierlist" prefHeight="37.0" prefWidth="147.0" style="-fx-background-color: #3D81FF; -fx-border-radius: 10;" text="Créer Tier List" textFill="WHITE">
                            <HBox.margin>
                               <Insets left="5.0" right="10.0" />
                            </HBox.margin>
@@ -29,7 +29,7 @@
                               <Font size="18.0" />
                            </font>
                         </Button>
-                        <Button fx:id="buttonImporter" mnemonicParsing="false" prefHeight="37.0" prefWidth="147.0" style="-fx-background-color: 070707; -fx-border-color: FFFFFF; -fx-border-radius: 3;" text="Importer" textFill="WHITE">
+                        <Button fx:id="buttonImporter" mnemonicParsing="false" onAction="#onImporter" prefHeight="37.0" prefWidth="147.0" style="-fx-background-color: 070707; -fx-border-color: FFFFFF; -fx-border-radius: 3;" text="Importer" textFill="WHITE">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
@@ -38,7 +38,7 @@
                            </font>
                         </Button>
                         <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                        <Button fx:id="buttonTheme" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" style="-fx-background-radius: 20; -fx-border-radius: 20;">
+                        <Button fx:id="buttonTheme" mnemonicParsing="false" onAction="#onToggleTheme" prefHeight="30.0" prefWidth="30.0" style="-fx-background-radius: 20; -fx-border-radius: 20;">
                            <opaqueInsets>
                               <Insets left="100.0" />
                            </opaqueInsets>
