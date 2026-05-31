@@ -59,7 +59,7 @@
                         </Label>
                      </children>
                   </HBox>
-                  <FlowPane fx:id="tierlistContainer" prefHeight="295.0" prefWidth="598.0">
+                  <FlowPane fx:id="tierlistContainer" hgap="16.0" prefHeight="295.0" prefWidth="1178.0" vgap="16.0">
                      <children>
                         <HBox prefHeight="295.0" prefWidth="1200.0">
                            <children>
@@ -177,7 +177,10 @@
                               </VBox>
                            </children>
                         </HBox>
-                     </children></FlowPane>
+                     </children>
+                     <padding>
+                        <Insets left="10.0" right="10.0" top="10.0" />
+                     </padding></FlowPane>
                   <HBox prefHeight="294.0" prefWidth="1200.0">
                      <children>
                         <VBox prefHeight="295.0" prefWidth="300.0">

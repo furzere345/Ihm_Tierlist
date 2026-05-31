@@ -26,20 +26,34 @@ import java.util.Optional;
 
 public class TierListEditorController {
 
-    @FXML private Label labelTierListName;
-    @FXML private VBox tiersContainer;
-    @FXML private FlowPane unclassifiedPane;
-    @FXML private Button btnAddTier;
-    @FXML private Button btnReset;
-    @FXML private Button btnSave;
-    @FXML private Button btnBack;
-    @FXML private Button btnAddItem;
-    @FXML private Button btnAddImageItem;
-    @FXML private Label labelDescription;
-    @FXML private Label itemCountBadge;
-    @FXML private ImageView coverImageView;
-    @FXML private Label coverPlaceholder;
-    @FXML private Button btnTheme;
+    @FXML
+    private Label labelTierListName;
+    @FXML
+    private VBox tiersContainer;
+    @FXML
+    private FlowPane unclassifiedPane;
+    @FXML
+    private Button btnAddTier;
+    @FXML
+    private Button btnReset;
+    @FXML
+    private Button btnSave;
+    @FXML
+    private Button btnBack;
+    @FXML
+    private Button btnAddItem;
+    @FXML
+    private Button btnAddImageItem;
+    @FXML
+    private Label labelDescription;
+    @FXML
+    private Label itemCountBadge;
+    @FXML
+    private ImageView coverImageView;
+    @FXML
+    private Label coverPlaceholder;
+    @FXML
+    private Button btnTheme;
 
     private TierList tierList;
     private PersistenceService persistenceService = new PersistenceService();
@@ -99,14 +113,17 @@ public class TierListEditorController {
     //Cree une ligne complete pour un tier : [label color | items | bouton édition]
     private HBox buildTierRow(Tier tier) {
         Label label = new Label(tier.getName());
-        label.setPrefWidth(60);
+        label.setPrefWidth(100);
         label.setPrefHeight(tier.getHeight());
+        label.setMinWidth(100);
+        label.setWrapText(true);
         label.setStyle(
                 "-fx-background-color: " + tier.getColorHex() + ";" +
                         "-fx-alignment: center;" +
-                        "-fx-font-size: 16px;" +
+                        "-fx-font-size: 14px;" +
                         "-fx-text-fill: black;" +
-                        "-fx-font-weight: bold;"
+                        "-fx-font-weight: bold;" +
+                        "-fx-padding: 5;"
         );
 
         FlowPane itemsPane = new FlowPane();
@@ -114,6 +131,7 @@ public class TierListEditorController {
         itemsPane.setVgap(6);
         itemsPane.setPadding(new Insets(6));
         itemsPane.setPrefHeight(tier.getHeight());
+        itemsPane.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
         itemsPane.setStyle("-fx-background-color: #2a2a2a;");
         HBox.setHgrow(itemsPane, Priority.ALWAYS);
 
@@ -169,13 +187,11 @@ public class TierListEditorController {
         buildTiersUI(); //rafraichir uniquement les tiers
     }
 
-    //Construire la zone "à classer"
+    //Construire la zone "a classer"
     private void buildUnclassifiedUI() {
         unclassifiedPane.getChildren().clear();
         for (Item item : tierList.getUnclassifiedItems()) {
-            unclassifiedPane.getChildren().add(
-                    buildItemNode(item, null, unclassifiedPane)
-            );
+            unclassifiedPane.getChildren().add(buildItemNode(item, null, unclassifiedPane));
         }
         enableDrop(unclassifiedPane, null); // null = zone non classifiée
     }
@@ -199,9 +215,7 @@ public class TierListEditorController {
         box.setUserData(item.getId()); // utilisé par le drag & drop
 
         if (item.getType() == Item.ItemType.IMAGE && item.getImageData() != null) {
-            ImageView iv = new ImageView(
-                    new Image(new ByteArrayInputStream(item.getImageData()))
-            );
+            ImageView iv = new ImageView(new Image(new ByteArrayInputStream(item.getImageData())));
             iv.setFitWidth(item.getSize() - 8);
             iv.setFitHeight(item.getSize() - 8);
             iv.setPreserveRatio(true);
@@ -218,7 +232,7 @@ public class TierListEditorController {
         box.setOnContextMenuRequested(e -> showItemContextMenu(box, item, sourceTier));
 
         //Drag
-        enableDrag(box, item);
+        enableDrag(box, item, sourceTier);
 
         return box;
     }
@@ -243,9 +257,7 @@ public class TierListEditorController {
     private void onAddImageItem() {
         FileChooser fc = new FileChooser();
         fc.setTitle("Choisir une image");
-        fc.getExtensionFilters().add(
-                new FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.jpeg", "*.gif")
-        );
+        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.jpeg", "*.gif"));
         File file = fc.showOpenDialog(btnAddImageItem.getScene().getWindow());
         if (file != null) {
             try {
@@ -257,6 +269,28 @@ public class TierListEditorController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    @FXML
+    private void onImportApi() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/OverlayApi.fxml"));
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Importer depuis RAWG");
+            stage.setScene(new Scene(loader.load()));
+
+            OverlayApiController ctrl = loader.getController();
+            ctrl.setOnImport(items -> {
+                tierList.getUnclassifiedItems().addAll(items);
+                persistenceService.save(tierList);
+                refresh();
+            });
+
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -301,9 +335,7 @@ public class TierListEditorController {
     //Ouvrir l'overlay de creation/édition d'un tier
     private void openOverlayTier(Tier tierToEdit) {
         try {
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/view/Overlay.fxml")
-            );
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Overlay.fxml"));
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setTitle(tierToEdit == null ? "Nouveau tier" : "Modifier le tier");
@@ -323,6 +355,7 @@ public class TierListEditorController {
                     },
                     //onDelete
                     () -> {
+                        tierList.getUnclassifiedItems().addAll(tierToEdit.getItems());
                         tierList.getTiers().remove(tierToEdit);
                         persistenceService.save(tierList);
                         refresh();
@@ -359,9 +392,7 @@ public class TierListEditorController {
     @FXML
     private void onSave() {
         try {
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/view/Overlay-save.fxml")
-            );
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Overlay-save.fxml"));
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setTitle("Sauvegarder");
@@ -380,9 +411,7 @@ public class TierListEditorController {
     @FXML
     private void onBack() {
         try {
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/view/Accueil.fxml")
-            );
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Accueil.fxml"));
             Stage stage = (Stage) btnBack.getScene().getWindow();
             stage.setScene(new Scene(loader.load()));
         } catch (IOException e) {
@@ -391,44 +420,114 @@ public class TierListEditorController {
     }
 
     // =========================================================================
-    // DRAG & DROP (a enrichir pour plus fluid)
+    // DRAG & DROP
     // =========================================================================
 
-    private void enableDrag(VBox itemNode, Item item) {
+    //Item en cours de drag
+    private Item draggedItem = null;
+    private Tier draggedFromTier = null; //null = vient de unclassified
+
+    private void enableDrag(VBox itemNode, Item item, Tier sourceTier) {
         itemNode.setOnDragDetected(e -> {
+            draggedItem = item;
+            draggedFromTier = sourceTier;
+
             var db = itemNode.startDragAndDrop(javafx.scene.input.TransferMode.MOVE);
             var content = new javafx.scene.input.ClipboardContent();
-            content.putString(item.getId()); // on passe l'ID de l'item
+            content.putString(item.getId());
             db.setContent(content);
+
+            //Feedback visuel : l'item devient semi-transparent
+            itemNode.setOpacity(0.4);
+            e.consume();
+        });
+
+        itemNode.setOnDragDone(e -> {
+            //Remettre l'opacite normale si le drop n'a pas eu lieu
+            itemNode.setOpacity(1.0);
+            draggedItem = null;
+            draggedFromTier = null;
             e.consume();
         });
     }
 
     private void enableDrop(FlowPane target, Tier targetTier) {
+
+        //Accepter le drag
         target.setOnDragOver(e -> {
-            if (e.getDragboard().hasString()) {
+            if (e.getDragboard().hasString() && draggedItem != null) {
                 e.acceptTransferModes(javafx.scene.input.TransferMode.MOVE);
+                //Feedback : bordure colore sur la zone cible
+                target.setStyle(target.getStyle().replace("-fx-border-color: #444444;", "") + "-fx-border-color: #3D81FF; -fx-border-width: 2;");
             }
             e.consume();
         });
 
+        //Retirer le feedback quand on quitte la zone
+        target.setOnDragExited(e -> {
+            resetPaneStyle(target);
+            e.consume();
+        });
+
+        //Drop effectif
         target.setOnDragDropped(e -> {
-            String itemId = e.getDragboard().getString();
-            Item movedItem = findItemById(itemId);
-            if (movedItem == null) { e.consume(); return; }
+            if (draggedItem == null) {
+                e.consume();
+                return;
+            }
+
+            //Calculer la position d'insertion selon la souris
+            int insertIndex = getInsertIndex(target, e.getX());
 
             //Retirer l'item de sa source
-            removeItemFromAllLocations(movedItem);
+            removeItemFromAllLocations(draggedItem);
 
-            //Ajouter dans la cible
-            if (targetTier != null) targetTier.getItems().add(movedItem);
-            else tierList.getUnclassifiedItems().add(movedItem);
+            //Inserer a la bonne position dans la cible
+            if (targetTier != null) {
+                insertIndex = Math.min(insertIndex, targetTier.getItems().size());
+                targetTier.getItems().add(insertIndex, draggedItem);
+            } else {
+                insertIndex = Math.min(insertIndex, tierList.getUnclassifiedItems().size());
+                tierList.getUnclassifiedItems().add(insertIndex, draggedItem);
+            }
 
             persistenceService.save(tierList);
             refresh();
+
+            resetPaneStyle(target);
             e.setDropCompleted(true);
             e.consume();
         });
+    }
+
+    //Calcule l'index d'insertion en fonction de la position X de la souris
+    private int getInsertIndex(FlowPane pane, double mouseX) {
+        int index = 0;
+        for (javafx.scene.Node child : pane.getChildren()) {
+            //Ignorer l'indicateur de position si présent
+            if (child.getUserData() != null && child.getUserData().equals("drop-indicator")) {
+                continue;
+            }
+            javafx.geometry.Bounds bounds = child.getBoundsInParent();
+            double midX = bounds.getMinX() + bounds.getWidth() / 2;
+            if (mouseX > midX) index++;
+            else break;
+        }
+        return index;
+    }
+
+    //Remet le style normal d'un FlowPane
+    private void resetPaneStyle(FlowPane pane) {
+        if (pane == unclassifiedPane) {
+            pane.setStyle(
+                    "-fx-background-color: #222222;" +
+                            "-fx-border-color: #444444;" +
+                            "-fx-border-radius: 5;" +
+                            "-fx-background-radius: 5;"
+            );
+        } else {
+            pane.setStyle("-fx-background-color: #2a2a2a;");
+        }
     }
 
     //Cherche un item dans tous les tiers + unclassified
@@ -441,7 +540,7 @@ public class TierListEditorController {
         return null;
     }
 
-    //Retire un item de partout (avant de le déplacer)
+    //Retire un item de partout
     private void removeItemFromAllLocations(Item item) {
         tierList.getUnclassifiedItems().remove(item);
         for (Tier tier : tierList.getTiers())

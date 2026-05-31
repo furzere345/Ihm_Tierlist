@@ -23,7 +23,7 @@ public class CreationTierListController {
     @FXML private TextField nomField;
     @FXML private TextArea  descriptionArea;
     @FXML private StackPane coverImagePane;
-    @FXML private Label     coverLabel;
+    @FXML private Label coverLabel;
 
     private byte[] coverImageData;
     private PersistenceService persistenceService = new PersistenceService();
@@ -32,9 +32,7 @@ public class CreationTierListController {
     private void onSelectCover() {
         FileChooser fc = new FileChooser();
         fc.setTitle("Choisir une image de couverture");
-        fc.getExtensionFilters().add(
-                new FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.jpeg")
-        );
+        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.jpeg"));
         File file = fc.showOpenDialog(coverImagePane.getScene().getWindow());
         if (file != null) {
             try {
@@ -60,9 +58,7 @@ public class CreationTierListController {
         persistenceService.save(tl);
 
         try {
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/view/TierListEditor.fxml")
-            );
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/TierListEditor.fxml"));
             Stage stage = (Stage) nomField.getScene().getWindow();
             stage.setScene(new Scene(loader.load()));
             TierListEditorController ctrl = loader.getController();
@@ -73,9 +69,7 @@ public class CreationTierListController {
     @FXML
     private void onAccueil() {
         try {
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/view/Accueil.fxml")
-            );
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Accueil.fxml"));
             Stage stage = (Stage) nomField.getScene().getWindow();
             stage.setScene(new Scene(loader.load()));
         } catch (IOException e) { e.printStackTrace(); }

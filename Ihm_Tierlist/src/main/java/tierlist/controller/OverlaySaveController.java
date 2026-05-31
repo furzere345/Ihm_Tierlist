@@ -21,10 +21,11 @@ import java.io.IOException;
 public class OverlaySaveController {
 
     @FXML private TextField tierlistNameField;
-    @FXML private TextArea  descriptionArea;
-    @FXML private Button    saveButton;
-    @FXML private Button    downloadButton;
+    @FXML private TextArea descriptionArea;
+    @FXML private Button saveButton;
+    @FXML private Button downloadButton;
     @FXML private ImageView previewImage;
+    @FXML private Button exportTlButton;
 
     private TierList tierList;
     private Pane tierListPane;
@@ -43,7 +44,6 @@ public class OverlaySaveController {
     }
 
     //Sauvegarder en binaire
-    //A faire
     @FXML
     private void onSave() {
         tierList.setName(tierlistNameField.getText().trim());
@@ -58,20 +58,39 @@ public class OverlaySaveController {
         FileChooser fc = new FileChooser();
         fc.setTitle("Exporter en image");
         fc.setInitialFileName(tierList.getName() + ".png");
-        fc.getExtensionFilters().add(
-                new FileChooser.ExtensionFilter("PNG", "*.png")
-        );
+        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("PNG", "*.png"));
         File file = fc.showSaveDialog(downloadButton.getScene().getWindow());
         if (file != null) {
-            WritableImage img = tierListPane.snapshot(
-                    new SnapshotParameters(), null
-            );
+            WritableImage img = tierListPane.snapshot(new SnapshotParameters(), null);
             try {
                 ImageIO.write(SwingFXUtils.fromFXImage(img, null), "png", file);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    //Exporter en fichier .tl (binaire)
+    @FXML
+    private void onExportTl() {
+        FileChooser fc = new FileChooser();
+        fc.setTitle("Exporter la tier-list");
+        fc.setInitialFileName(tierList.getName() + ".tl");
+        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Tier List", "*.tl"));
+        File file = fc.showSaveDialog(saveButton.getScene().getWindow());
+        if (file != null) {
+            persistenceService.exportTo(tierList, file);
+            showSuccess("Tier-list exportée avec succès !");
+        }
+    }
+
+    //Feedback succes
+    private void showSuccess(String message) {
+        javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.INFORMATION);
+        alert.setTitle("Succès");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
     private void closeStage() {

@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -39,9 +40,7 @@ public class AccueilController {
     @FXML
     private void onCreerTierlist() {
         try {
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/view/CreationTierList.fxml")
-            );
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/CreationTierList.fxml"));
             Stage stage = (Stage) buttonCrreTierlist.getScene().getWindow();
             stage.setScene(new Scene(loader.load()));
         } catch (IOException e) { e.printStackTrace(); }
@@ -52,20 +51,46 @@ public class AccueilController {
     private void onImporter() {
         FileChooser fc = new FileChooser();
         fc.setTitle("Importer une Tier List");
-        fc.getExtensionFilters().add(
-                new FileChooser.ExtensionFilter("Tier List Files", "*.tl")
-        );
+        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Tier List Files", "*.tl"));
         File file = fc.showOpenDialog(buttonImporter.getScene().getWindow());
         if (file != null) {
             TierList imported = persistenceService.importFrom(file);
             if (imported != null) {
+                //Generer un nouvel ID pour eviter les conflit
+                imported = reIdTierList(imported);
                 persistenceService.save(imported);
                 refreshTierListCards(persistenceService.loadAll());
+                showImportSuccess(imported.getName());
+            } else {
+                showImportError();
             }
         }
     }
 
-    //Basculer thème clair/sombre
+    //evite les conflits d'ID si on importe 2x le meme fichier
+    private TierList reIdTierList(TierList tl) {
+        TierList copy = tl.duplicate();
+        copy.setName(tl.getName()); //duplicate() prefixe "Copie de", on remet le vrai nom
+        return copy;
+    }
+
+    private void showImportSuccess(String name) {
+        javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.INFORMATION);
+        alert.setTitle("Import réussi");
+        alert.setHeaderText(null);
+        alert.setContentText("\"" + name + "\" importée avec succès !");
+        alert.showAndWait();
+    }
+
+    private void showImportError() {
+        javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.ERROR);
+        alert.setTitle("Erreur d'import");
+        alert.setHeaderText(null);
+        alert.setContentText("Le fichier sélectionné n'est pas valide.");
+        alert.showAndWait();
+    }
+
+    //Basculer theme clair/sombre
     //A faire
     @FXML
     private void onToggleTheme() {
@@ -86,33 +111,64 @@ public class AccueilController {
 
     private VBox createCard(TierList tl) {
         VBox card = new VBox(10);
-        card.setPrefSize(300, 295);
-        card.setStyle("-fx-cursor: hand;");
+        card.setPrefSize(220, 250);
+        card.setStyle(
+                "-fx-background-color: #2a2a2a;" +
+                        "-fx-border-color: #444444;" +
+                        "-fx-border-radius: 8;" +
+                        "-fx-background-radius: 8;" +
+                        "-fx-cursor: hand;" +
+                        "-fx-padding: 10;"
+        );
 
         Label nom = new Label(tl.getName());
-        nom.setStyle("-fx-text-fill: white; -fx-font-size: 24;");
+        nom.setTextFill(javafx.scene.paint.Color.WHITE);
+        nom.setStyle("-fx-font-size: 14px; -fx-font-weight: bold;");
+        nom.setMaxWidth(200);
+        nom.setWrapText(true);
 
-        ImageView img = new ImageView();
-        img.setFitWidth(204);
-        img.setFitHeight(172);
-        img.setPreserveRatio(true);
+        //Image de couverture
+        StackPane imageContainer = new StackPane();
+        imageContainer.setPrefSize(200, 160);
+        imageContainer.setMinSize(200, 160);
+        imageContainer.setMaxSize(200, 160);
+        imageContainer.setStyle(
+                "-fx-background-color: #1a1a1a;" +
+                        "-fx-border-color: #1a1a1a;" +
+                        "-fx-border-radius: 4;" +
+                        "-fx-background-radius: 4;"
+        );
+
         if (tl.getCoverImageData() != null) {
-            img.setImage(new Image(
-                    new java.io.ByteArrayInputStream(tl.getCoverImageData())
-            ));
+            ImageView iv = new ImageView(new Image(new java.io.ByteArrayInputStream(tl.getCoverImageData())));
+            iv.setFitWidth(200);
+            iv.setFitHeight(160);
+            iv.setPreserveRatio(true);
+            imageContainer.getChildren().add(iv);
+        } else {
+            //Placeholder si pas d'image
+            Label placeholder = new Label("Aucune image");
+            placeholder.setTextFill(javafx.scene.paint.Color.web("#666666"));
+            placeholder.setStyle("-fx-font-size: 12px;");
+            imageContainer.getChildren().add(placeholder);
         }
 
         Button menu = new Button(". . .");
-        menu.setStyle("-fx-background-color: #070707; -fx-border-color: white;");
+        menu.setStyle(
+                "-fx-background-color: #3a3a3a;" +
+                        "-fx-border-color: #666666;" +
+                        "-fx-border-radius: 4;" +
+                        "-fx-background-radius: 4;"
+        );
         menu.setTextFill(javafx.scene.paint.Color.WHITE);
+        menu.setMaxWidth(Double.MAX_VALUE);
         menu.setOnAction(e -> showCardMenu(tl, card));
 
-        // Clic sur la carte → ouvrir la tier-list
         card.setOnMouseClicked(e -> {
             if (e.getTarget() != menu) ouvrirTierList(tl);
         });
 
-        card.getChildren().addAll(nom, img, menu);
+        card.getChildren().addAll(imageContainer, nom, menu);
         return card;
     }
 
@@ -120,16 +176,14 @@ public class AccueilController {
     private void showCardMenu(TierList tl, VBox card) {
         javafx.scene.control.ContextMenu menu = new javafx.scene.control.ContextMenu();
 
-        javafx.scene.control.MenuItem dupliquer =
-                new javafx.scene.control.MenuItem("Dupliquer");
+        javafx.scene.control.MenuItem dupliquer = new javafx.scene.control.MenuItem("Dupliquer");
         dupliquer.setOnAction(e -> {
             TierList copy = tl.duplicate();
             persistenceService.save(copy);
             refreshTierListCards(persistenceService.loadAll());
         });
 
-        javafx.scene.control.MenuItem supprimer =
-                new javafx.scene.control.MenuItem("Supprimer");
+        javafx.scene.control.MenuItem supprimer = new javafx.scene.control.MenuItem("Supprimer");
         supprimer.setOnAction(e -> {
             persistenceService.delete(tl.getId());
             refreshTierListCards(persistenceService.loadAll());
@@ -143,9 +197,7 @@ public class AccueilController {
     //Naviguer vers l'éditeur
     private void ouvrirTierList(TierList tl) {
         try {
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/view/TierListEditor.fxml")
-            );
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/TierListEditor.fxml"));
             Stage stage = (Stage) buttonCrreTierlist.getScene().getWindow();
             stage.setScene(new Scene(loader.load()));
             TierListEditorController ctrl = loader.getController();

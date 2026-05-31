@@ -50,6 +50,8 @@
                   <!-- DOWNLOAD -->
                   <Button fx:id="downloadButton" mnemonicParsing="false" onAction="#onDownload" prefHeight="70.0" prefWidth="470.0" style="-fx-background-color: #3D81FF;                                        -fx-background-radius: 8;                                        -fx-font-size: 24px;" text="Télécharger comme image" textFill="WHITE" />
 
+                  <Button fx:id="exportTlButton" mnemonicParsing="false" prefHeight="34.0" prefWidth="180.0" style="-fx-background-color: #2a2a2a; -fx-border-color: #FFFFFF; -fx-border-radius: 6; -fx-background-radius: 6;" text="Exporter en .tl" textFill="WHITE" onAction="#onExportTl" />
+
                </children>
 
                <VBox.margin>
