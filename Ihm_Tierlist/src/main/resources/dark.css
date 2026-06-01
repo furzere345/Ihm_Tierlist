@@ -1,79 +1,196 @@
+
 .root {
-    -color-fond: #181616;
-    -color-texte: #FFFFFF;
-    -color-secondary: #3D81FF;
-    -color-border: #FFFFFF;
+    /* --- Fonds --- */
+    -color-bg-primary:      #181616;
+    -color-bg-secondary:    #2A2A2A;
+    -color-bg-hover:        #1E1E1E;
+
+    /* --- Texte --- */
+    -color-text-primary:    #FFFFFF;
+    -color-text-muted:      #888888;
+
+    /* --- Accent (boutons principaux) --- */
+    -color-accent:          #3D81FF;
+    -color-accent-hover:    #2670FF;
+    -color-accent-text:     #FFFFFF;
+
+    /* --- Bordures --- */
+    -color-border:          #FFFFFF;
+    -color-border-input:    #555555;
+
+    /* --- Bouton Importer --- */
+    -color-btn-import:      #070707;
+    -color-btn-import-text: #FFFFFF;
+
+    /* --- Bouton Thème --- */
+    -color-btn-theme:       #FFFFFF;
 }
 
-/* Arrière-plans de la structure */
-.root, .border-pane, .vbox, .flow-pane {
-    -fx-background-color: -color-fond !important;
+
+/* ============================================================
+   RESET — Fonds de base
+   ============================================================ */
+.root,
+.border-pane,
+.vbox,
+.flow-pane {
+    -fx-background-color: -color-bg-primary;
 }
 
 .scroll-pane {
-    -fx-background-color: transparent !important;
-    -fx-background: #181616 !important;
+    -fx-background-color: transparent;
+    -fx-background: -color-bg-primary;
 }
 
-/* Lignes de séparation (Navbar Accueil et Création) */
-#navbar, #vosTierList, .hbox {
-    -fx-border-color: -color-border !important;
-    -fx-border-width: 0 0 1 0 !important;
+
+/* ============================================================
+   SÉPARATEURS (Navbar, sections)
+   ============================================================ */
+#navbar,
+#vosTierList,
+.hbox {
+    -fx-border-color: -color-border;
+    -fx-border-width: 0 0 1 0;
 }
 
-/* Boutons Bleus (Accueil, Créer, Commencer) */
-#buttonCrreTierlist, #btnAccueil, #btnCommencer {
-    -fx-background-color: -color-secondary !important;
-    -fx-text-fill: white !important;
-    -fx-background-radius: 10 !important;
-}
-#buttonCrreTierlist:hover, #btnAccueil:hover, #btnCommencer:hover {
-    -fx-background-color: #2670FF !important;
-}
 
-/* Bouton Importer */
-#buttonImporter {
-    -fx-background-color: #070707 !important;
-    -fx-text-fill: white !important;
-    -fx-border-color: -color-border !important;
-    -fx-border-radius: 3 !important;
-    -fx-background-radius: 3 !important;
-}
-#buttonImporter:hover {
-    -fx-background-color: #1E1E1E !important;
-}
-
-/* Bouton de changement de Thème (Rond) */
-#buttonTheme {
-    -fx-background-radius: 20 !important;
-    -fx-background-color: #FFFFFF !important;
-    -fx-cursor: hand !important;
-}
-
-/* Tous les textes/labels */
+/* ============================================================
+   LABELS / TEXTES
+   ============================================================ */
 .label {
-    -fx-text-fill: -color-texte !important;
+    -fx-text-fill: -color-text-primary;
 }
 
-/* Zone de l'image de couverture (StackPane) */
+
+/* ============================================================
+   BOUTONS PRINCIPAUX (accent bleu)
+   ============================================================ */
+#buttonCrreTierlist,
+#btnAccueil,
+#btnCommencer {
+    -fx-background-color: -color-accent;
+    -fx-text-fill: -color-accent-text;
+    -fx-background-radius: 10;
+}
+
+#buttonCrreTierlist:hover,
+#btnAccueil:hover,
+#btnCommencer:hover {
+    -fx-background-color: -color-accent-hover;
+}
+
+
+/* ============================================================
+   BOUTON IMPORTER
+   ============================================================ */
+#buttonImporter {
+    -fx-background-color: -color-btn-import;
+    -fx-text-fill: -color-btn-import-text;
+    -fx-border-color: -color-border;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
+}
+
+#buttonImporter:hover {
+    -fx-background-color: -color-bg-hover;
+}
+
+
+/* ============================================================
+   BOUTON CHANGEMENT DE THÈME (rond)
+   ============================================================ */
+#buttonTheme {
+    -fx-background-color: -color-btn-theme;
+    -fx-background-radius: 20;
+    -fx-cursor: hand;
+}
+
+
+/* ============================================================
+   ZONE IMAGE DE COUVERTURE
+   ============================================================ */
 #coverImagePane {
-    -fx-background-color: #2A2A2A !important;
-    -fx-border-color: -color-secondary !important;
-    -fx-border-width: 2 !important;
-    -fx-cursor: hand !important;
+    -fx-background-color: -color-bg-secondary;
+    -fx-border-color: -color-accent;
+    -fx-border-width: 2;
+    -fx-cursor: hand;
 }
 
-/* ==========================================
-   CORRECTIF SYSTEME DE FOCUS (DARK)
-   ========================================== */
 
-/* On cible la cellule de texte native de JavaFX (.text-input) */
-.text-input, .text-field, .text-area, .text-area .content {
-    -fx-background-color: #2A2A2A !important;
-    -fx-control-inner-background: #2A2A2A !important;
-    -fx-text-fill: white !important;
-    -fx-prompt-text-fill: #888888 !important;
-    -fx-border-color: #555555 !important;
-    -fx-border-radius: 5 !important;
-    -fx-background-radius: 5 !important;
+/* ============================================================
+   CHAMPS DE SAISIE (TextField, TextArea)
+   ============================================================ */
+.text-input,
+.text-field,
+.text-area,
+.text-area .content {
+    -fx-background-color: -color-bg-secondary;
+    -fx-control-inner-background: -color-bg-secondary;
+    -fx-text-fill: -color-text-primary;
+    -fx-prompt-text-fill: -color-text-muted;
+    -fx-border-color: -color-border-input;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+/* Style du conteneur de la popup (le rectangle de fond) */
+.context-menu, .popup, .menu-button .context-menu {
+    -fx-background-color: -color-bg-secondary; /* Fond gris foncé assorti à tes cartes */
+    -fx-border-color: -color-border-input;      /* Bordure fine pour le détacher du fond noir */
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 0;                /* Nettoie les marges internes par défaut */
+}
+
+/* Style des éléments textuels à l'intérieur (comme "Dupliquer") */
+.menu-item .label {
+    -fx-text-fill: -color-text-primary ; /* Texte écrit en blanc */
+    -fx-font-size: 14px;
+}
+.tierlist-card {
+    -fx-background-color: -color-bg-secondary;
+    -fx-border-color: #444444; /* Tu peux mettre -color-border-input si tu veux que ça change */
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+    -fx-padding: 10;
+}
+
+/* Titre de la carte (Label) */
+.tierlist-card-title {
+    -fx-text-fill: -color-text-primary;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+/* Conteneur de l'image (StackPane) */
+.tierlist-card-image-container {
+    -fx-background-color: -color-bg-primary;
+    -fx-border-color: -color-bg-primary;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+}
+
+/* Texte "Aucune image" (Label) */
+.tierlist-card-placeholder {
+    -fx-text-fill: -color-text-muted;
+    -fx-font-size: 12px;
+}
+
+/* Bouton ". . ." */
+.tierlist-card-menu-button {
+    -fx-background-color: #3a3a3a;
+    -fx-border-color: -color-text-muted;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-text-fill: -color-text-primary;
+}
+
+/* Optionnel : Le menu contextuel "Dupliquer" avec tes variables */
+.context-menu, .popup {
+    -fx-background-color: -color-bg-secondary;
+    -fx-border-color: -color-border-input;
+}
+.menu-item .label {
+    -fx-text-fill: -color-text-primary;
 }

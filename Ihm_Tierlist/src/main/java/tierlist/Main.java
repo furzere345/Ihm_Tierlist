@@ -10,9 +10,9 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-
-        // Charge ton fichier FXML (adapte le chemin si besoin)
+        // Charge ton fichier FXML
         Parent root = FXMLLoader.load(getClass().getResource("/view/Accueil.fxml"));
+        root.getStylesheets().add(getClass().getResource("/dark.css").toExternalForm());
 
         primaryStage.setTitle("Test JavaFX FXML");
         primaryStage.setScene(new Scene(root));

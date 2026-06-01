@@ -13,6 +13,7 @@ import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import tierlist.Main;
 import tierlist.model.TierList;
 import tierlist.service.PersistenceService;
 import javafx.scene.Parent;
@@ -29,17 +30,14 @@ public class AccueilController {
 
     private boolean isDarkTheme = true;
     private PersistenceService persistenceService = new PersistenceService();
-
+    public void setDarkTheme(boolean darkTheme) {
+        this.isDarkTheme = darkTheme;
+    }
     @FXML
     public void initialize() {
         List<TierList> tierLists = persistenceService.loadAll();
         refreshTierListCards(tierLists);
-        javafx.application.Platform.runLater(() -> {
-            Scene scene = buttonTheme.getScene();
-            if (scene != null) {
-                scene.getStylesheets().add(getClass().getResource("/light.css").toExternalForm());
-            }
-        });
+
     }
 
     //Creer une nouvelle tier-list
@@ -50,6 +48,12 @@ public class AccueilController {
             Parent root = loader.load();
             CreationTierListController nextController = loader.getController();
             nextController.setDarkTheme(this.isDarkTheme);
+            if (isDarkTheme==true){
+                root.getStylesheets().add(getClass().getResource("/dark.css").toExternalForm());
+            }
+            else{
+                root.getStylesheets().add(getClass().getResource("/light.css").toExternalForm());
+            }
             Stage stage = (Stage) buttonCrreTierlist.getScene().getWindow();
             stage.setScene(new Scene(root));
 
@@ -84,6 +88,7 @@ public class AccueilController {
         TierList copy = tl.duplicate();
         copy.setName(tl.getName()); //duplicate() prefixe "Copie de", on remet le vrai nom
         return copy;
+
     }
 
     private void showImportSuccess(String name) {
@@ -106,11 +111,15 @@ public class AccueilController {
     //A faire
     @FXML
     private void onToggleTheme() {
-        isDarkTheme = !isDarkTheme;
+        System.out.println("Le bouton a bien été cliqué !"); // Si ça s'affiche dans la console, le FXML est bon.
         Scene scene = buttonTheme.getScene();
         scene.getStylesheets().clear();
+        isDarkTheme = !isDarkTheme;
         String css = isDarkTheme ? "/dark.css" : "/light.css";
         scene.getStylesheets().add(getClass().getResource(css).toExternalForm());
+    Parent root = scene.getRoot();
+        root.getStylesheets().clear();
+        root.getStylesheets().add(css);
     }
 
     //Genérer dynamiquement les cartes
@@ -124,32 +133,19 @@ public class AccueilController {
     private VBox createCard(TierList tl) {
         VBox card = new VBox(10);
         card.setPrefSize(220, 250);
-        card.setStyle(
-                "-fx-background-color: #2a2a2a;" +
-                        "-fx-border-color: #444444;" +
-                        "-fx-border-radius: 8;" +
-                        "-fx-background-radius: 8;" +
-                        "-fx-cursor: hand;" +
-                        "-fx-padding: 10;"
-        );
+        card.getStyleClass().add("tierlist-card"); // Classe de la carte globale
 
         Label nom = new Label(tl.getName());
-        nom.setTextFill(javafx.scene.paint.Color.WHITE);
-        nom.setStyle("-fx-font-size: 14px; -fx-font-weight: bold;");
+        nom.getStyleClass().add("tierlist-card-title"); // Classe du titre
         nom.setMaxWidth(200);
         nom.setWrapText(true);
 
-        //Image de couverture
+        // Image de couverture
         StackPane imageContainer = new StackPane();
         imageContainer.setPrefSize(200, 160);
         imageContainer.setMinSize(200, 160);
         imageContainer.setMaxSize(200, 160);
-        imageContainer.setStyle(
-                "-fx-background-color: #1a1a1a;" +
-                        "-fx-border-color: #1a1a1a;" +
-                        "-fx-border-radius: 4;" +
-                        "-fx-background-radius: 4;"
-        );
+        imageContainer.getStyleClass().add("tierlist-card-image-container"); // Classe du conteneur d'image
 
         if (tl.getCoverImageData() != null) {
             ImageView iv = new ImageView(new Image(new java.io.ByteArrayInputStream(tl.getCoverImageData())));
@@ -158,21 +154,14 @@ public class AccueilController {
             iv.setPreserveRatio(true);
             imageContainer.getChildren().add(iv);
         } else {
-            //Placeholder si pas d'image
+            // Placeholder si pas d'image
             Label placeholder = new Label("Aucune image");
-            placeholder.setTextFill(javafx.scene.paint.Color.web("#666666"));
-            placeholder.setStyle("-fx-font-size: 12px;");
+            placeholder.getStyleClass().add("tierlist-card-placeholder"); // Classe du texte d'absence d'image
             imageContainer.getChildren().add(placeholder);
         }
 
         Button menu = new Button(". . .");
-        menu.setStyle(
-                "-fx-background-color: #3a3a3a;" +
-                        "-fx-border-color: #666666;" +
-                        "-fx-border-radius: 4;" +
-                        "-fx-background-radius: 4;"
-        );
-        menu.setTextFill(javafx.scene.paint.Color.WHITE);
+        menu.getStyleClass().add("tierlist-card-menu-button"); // Classe du bouton option
         menu.setMaxWidth(Double.MAX_VALUE);
         menu.setOnAction(e -> showCardMenu(tl, card));
 
