@@ -54,6 +54,8 @@ public class TierListEditorController {
     private Label coverPlaceholder;
     @FXML
     private Button btnTheme;
+    @FXML
+    private Button btnRename;
 
     private TierList tierList;
     private PersistenceService persistenceService = new PersistenceService();
@@ -424,6 +426,26 @@ public class TierListEditorController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Accueil.fxml"));
             Stage stage = (Stage) btnBack.getScene().getWindow();
             stage.setScene(new Scene(loader.load()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void onModifierTierList() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/RenommerTierList.fxml"));
+
+            Scene scene = new Scene(loader.load());
+
+            Stage stage = new Stage();
+            stage.setTitle("Modifier la Tier-List");
+            stage.setScene(scene);
+
+            stage.initModality(javafx.stage.Modality.APPLICATION_MODAL);
+
+            stage.showAndWait();
+
         } catch (IOException e) {
             e.printStackTrace();
         }

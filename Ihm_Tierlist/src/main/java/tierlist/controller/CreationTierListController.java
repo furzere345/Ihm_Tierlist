@@ -24,7 +24,6 @@ public class CreationTierListController {
     @FXML private TextField nomField;
     @FXML private TextArea  descriptionArea;
     @FXML private StackPane coverImagePane;
-    @FXML private Label coverLabel;
     @FXML private Button buttonTheme;
 
     private byte[] coverImageData;

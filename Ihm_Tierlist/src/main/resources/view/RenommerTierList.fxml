@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="600.0" prefWidth="720.0" stylesheets="@../css/dark.css" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tierlist.controller.CreationTierListController">
+<BorderPane prefHeight="600.0" prefWidth="720.0" stylesheets="@../css/dark.css" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tierlist.controller.RenommerTierListController">
 
     <top>
         <HBox fx:id="navbar" alignment="CENTER_LEFT" prefHeight="55.0">
@@ -33,7 +33,7 @@
             <!-- Titre section -->
             <HBox alignment="CENTER_LEFT" prefHeight="55.0">
                 <padding><Insets left="30.0" /></padding>
-                <Label text="Création de Tier-Lists :" textFill="WHITE">
+                <Label text="Modification de Tier-Lists :" textFill="WHITE">
                     <font><Font size="20.0" /></font>
                 </Label>
             </HBox>
@@ -71,7 +71,7 @@
         <HBox alignment="CENTER_LEFT" prefHeight="70.0">
             <padding><Insets left="30.0" /></padding>
 
-            <Button fx:id="btnCommencer" mnemonicParsing="false" onAction="#onCommencer" prefHeight="38.0" prefWidth="200.0" text="Commencer la tier list !" textFill="WHITE">
+            <Button fx:id="btnCommencer" mnemonicParsing="false" onAction="#onCommencer" prefHeight="38.0" prefWidth="205.0" text="Sauvegarder les modifications" textFill="WHITE">
                 <font><Font size="14.0" /></font>
             </Button>
 
