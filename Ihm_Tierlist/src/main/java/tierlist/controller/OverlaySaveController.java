@@ -4,8 +4,7 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.Pane;
@@ -20,12 +19,10 @@ import java.io.IOException;
 
 public class OverlaySaveController {
 
-    @FXML private TextField tierlistNameField;
-    @FXML private TextArea descriptionArea;
-    @FXML private Button saveButton;
     @FXML private Button downloadButton;
     @FXML private ImageView previewImage;
     @FXML private Button exportTlButton;
+    @FXML private Label tierlistName;
 
     private TierList tierList;
     private Pane tierListPane;
@@ -34,22 +31,11 @@ public class OverlaySaveController {
     public void setData(TierList tl, Pane pane) {
         this.tierList = tl;
         this.tierListPane = pane;
-
-        tierlistNameField.setText(tl.getName());
-        descriptionArea.setText(tl.getDescription());
+        tierlistName.setText(tierList.getName());
 
         //Generer l'aperçu depuis le vrai rendu
         WritableImage snapshot = pane.snapshot(new SnapshotParameters(), null);
         previewImage.setImage(snapshot);
-    }
-
-    //Sauvegarder en binaire
-    @FXML
-    private void onSave() {
-        tierList.setName(tierlistNameField.getText().trim());
-        tierList.setDescription(descriptionArea.getText().trim());
-        persistenceService.save(tierList);
-        closeStage();
     }
 
     //Exporter en image PNG
@@ -77,7 +63,7 @@ public class OverlaySaveController {
         fc.setTitle("Exporter la tier-list");
         fc.setInitialFileName(tierList.getName() + ".tl");
         fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Tier List", "*.tl"));
-        File file = fc.showSaveDialog(saveButton.getScene().getWindow());
+        File file = fc.showSaveDialog(downloadButton.getScene().getWindow());
         if (file != null) {
             persistenceService.exportTo(tierList, file);
             showSuccess("Tier-list exportée avec succès !");
@@ -94,6 +80,6 @@ public class OverlaySaveController {
     }
 
     private void closeStage() {
-        ((Stage) saveButton.getScene().getWindow()).close();
+        ((Stage) downloadButton.getScene().getWindow()).close();
     }
 }

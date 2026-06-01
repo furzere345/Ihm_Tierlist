@@ -29,9 +29,9 @@ public class CreationTierListController {
     @FXML
     private StackPane coverImagePane;
     @FXML
-    private Label coverLabel;
-    @FXML
     private Button buttonTheme;
+    @FXML
+    private Button btnAccueil;
 
     private byte[] coverImageData;
     private PersistenceService persistenceService = new PersistenceService();
@@ -43,18 +43,21 @@ public class CreationTierListController {
 
     @FXML
     private void onToggleTheme() {
-        System.out.println("Le bouton a bien été cliqué !"); // Si ça s'affiche dans la console, le FXML est bon.
+        isDarkTheme = !isDarkTheme;
+        String css = isDarkTheme ? "/css/dark.css" : "/css/light.css";
+        String cssUrl = getClass().getResource(css).toExternalForm();
 
         Scene scene = buttonTheme.getScene();
-        scene.getStylesheets().clear();
-        isDarkTheme = !isDarkTheme;
-        String css = isDarkTheme ? "/dark.css" : "/light.css";
-        scene.getStylesheets().add(getClass().getResource(css).toExternalForm());
-        Parent root = scene.getRoot();
-        root.getStylesheets().clear();
-        root.getStylesheets().add(css);
-    }
+        if (scene != null) {
+            // 1. On applique sur la scène globale
+            scene.getStylesheets().setAll(cssUrl);
 
+            // 2. CORRECTION : On force le FXML racine à vider son CSS et à prendre le nouveau
+            if (scene.getRoot() != null) {
+                scene.getRoot().getStylesheets().setAll(cssUrl);
+            }
+        }
+    }
     @FXML
     private void onSelectCover() {
         FileChooser fc = new FileChooser();
@@ -101,22 +104,21 @@ public class CreationTierListController {
     @FXML
     private void onAccueil() {
         try {
+            // 1. Chargement de l'Accueil
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Accueil.fxml"));
             Parent root = loader.load();
 
-            // 1. Correction du type de contrôleur (Accueil et non Creation)
+            // 2. Récupération du BON contrôleur (AccueilController) et envoi du thème
             AccueilController nextController = loader.getController();
             nextController.setDarkTheme(this.isDarkTheme);
 
-            // 2. On crée la nouvelle scène
+            // 3. Création de la scène et application du CSS global
             Scene nextScene = new Scene(root);
+            String cssPath = this.isDarkTheme ? "/css/dark.css" : "/css/light.css";
+            nextScene.getStylesheets().add(getClass().getResource(cssPath).toExternalForm());
 
-            // 3. On applique le CSS directement sur la SCÈNE (plus propre que sur le root)
-            String css = this.isDarkTheme ? "/dark.css" : "/light.css";
-            nextScene.getStylesheets().add(getClass().getResource(css).toExternalForm());
-
-            // 4. On l'affiche sur le stage
-            Stage stage = (Stage) nomField.getScene().getWindow();
+            // 4. Affichage
+            Stage stage = (Stage) btnAccueil.getScene().getWindow();
             stage.setScene(nextScene);
 
         } catch (IOException e) {

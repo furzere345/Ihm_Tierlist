@@ -3,93 +3,69 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1436.0" prefWidth="1120.0" style="-fx-background-color: #111111;" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tierlist.controller.OverlaySaveController">
+<BorderPane style="-fx-background-color: #111111;" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tierlist.controller.OverlaySaveController">
 
-   <!-- CONTENU -->
-   <center>
-
-      <VBox spacing="35.0" style="-fx-background-color: #111111;">
-
+   <!-- ================= TOP BAR ================= -->
+   <top>
+      <HBox alignment="TOP_CENTER" style="-fx-background-color: #1a1a1a; -fx-padding: 12;">
          <children>
-
-            <!-- NOM -->
-            <TextField fx:id="tierlistNameField" prefHeight="45.0" prefWidth="320.0" promptText="Nom de la tierlist" style="-fx-background-radius: 6;                                   -fx-font-size: 18px;">
-
-               <VBox.margin>
-                  <Insets left="60.0" top="60.0" />
-               </VBox.margin>
-
-            </TextField>
-
-            <!-- DESCRIPTION -->
-            <TextArea fx:id="descriptionArea" prefHeight="220.0" prefWidth="1000.0" promptText="Description" style="-fx-background-radius: 6;                                  -fx-font-size: 18px;" wrapText="true">
-
-               <VBox.margin>
-                  <Insets left="60.0" right="60.0" />
-               </VBox.margin>
-
-            </TextArea>
-
-            <!-- BOUTONS -->
-            <HBox spacing="90.0">
-
-               <children>
-
-                  <!-- SAVE -->
-                  <Button fx:id="saveButton" mnemonicParsing="false" onAction="#onSave" prefHeight="70.0" prefWidth="360.0" style="-fx-background-color: #BDBDBD;                                        -fx-background-radius: 8;                                        -fx-font-size: 24px;" text="Sauvegarder la tier-list" textFill="WHITE" />
-
-                  <!-- DOWNLOAD -->
-                  <Button fx:id="downloadButton" mnemonicParsing="false" onAction="#onDownload" prefHeight="70.0" prefWidth="470.0" style="-fx-background-color: #3D81FF;                                        -fx-background-radius: 8;                                        -fx-font-size: 24px;" text="Télécharger comme image" textFill="WHITE" />
-
-                  <Button fx:id="exportTlButton" mnemonicParsing="false" prefHeight="34.0" prefWidth="180.0" style="-fx-background-color: #2a2a2a; -fx-border-color: #FFFFFF; -fx-border-radius: 6; -fx-background-radius: 6;" text="Exporter en .tl" textFill="WHITE" onAction="#onExportTl" />
-
-               </children>
-
-               <VBox.margin>
-                  <Insets left="60.0" />
-               </VBox.margin>
-
-            </HBox>
-
-            <!-- APERCU -->
-            <Label text="Aperçu :" textFill="WHITE">
-
+            <Label fx:id="tierlistName" text="Titre" textFill="WHITE">
                <font>
                   <Font size="24.0" />
                </font>
-
-               <VBox.margin>
-                  <Insets left="130.0" />
-               </VBox.margin>
-
             </Label>
-
-            <!-- IMAGE -->
-            <ImageView fx:id="previewImage" fitHeight="720.0" fitWidth="720.0" pickOnBounds="true" preserveRatio="true">
-
-               <image>
-                  <Image url="@../Img/Tier_list_fruits.jpg" />
-               </image>
-
-               <VBox.margin>
-                  <Insets left="200.0" />
-               </VBox.margin>
-
-            </ImageView>
-
          </children>
 
-      </VBox>
+      </HBox>
+   </top>
 
+   <!-- ================= CENTER ================= -->
+   <center>
+      <ScrollPane fitToWidth="true" style="-fx-background: #1a1a1a; -fx-border-color: #333333;">
+
+         <content>
+            <VBox spacing="20" style="-fx-background-color: #1a1a1a;">
+               <padding>
+                  <Insets bottom="20" left="20" right="20" top="20" />
+               </padding>
+
+               <!-- ACTION BUTTONS -->
+               <HBox alignment="TOP_CENTER" spacing="15">
+
+                  <Button fx:id="downloadButton" onAction="#onDownload" prefWidth="220" style="-fx-background-color: #3D81FF;                                        -fx-text-fill: white;                                        -fx-background-radius: 8;                                        -fx-font-size: 14px;" text="Télécharger image" />
+                  <Region prefHeight="0.0" prefWidth="130.0" />
+                  <Button fx:id="exportTlButton" onAction="#onExportTl" prefWidth="220" style="-fx-background-color: #3D81FF;                                        -fx-text-fill: white;                                        -fx-background-radius: 8;                                        -fx-font-size: 14px;" text="Exporter en .lt" />
+               </HBox>
+
+               <!-- TITLE -->
+               <Label style="-fx-text-fill: white;                                   -fx-font-size: 20px;                                   -fx-font-weight: bold;" text="Aperçu" />
+
+               <!-- PREVIEW -->
+               <VBox style="-fx-background-color: #1c1c1c;                                  -fx-background-radius: 10;                                  -fx-padding: 15;">
+
+                  <ImageView fx:id="previewImage" fitHeight="750" fitWidth="750" pickOnBounds="true" preserveRatio="true">
+
+                     <image>
+                        <Image url="@../Img/Tier_list_fruits.jpg" />
+                     </image>
+
+                  </ImageView>
+
+               </VBox>
+
+            </VBox>
+         </content>
+
+      </ScrollPane>
    </center>
 
 </BorderPane>

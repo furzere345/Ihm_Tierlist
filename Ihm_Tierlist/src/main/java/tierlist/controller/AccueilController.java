@@ -45,17 +45,17 @@ public class AccueilController {
     private void onCreerTierlist() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/CreationTierList.fxml"));
-            Parent root = loader.load();
+            Parent scene = loader.load();
             CreationTierListController nextController = loader.getController();
             nextController.setDarkTheme(this.isDarkTheme);
             if (isDarkTheme==true){
-                root.getStylesheets().add(getClass().getResource("/dark.css").toExternalForm());
+                scene.getStylesheets().add(getClass().getResource("/css/dark.css").toExternalForm());
             }
             else{
-                root.getStylesheets().add(getClass().getResource("/light.css").toExternalForm());
+                scene.getStylesheets().add(getClass().getResource("/css/light.css").toExternalForm());
             }
             Stage stage = (Stage) buttonCrreTierlist.getScene().getWindow();
-            stage.setScene(new Scene(root));
+            stage.setScene(new Scene(scene));
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -108,19 +108,22 @@ public class AccueilController {
     }
 
     //Basculer theme clair/sombre
-    //A faire
-    @FXML
-    private void onToggleTheme() {
-        System.out.println("Le bouton a bien été cliqué !"); // Si ça s'affiche dans la console, le FXML est bon.
-        Scene scene = buttonTheme.getScene();
-        scene.getStylesheets().clear();
-        isDarkTheme = !isDarkTheme;
-        String css = isDarkTheme ? "/dark.css" : "/light.css";
-        scene.getStylesheets().add(getClass().getResource(css).toExternalForm());
-    Parent root = scene.getRoot();
-        root.getStylesheets().clear();
-        root.getStylesheets().add(css);
-    }
+
+        @FXML
+        private void onToggleTheme() {
+            isDarkTheme = !isDarkTheme;
+            String css = isDarkTheme ? "/css/dark.css" : "/css/light.css";
+            String cssUrl = getClass().getResource(css).toExternalForm();
+
+            // 1. On récupère la scène
+            Scene scene = buttonTheme.getScene();
+                // On nettoie la scène ET on applique le nouveau CSS
+                scene.getStylesheets().clear();
+                scene.getStylesheets().add(cssUrl);
+
+
+        }
+
 
     //Genérer dynamiquement les cartes
     private void refreshTierListCards(List<TierList> tierLists) {
