@@ -2,31 +2,27 @@
     -color-fond: #FFFFFF;
     -color-texte: #1A1A1A;
     -color-secondary: #1A66FF;
-    -color-border: #CCCCCC; /* Bordure grise plus douce que le blanc */
+    -color-border: #CCCCCC;
 }
 
-/* Arrière-plans */
-.root, .scroll-pane, .scroll-pane > .viewport, .scroll-pane .content, .vbox, .flow-pane {
+/* Arrière-plans de la structure */
+.root,.BorderPane, .vbox {
     -fx-background-color: -color-fond;
 }
-#navbar, #vosTierList{
 
-    -fx-border-color: -color-border;
-    -fx-border-width: 0 0 1 0 ; /* Ligne de 1px en bas */
-}
 /* Lignes de séparation */
-.hbox {
+#navbar, #vosTierList, .hbox {
     -fx-border-color: -color-border;
     -fx-border-width: 0 0 1 0;
 }
 
-/* Bouton Créer Tier List */
-#buttonCrreTierlist {
+/* Boutons Bleus */
+#buttonCrreTierlist, #btnAccueil, #btnCommencer {
     -fx-background-color: -color-secondary;
     -fx-text-fill: white;
     -fx-background-radius: 10;
 }
-#buttonCrreTierlist:hover {
+#buttonCrreTierlist:hover, #btnAccueil:hover, #btnCommencer:hover {
     -fx-background-color: #0052CC;
 }
 
@@ -45,7 +41,7 @@
 /* Bouton de changement de Thème */
 #buttonTheme {
     -fx-background-radius: 20;
-    -fx-background-color: #1A1A1A; /* Représente la lune */
+    -fx-background-color: #1A1A1A;
     -fx-cursor: hand;
 }
 
@@ -53,3 +49,25 @@
 .label {
     -fx-text-fill: -color-texte;
 }
+
+/* Zone de l'image de couverture */
+#coverImagePane {
+    -fx-background-color: #F5F5F5;
+    -fx-border-color: -color-secondary;
+    -fx-border-width: 2;
+    -fx-cursor: hand;
+}
+
+/* --- LE FOCUS ET LES INPUTS (LIGHT) --- */
+
+/* Style par défaut des champs de texte */
+.text-field, .text-area, .text-area .content {
+    -fx-background-color: #FFFFFF !important;
+    -fx-control-inner-background: #FFFFFF !important;
+    -fx-text-fill: -color-texte !important;
+    -fx-prompt-text-fill: #979797 !important;
+    -fx-border-color: -color-border !important;
+    -fx-border-radius: 5 !important;
+    -fx-background-radius: 5 !important;
+}
+

@@ -1,77 +1,79 @@
 .root {
-    .root {
-        -color-fond: #181616;
-        -color-texte: #FFFFFF;
-        -color-secondary: #3D81FF;
-        -color-border: #FFFFFF;
-    }
+    -color-fond: #181616;
+    -color-texte: #FFFFFF;
+    -color-secondary: #3D81FF;
+    -color-border: #FFFFFF;
+}
 
-    /* Arrière-plans de la structure */
+/* Arrière-plans de la structure */
+.root, .border-pane, .vbox, .flow-pane {
+    -fx-background-color: -color-fond !important;
+}
 
-   .vbox,.hbox {
-        -fx-background-color: -color-fond;
-    }
-    #navbar, #vosTierList{
+.scroll-pane {
+    -fx-background-color: transparent !important;
+    -fx-background: #181616 !important;
+}
 
-        -fx-border-color: -color-border;
-        -fx-border-width: 0 0 1 0 ; /* Ligne de 1px en bas */
-    }
-    /* Lignes de séparation sous la navbar et le titre */
+/* Lignes de séparation (Navbar Accueil et Création) */
+#navbar, #vosTierList, .hbox {
+    -fx-border-color: -color-border !important;
+    -fx-border-width: 0 0 1 0 !important;
+}
 
-    .hbox {
-        -fx-border-color: -color-border;
-        -fx-border-width: 0 0 1 0; /* Uniquement une ligne en bas */
-    }
+/* Boutons Bleus (Accueil, Créer, Commencer) */
+#buttonCrreTierlist, #btnAccueil, #btnCommencer {
+    -fx-background-color: -color-secondary !important;
+    -fx-text-fill: white !important;
+    -fx-background-radius: 10 !important;
+}
+#buttonCrreTierlist:hover, #btnAccueil:hover, #btnCommencer:hover {
+    -fx-background-color: #2670FF !important;
+}
 
-    /* Bouton Créer Tier List */
+/* Bouton Importer */
+#buttonImporter {
+    -fx-background-color: #070707 !important;
+    -fx-text-fill: white !important;
+    -fx-border-color: -color-border !important;
+    -fx-border-radius: 3 !important;
+    -fx-background-radius: 3 !important;
+}
+#buttonImporter:hover {
+    -fx-background-color: #1E1E1E !important;
+}
 
-    #buttonCrreTierlist {
-        -fx-background-color: -color-secondary;
-        -fx-text-fill: white;
-        -fx-background-radius: 10;
-    }
+/* Bouton de changement de Thème (Rond) */
+#buttonTheme {
+    -fx-background-radius: 20 !important;
+    -fx-background-color: #FFFFFF !important;
+    -fx-cursor: hand !important;
+}
 
-    #buttonCrreTierlist:hover {
-        -fx-background-color: #2670FF;
-    }
+/* Tous les textes/labels */
+.label {
+    -fx-text-fill: -color-texte !important;
+}
 
-    /* Bouton Importer */
+/* Zone de l'image de couverture (StackPane) */
+#coverImagePane {
+    -fx-background-color: #2A2A2A !important;
+    -fx-border-color: -color-secondary !important;
+    -fx-border-width: 2 !important;
+    -fx-cursor: hand !important;
+}
 
-    #buttonImporter {
-        -fx-background-color: #070707;
-        -fx-text-fill: white;
-        -fx-border-color: -color-border;
-        -fx-border-radius: 3;
-        -fx-background-radius: 3;
-    }
+/* ==========================================
+   CORRECTIF SYSTEME DE FOCUS (DARK)
+   ========================================== */
 
-    #buttonImporter:hover {
-        -fx-background-color: #1E1E1E;
-    }
-
-    /* Bouton de changement de Thème (Rond) */
-
-    #buttonTheme {
-        -fx-background-radius: 20;
-        -fx-background-color: #FFFFFF; /* Représente le soleil */
-        -fx-cursor: hand;
-    }
-
-    /* Tous les textes/labels */
-
-    .label {
-        -fx-text-fill: -color-texte;
-    }
-    /* 1. On applique le fond sur la racine et les conteneurs principaux */
-    .root, .border-pane, .vbox, .flow-pane {
-        -fx-background-color: #181616;
-    }
-
-    /* 2. Le ScrollPane a besoin d'un traitement spécial pour vider ses fonds par défaut */
-    .scroll-pane {
-        -fx-background-color: transparent;
-        -fx-background: #181616; /* Force la couleur de structure du scroll */
-    }
-
-
+/* On cible la cellule de texte native de JavaFX (.text-input) */
+.text-input, .text-field, .text-area, .text-area .content {
+    -fx-background-color: #2A2A2A !important;
+    -fx-control-inner-background: #2A2A2A !important;
+    -fx-text-fill: white !important;
+    -fx-prompt-text-fill: #888888 !important;
+    -fx-border-color: #555555 !important;
+    -fx-border-radius: 5 !important;
+    -fx-background-radius: 5 !important;
 }

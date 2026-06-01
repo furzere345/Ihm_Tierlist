@@ -3,6 +3,7 @@ package tierlist.controller;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -24,9 +25,23 @@ public class CreationTierListController {
     @FXML private TextArea  descriptionArea;
     @FXML private StackPane coverImagePane;
     @FXML private Label coverLabel;
+    @FXML private Button buttonTheme;
 
     private byte[] coverImageData;
     private PersistenceService persistenceService = new PersistenceService();
+    private boolean isDarkTheme;
+
+    public void setDarkTheme(boolean darkTheme) {
+        this.isDarkTheme = darkTheme;
+    }
+    @FXML
+    private void onToggleTheme() {
+        isDarkTheme = !isDarkTheme;
+        Scene scene = buttonTheme.getScene();
+        scene.getStylesheets().clear();
+        String css = isDarkTheme ? "/dark.css" : "/light.css";
+        scene.getStylesheets().add(getClass().getResource(css).toExternalForm());
+    }
 
     @FXML
     private void onSelectCover() {

@@ -15,7 +15,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import tierlist.model.TierList;
 import tierlist.service.PersistenceService;
-
+import javafx.scene.Parent;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -37,7 +37,7 @@ public class AccueilController {
         javafx.application.Platform.runLater(() -> {
             Scene scene = buttonTheme.getScene();
             if (scene != null) {
-                scene.getStylesheets().add(getClass().getResource("/dark.css").toExternalForm());
+                scene.getStylesheets().add(getClass().getResource("/light.css").toExternalForm());
             }
         });
     }
@@ -47,9 +47,15 @@ public class AccueilController {
     private void onCreerTierlist() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/CreationTierList.fxml"));
+            Parent root = loader.load();
+            CreationTierListController nextController = loader.getController();
+            nextController.setDarkTheme(this.isDarkTheme);
             Stage stage = (Stage) buttonCrreTierlist.getScene().getWindow();
-            stage.setScene(new Scene(loader.load()));
-        } catch (IOException e) { e.printStackTrace(); }
+            stage.setScene(new Scene(root));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     //Importer depuis un fichier binaire
