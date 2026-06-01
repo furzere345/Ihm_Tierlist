@@ -57,6 +57,7 @@ public class TierListEditorController {
 
     private TierList tierList;
     private PersistenceService persistenceService = new PersistenceService();
+    private boolean isDarkTheme = true;
 
     public void setTierList(TierList tl) {
         this.tierList = tl;
@@ -89,6 +90,15 @@ public class TierListEditorController {
     public void initialize() {
         // Les handlers boutons sont déclarés ici
         // (les @FXML methods suffisent, pas besoin de setOnAction manuel)
+    }
+
+    @FXML
+    private void onToggleTheme() {
+        isDarkTheme = !isDarkTheme;
+        Scene scene = btnTheme.getScene();
+        scene.getStylesheets().clear();
+        String css = isDarkTheme ? "/css/dark.css" : "/css/light.css";
+        scene.getStylesheets().add(getClass().getResource(css).toExternalForm());
     }
 
     // =========================================================================
@@ -142,17 +152,17 @@ public class TierListEditorController {
 
         //Boutons droite : edition + monter + descendre
         Button editBtn = new Button("⚙");
-        editBtn.setPrefSize(30, 30);
+        editBtn.setPrefSize(32, 32);
         editBtn.setStyle("-fx-background-color: #3a3a3a; -fx-text-fill: white; -fx-font-size: 14;");
         editBtn.setOnAction(e -> openOverlayTier(tier));
 
         Button upBtn = new Button("∧");
-        upBtn.setPrefSize(30, 30);
+        upBtn.setPrefSize(32, 32);
         upBtn.setStyle("-fx-background-color: #3a3a3a; -fx-text-fill: white; -fx-font-size: 12;");
         upBtn.setOnAction(e -> moveTier(tier, -1));
 
         Button downBtn = new Button("∨");
-        downBtn.setPrefSize(30, 30);
+        downBtn.setPrefSize(32, 32);
         downBtn.setStyle("-fx-background-color: #3a3a3a; -fx-text-fill: white; -fx-font-size: 12;");
         downBtn.setOnAction(e -> moveTier(tier, +1));
 

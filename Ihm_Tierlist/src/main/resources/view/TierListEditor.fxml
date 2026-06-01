@@ -29,7 +29,7 @@
                 <font><Font size="13.0" /></font>
             </Button>
 
-            <Button fx:id="btnTheme" mnemonicParsing="false" prefHeight="35.0" prefWidth="35.0" style="-fx-background-color: #2a2a2a; -fx-background-radius: 20; -fx-border-color: #555555; -fx-border-radius: 20;" text="☀" textFill="WHITE">
+            <Button fx:id="btnTheme" mnemonicParsing="false" onAction="#onToggleTheme" prefHeight="35.0" prefWidth="35.0" style="-fx-background-color: #2a2a2a; -fx-background-radius: 20; -fx-border-color: #555555; -fx-border-radius: 20;" text="☀" textFill="WHITE">
                 <font><Font size="14.0" /></font>
             </Button>
 
@@ -107,10 +107,16 @@
                                 <font><Font size="12.0" /></font>
                             </Button>
                         </HBox>
-
-                        <FlowPane fx:id="unclassifiedPane" hgap="6.0" prefHeight="100.0" style="-fx-background-color: #222222; -fx-border-color: #444444; -fx-border-radius: 5; -fx-background-radius: 5;" vgap="6.0">
-                            <padding><Insets bottom="8.0" left="8.0" right="8.0" top="8.0" /></padding>
-                        </FlowPane>
+                  <ScrollPane fitToWidth="true" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #1a1a1a;">
+                     <content>
+      
+                              <FlowPane fx:id="unclassifiedPane" hgap="6.0" prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: #222222; -fx-border-color: #444444; -fx-border-radius: 5; -fx-background-radius: 5;" vgap="6.0">
+                                  <padding>
+                              <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                           </padding>
+                              </FlowPane>
+                     </content>
+                  </ScrollPane>
 
                     </VBox>
 

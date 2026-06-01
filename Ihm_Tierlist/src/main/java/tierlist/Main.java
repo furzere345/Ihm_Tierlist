@@ -11,11 +11,15 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        // Charge ton fichier FXML (adapte le chemin si besoin)
-        Parent root = FXMLLoader.load(getClass().getResource("/view/Accueil.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Accueil.fxml"));
+
+        Parent root = loader.load();
+
+        Scene scene = new Scene(root);
+
 
         primaryStage.setTitle("Test JavaFX FXML");
-        primaryStage.setScene(new Scene(root));
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 

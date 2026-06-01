@@ -39,7 +39,7 @@ public class CreationTierListController {
         isDarkTheme = !isDarkTheme;
         Scene scene = buttonTheme.getScene();
         scene.getStylesheets().clear();
-        String css = isDarkTheme ? "/dark.css" : "/light.css";
+        String css = isDarkTheme ? "/css/dark.css" : "/css/light.css";
         scene.getStylesheets().add(getClass().getResource(css).toExternalForm());
     }
 

@@ -11,7 +11,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import tierlist.model.TierList;
 import tierlist.service.PersistenceService;
@@ -34,12 +33,6 @@ public class AccueilController {
     public void initialize() {
         List<TierList> tierLists = persistenceService.loadAll();
         refreshTierListCards(tierLists);
-        javafx.application.Platform.runLater(() -> {
-            Scene scene = buttonTheme.getScene();
-            if (scene != null) {
-                scene.getStylesheets().add(getClass().getResource("/light.css").toExternalForm());
-            }
-        });
     }
 
     //Creer une nouvelle tier-list
@@ -51,7 +44,7 @@ public class AccueilController {
             CreationTierListController nextController = loader.getController();
             nextController.setDarkTheme(this.isDarkTheme);
             Stage stage = (Stage) buttonCrreTierlist.getScene().getWindow();
-            stage.setScene(new Scene(root));
+            stage.setScene(new Scene(root, 1200, 800));
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -109,7 +102,7 @@ public class AccueilController {
         isDarkTheme = !isDarkTheme;
         Scene scene = buttonTheme.getScene();
         scene.getStylesheets().clear();
-        String css = isDarkTheme ? "/dark.css" : "/light.css";
+        String css = isDarkTheme ? "/css/dark.css" : "/css/light.css";
         scene.getStylesheets().add(getClass().getResource(css).toExternalForm());
     }
 
@@ -124,8 +117,7 @@ public class AccueilController {
     private VBox createCard(TierList tl) {
         VBox card = new VBox(10);
         card.setPrefSize(220, 250);
-        card.setStyle(
-                "-fx-background-color: #2a2a2a;" +
+        card.setStyle("-fx-background-color: #2a2a2a;" +
                         "-fx-border-color: #444444;" +
                         "-fx-border-radius: 8;" +
                         "-fx-background-radius: 8;" +
@@ -144,8 +136,7 @@ public class AccueilController {
         imageContainer.setPrefSize(200, 160);
         imageContainer.setMinSize(200, 160);
         imageContainer.setMaxSize(200, 160);
-        imageContainer.setStyle(
-                "-fx-background-color: #1a1a1a;" +
+        imageContainer.setStyle("-fx-background-color: #1a1a1a;" +
                         "-fx-border-color: #1a1a1a;" +
                         "-fx-border-radius: 4;" +
                         "-fx-background-radius: 4;"
@@ -166,8 +157,7 @@ public class AccueilController {
         }
 
         Button menu = new Button(". . .");
-        menu.setStyle(
-                "-fx-background-color: #3a3a3a;" +
+        menu.setStyle("-fx-background-color: #3a3a3a;" +
                         "-fx-border-color: #666666;" +
                         "-fx-border-radius: 4;" +
                         "-fx-background-radius: 4;"
@@ -210,10 +200,13 @@ public class AccueilController {
     private void ouvrirTierList(TierList tl) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/TierListEditor.fxml"));
-            Stage stage = (Stage) buttonCrreTierlist.getScene().getWindow();
-            stage.setScene(new Scene(loader.load()));
+            Parent root = loader.load();
             TierListEditorController ctrl = loader.getController();
             ctrl.setTierList(tl);
+            Stage stage = (Stage) buttonCrreTierlist.getScene().getWindow();
+            Scene scene = new Scene(root, 1200, 800);
+            stage.setScene(scene);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
