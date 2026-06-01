@@ -34,6 +34,12 @@ public class AccueilController {
     public void initialize() {
         List<TierList> tierLists = persistenceService.loadAll();
         refreshTierListCards(tierLists);
+        javafx.application.Platform.runLater(() -> {
+            Scene scene = buttonTheme.getScene();
+            if (scene != null) {
+                scene.getStylesheets().add(getClass().getResource("/dark.css").toExternalForm());
+            }
+        });
     }
 
     //Creer une nouvelle tier-list
@@ -97,7 +103,7 @@ public class AccueilController {
         isDarkTheme = !isDarkTheme;
         Scene scene = buttonTheme.getScene();
         scene.getStylesheets().clear();
-        String css = isDarkTheme ? "/css/dark.css" : "/css/light.css";
+        String css = isDarkTheme ? "/dark.css" : "/light.css";
         scene.getStylesheets().add(getClass().getResource(css).toExternalForm());
     }
 

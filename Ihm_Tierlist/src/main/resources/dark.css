@@ -1,0 +1,77 @@
+.root {
+    .root {
+        -color-fond: #181616;
+        -color-texte: #FFFFFF;
+        -color-secondary: #3D81FF;
+        -color-border: #FFFFFF;
+    }
+
+    /* Arrière-plans de la structure */
+
+   .vbox,.hbox {
+        -fx-background-color: -color-fond;
+    }
+    #navbar, #vosTierList{
+
+        -fx-border-color: -color-border;
+        -fx-border-width: 0 0 1 0 ; /* Ligne de 1px en bas */
+    }
+    /* Lignes de séparation sous la navbar et le titre */
+
+    .hbox {
+        -fx-border-color: -color-border;
+        -fx-border-width: 0 0 1 0; /* Uniquement une ligne en bas */
+    }
+
+    /* Bouton Créer Tier List */
+
+    #buttonCrreTierlist {
+        -fx-background-color: -color-secondary;
+        -fx-text-fill: white;
+        -fx-background-radius: 10;
+    }
+
+    #buttonCrreTierlist:hover {
+        -fx-background-color: #2670FF;
+    }
+
+    /* Bouton Importer */
+
+    #buttonImporter {
+        -fx-background-color: #070707;
+        -fx-text-fill: white;
+        -fx-border-color: -color-border;
+        -fx-border-radius: 3;
+        -fx-background-radius: 3;
+    }
+
+    #buttonImporter:hover {
+        -fx-background-color: #1E1E1E;
+    }
+
+    /* Bouton de changement de Thème (Rond) */
+
+    #buttonTheme {
+        -fx-background-radius: 20;
+        -fx-background-color: #FFFFFF; /* Représente le soleil */
+        -fx-cursor: hand;
+    }
+
+    /* Tous les textes/labels */
+
+    .label {
+        -fx-text-fill: -color-texte;
+    }
+    /* 1. On applique le fond sur la racine et les conteneurs principaux */
+    .root, .border-pane, .vbox, .flow-pane {
+        -fx-background-color: #181616;
+    }
+
+    /* 2. Le ScrollPane a besoin d'un traitement spécial pour vider ses fonds par défaut */
+    .scroll-pane {
+        -fx-background-color: transparent;
+        -fx-background: #181616; /* Force la couleur de structure du scroll */
+    }
+
+
+}

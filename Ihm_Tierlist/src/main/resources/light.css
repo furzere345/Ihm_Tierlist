@@ -1,0 +1,55 @@
+.root {
+    -color-fond: #FFFFFF;
+    -color-texte: #1A1A1A;
+    -color-secondary: #1A66FF;
+    -color-border: #CCCCCC; /* Bordure grise plus douce que le blanc */
+}
+
+/* Arrière-plans */
+.root, .scroll-pane, .scroll-pane > .viewport, .scroll-pane .content, .vbox, .flow-pane {
+    -fx-background-color: -color-fond;
+}
+#navbar, #vosTierList{
+
+    -fx-border-color: -color-border;
+    -fx-border-width: 0 0 1 0 ; /* Ligne de 1px en bas */
+}
+/* Lignes de séparation */
+.hbox {
+    -fx-border-color: -color-border;
+    -fx-border-width: 0 0 1 0;
+}
+
+/* Bouton Créer Tier List */
+#buttonCrreTierlist {
+    -fx-background-color: -color-secondary;
+    -fx-text-fill: white;
+    -fx-background-radius: 10;
+}
+#buttonCrreTierlist:hover {
+    -fx-background-color: #0052CC;
+}
+
+/* Bouton Importer */
+#buttonImporter {
+    -fx-background-color: #F0F0F0;
+    -fx-text-fill: -color-texte;
+    -fx-border-color: #757575;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
+}
+#buttonImporter:hover {
+    -fx-background-color: #E0E0E0;
+}
+
+/* Bouton de changement de Thème */
+#buttonTheme {
+    -fx-background-radius: 20;
+    -fx-background-color: #1A1A1A; /* Représente la lune */
+    -fx-cursor: hand;
+}
+
+/* Tous les textes/labels */
+.label {
+    -fx-text-fill: -color-texte;
+}
