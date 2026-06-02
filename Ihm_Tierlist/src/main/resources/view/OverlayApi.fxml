@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane prefHeight="520.0" prefWidth="620.0" style="-fx-background-color: #1a1a1a;" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tierlist.controller.OverlayApiController">
@@ -20,10 +19,6 @@
             <Label text="Importer depuis RAWG" textFill="WHITE">
                 <font><Font size="16.0" /></font>
             </Label>
-
-            <Region HBox.hgrow="ALWAYS" />
-
-            <Button fx:id="btnClose" mnemonicParsing="false" onAction="#onClose" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: #3a3a3a; -fx-border-color: #666666; -fx-border-radius: 4; -fx-background-radius: 4;" text="✕" textFill="WHITE" />
         </HBox>
     </top>
 

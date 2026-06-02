@@ -258,16 +258,26 @@ public class TierListEditorController {
     //Ajouter un item texte
     @FXML
     private void onAddItem() {
-        TextInputDialog dialog = new TextInputDialog();
-        dialog.setTitle("Nouvel item");
-        dialog.setHeaderText(null);
-        dialog.setContentText("Nom de l'item :");
-        Optional<String> result = dialog.showAndWait();
-        result.filter(s -> !s.isBlank()).ifPresent(name -> {
-            tierList.getUnclassifiedItems().add(new Item(name));
-            persistenceService.save(tierList);
-            buildUnclassifiedUI();
-        });
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/CustomInput.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(loader.load()));
+            stage.initModality(Modality.APPLICATION_MODAL);
+
+            CustomInputController ctrl = loader.getController();
+            ctrl.configurer("Nouvel item", "");
+
+            stage.showAndWait();
+
+            String resultat = ctrl.getResultat();
+            if (resultat != null && !resultat.isBlank()) {
+                tierList.getUnclassifiedItems().add(new Item(resultat));
+                persistenceService.save(tierList);
+                buildUnclassifiedUI();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     //Ajouter un item image
@@ -317,14 +327,27 @@ public class TierListEditorController {
 
         MenuItem renommer = new MenuItem("Renommer");
         renommer.setOnAction(e -> {
-            TextInputDialog d = new TextInputDialog(item.getLabel());
-            d.setHeaderText(null);
-            d.setContentText("Nouveau nom :");
-            d.showAndWait().filter(s -> !s.isBlank()).ifPresent(s -> {
-                item.setLabel(s);
-                persistenceService.save(tierList);
-                refresh();
-            });
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/CustomInput.fxml"));
+                Stage stage = new Stage();
+                stage.setScene(new Scene(loader.load()));
+
+                stage.initModality(Modality.APPLICATION_MODAL);
+
+                CustomInputController ctrl = loader.getController();
+                ctrl.configurer("Renommer l'item", item.getLabel());
+
+                stage.showAndWait();
+
+                String resultat = ctrl.getResultat();
+                if (resultat != null && !resultat.isBlank()) {
+                    item.setLabel(resultat);
+                    persistenceService.save(tierList);
+                    refresh();
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         });
 
         MenuItem supprimer = new MenuItem("Supprimer");
@@ -392,17 +415,25 @@ public class TierListEditorController {
     //Reinitialiser la tier-list
     @FXML
     private void onReset() {
-        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
-        confirm.setTitle("Réinitialiser");
-        confirm.setHeaderText(null);
-        confirm.setContentText("Remettre tous les items dans la zone à classer ?");
-        confirm.showAndWait().ifPresent(btn -> {
-            if (btn == ButtonType.OK) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/CustomConfirm.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(loader.load()));
+            stage.initModality(Modality.APPLICATION_MODAL);
+
+            CustomConfirmController ctrl = loader.getController();
+            ctrl.configurer("Remettre tous les items dans la zone à classer ?");
+
+            stage.showAndWait();
+
+            if (ctrl.isConfirmed()) {
                 tierList.reset();
                 persistenceService.save(tierList);
                 refresh();
             }
-        });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     //Ouvrir l'overlay de sauvegarde

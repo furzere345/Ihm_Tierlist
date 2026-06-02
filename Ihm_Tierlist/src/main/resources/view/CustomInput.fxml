@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" prefHeight="200.0" prefWidth="350.0" spacing="20.0" style="-fx-background-color: #2b2b2b; -fx-border-color: #444444; -fx-border-width: 2;" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tierlist.controller.CustomInputController">
+
+    <padding>
+        <Insets bottom="20.0" left="30.0" right="30.0" top="20.0" />
+    </padding>
+
+    <Label fx:id="labelTitre" text="Titre" textFill="WHITE">
+        <font>
+            <Font name="System Bold" size="16.0" />
+        </font>
+    </Label>
+
+    <TextField fx:id="champSaisie" prefHeight="35.0" promptText="Entrez le texte ici..." style="-fx-background-color: #1e1e1e; -fx-text-fill: white; -fx-prompt-text-fill: gray; -fx-border-color: #555555; -fx-border-radius: 3; -fx-background-radius: 3;" />
+
+    <HBox alignment="CENTER" spacing="15.0">
+        <Button defaultButton="true" mnemonicParsing="false" onAction="#onValider" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #3D81FF; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" text="Valider" />
+
+        <Button cancelButton="true" mnemonicParsing="false" onAction="#onAnnuler" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: transparent; -fx-border-color: #666666; -fx-text-fill: #cccccc; -fx-cursor: hand;" text="Annuler" />
+    </HBox>
+
+</VBox>

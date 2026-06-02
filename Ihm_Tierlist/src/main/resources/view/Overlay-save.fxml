@@ -43,7 +43,7 @@
 
                   <Button fx:id="downloadButton" onAction="#onDownload" prefWidth="220" style="-fx-background-color: #3D81FF;                                        -fx-text-fill: white;                                        -fx-background-radius: 8;                                        -fx-font-size: 14px;" text="Télécharger image" />
                   <Region prefHeight="0.0" prefWidth="130.0" />
-                  <Button fx:id="exportTlButton" onAction="#onExportTl" prefWidth="220" style="-fx-background-color: #3D81FF;                                        -fx-text-fill: white;                                        -fx-background-radius: 8;                                        -fx-font-size: 14px;" text="Exporter en .lt" />
+                  <Button fx:id="exportTlButton" onAction="#onExportTl" prefWidth="220" style="-fx-background-color: #3D81FF;                                        -fx-text-fill: white;                                        -fx-background-radius: 8;                                        -fx-font-size: 14px;" text="Exporter en .tl" />
                </HBox>
 
                <!-- TITLE -->

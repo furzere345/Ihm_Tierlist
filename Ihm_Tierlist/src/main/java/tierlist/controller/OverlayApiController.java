@@ -17,11 +17,14 @@ import java.util.function.Consumer;
 
 public class OverlayApiController {
 
-    @FXML private TextField searchField;
-    @FXML private Button searchButton;
-    @FXML private FlowPane resultsPane;
-    @FXML private Label statusLabel;
-    @FXML private Button btnClose;
+    @FXML
+    private TextField searchField;
+    @FXML
+    private Button searchButton;
+    @FXML
+    private FlowPane resultsPane;
+    @FXML
+    private Label statusLabel;
 
     private RawgApiService apiService = new RawgApiService();
     private Consumer<List<Item>> onImport;
@@ -90,7 +93,8 @@ public class OverlayApiController {
                     Platform.runLater(() ->
                             iv.setImage(new Image(new ByteArrayInputStream(data)))
                     );
-                } catch (Exception ignored) {}
+                } catch (Exception ignored) {
+                }
             }).start();
         }
 
@@ -130,10 +134,5 @@ public class OverlayApiController {
                 );
             }
         }).start();
-    }
-
-    @FXML
-    private void onClose() {
-        ((Stage) btnClose.getScene().getWindow()).close();
     }
 }
