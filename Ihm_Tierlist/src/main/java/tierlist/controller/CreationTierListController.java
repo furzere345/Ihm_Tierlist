@@ -80,42 +80,35 @@ public class CreationTierListController {
     }
 
     @FXML
+    private void onCommencer() {
+        String nom = nomField.getText().trim();
+        if (nom.isEmpty()) {
+            nomField.setStyle("-fx-border-color: red;");
+            return;
+        }
 
-        private void onCommencer() {
-            String nom = nomField.getText().trim();
-            if (nom.isEmpty()) {
-                nomField.setStyle("-fx-border-color: red;");
-                return;
-            }
+        TierList tl = new TierList(nom);
+        tl.setDescription(descriptionArea.getText().trim());
+        tl.setCoverImageData(coverImageData);
+        persistenceService.save(tl);
 
-            // 1. Création et sauvegarde du modèle
-            TierList tl = new TierList(nom);
-            tl.setDescription(descriptionArea.getText().trim());
-            tl.setCoverImageData(coverImageData);
-            persistenceService.save(tl);
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/TierListEditor.fxml"));
+            Scene scene = new Scene(loader.load(), 1200, 800);
 
-            try {
-                // 2. Chargement de la vue de l'éditeur
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/TierListEditor.fxml"));
-                Parent root = loader.load();
+            TierListEditorController ctrl = loader.getController();
+            ctrl.setTierList(tl);
+            ctrl.setDarkTheme(this.isDarkTheme);
 
-                // 3. Récupération du BON contrôleur et transmission des données
-                TierListEditorController ctrl = loader.getController();
-                ctrl.setTierList(tl);
-                ctrl.setDarkTheme(this.isDarkTheme); // Transmet le thème actuel (true ou false)
+            String cssPath = this.isDarkTheme ? "/css/dark.css" : "/css/light.css";
+            scene.getStylesheets().add(getClass().getResource(cssPath).toExternalForm());
 
-                // 4. Création de la scène et application immédiate du CSS correspondant
-                Scene nextScene = new Scene(root);
-                String cssPath = this.isDarkTheme ? "/css/dark.css" : "/css/light.css";
-                nextScene.getStylesheets().add(getClass().getResource(cssPath).toExternalForm());
+            Stage stage = (Stage) nomField.getScene().getWindow();
+            stage.setScene(scene);
 
-                // 5. Affichage sur la fenêtre
-                Stage stage = (Stage) nomField.getScene().getWindow();
-                stage.setScene(nextScene);
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
