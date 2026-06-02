@@ -203,7 +203,8 @@ public class AccueilController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/TierListEditor.fxml"));
             Stage stage = (Stage) buttonCrreTierlist.getScene().getWindow();
-            stage.setScene(new Scene(loader.load()));
+            Scene scene = new Scene(loader.load(), 1200, 800); // largeur, hauteur
+            stage.setScene(scene);
             TierListEditorController ctrl = loader.getController();
             ctrl.setTierList(tl);
         } catch (IOException e) {

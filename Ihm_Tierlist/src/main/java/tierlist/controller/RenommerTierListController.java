@@ -24,7 +24,6 @@ public class RenommerTierListController {
     @FXML private TextField nomField;
     @FXML private TextArea descriptionArea;
     @FXML private StackPane coverImagePane;
-    @FXML private Button buttonTheme;
 
     private final PersistenceService persistenceService = new PersistenceService();
 
@@ -33,8 +32,9 @@ public class RenommerTierListController {
     private byte[] coverImageData;
     private boolean isDarkTheme;
 
-    public void setTierList(TierList tl) {
-        this.tierList = tl;
+    public void setTierList(TierList tierList) {
+        this.tierList = tierList;
+        onLoaded();
     }
 
     @FXML
@@ -58,20 +58,6 @@ public class RenommerTierListController {
 
             coverImageData = tierList.getCoverImageData();
         }
-    }
-
-    public void setDarkTheme(boolean darkTheme) {
-        this.isDarkTheme = darkTheme;
-    }
-
-    @FXML
-    private void onToggleTheme() {
-        isDarkTheme = !isDarkTheme;
-        Scene scene = buttonTheme.getScene();
-        scene.getStylesheets().clear();
-
-        String css = isDarkTheme ? "/css/dark.css" : "/css/light.css";
-        scene.getStylesheets().add(getClass().getResource(css).toExternalForm());
     }
 
     @FXML
@@ -101,7 +87,6 @@ public class RenommerTierListController {
 
     @FXML
     private void onCommencer() {
-
         String nom = nomField.getText().trim();
         String description = descriptionArea.getText().trim();
 
@@ -112,34 +97,13 @@ public class RenommerTierListController {
 
         tierList.setName(nom);
         tierList.setDescription(description);
-
         if (coverImageData != null) {
             tierList.setCoverImageData(coverImageData);
         }
 
         persistenceService.save(tierList);
 
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/TierListEditor.fxml"));
-            Stage stage = (Stage) nomField.getScene().getWindow();
-            stage.setScene(new Scene(loader.load()));
-
-            TierListEditorController ctrl = loader.getController();
-            ctrl.setTierList(tierList);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    private void onAccueil() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Accueil.fxml"));
-            Stage stage = (Stage) nomField.getScene().getWindow();
-            stage.setScene(new Scene(loader.load()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Stage stage = (Stage) nomField.getScene().getWindow();
+        stage.close();
     }
 }

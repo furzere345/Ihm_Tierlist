@@ -443,13 +443,17 @@ public class TierListEditorController {
 
             Scene scene = new Scene(loader.load());
 
+            RenommerTierListController controller = loader.getController();
+
+            controller.setTierList(tierList);
+
             Stage stage = new Stage();
             stage.setTitle("Modifier la Tier-List");
             stage.setScene(scene);
-
             stage.initModality(javafx.stage.Modality.APPLICATION_MODAL);
 
             stage.showAndWait();
+            setTierList(this.tierList);
 
         } catch (IOException e) {
             e.printStackTrace();
