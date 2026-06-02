@@ -196,3 +196,73 @@
 .menu-item .label {
     -fx-text-fill: -color-text-primary;
 }
+/* ==========================================================================
+   STYLE COMPLÉMENTAIRE DE L'ÉDITEUR - MODE SOMBRE
+   ========================================================================== */
+
+/* Style par défaut des boutons gris de l'éditeur (+ Ajouter tier, + Ajouter item...) */
+.button {
+    -fx-text-fill: -color-text-primary;
+}
+
+/* On force la visibilité du texte dans le ScrollPane en mode sombre */
+.scroll-pane *.label {
+    -fx-text-fill: -color-text-primary;
+}
+
+/* Nettoyage des bordures blanches par défaut de JavaFX sur le ScrollPane */
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-viewport-background-color: transparent;
+}
+
+/* Rendre les barres de défilement (ScrollBars) plus discrètes et sombres */
+.scroll-pane .scroll-bar:vertical,
+.scroll-pane .scroll-bar:horizontal {
+    -fx-background-color: -color-bg-primary;
+}
+
+.scroll-pane .scroll-bar .thumb {
+    -fx-background-color: -color-bg-secondary;
+    -fx-background-radius: 4;
+}
+/* Boutons standards de l'éditeur (+ Ajouter item, + Ajouter image, etc.) */
+.button {
+    -fx-background-color: -color-bg-secondary;
+    -fx-border-color: -color-border-input;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-text-fill: -color-text-primary;
+}
+
+.button:hover {
+    -fx-background-color: -color-bg-hover;
+}
+
+/* Fix pour le ScrollPane de la zone "À classer" */
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-viewport-background-color: transparent;
+    -fx-border-color: transparent;
+}.context-menu {
+     -fx-background-color: -color-bg-secondary;
+     -fx-border-color: -color-border-input;
+     -fx-border-width: 1px;
+     -fx-border-radius: 4px;
+     -fx-background-radius: 4px;
+     -fx-padding: 0; /* Supprime l'espace vide interne qui crée le bloc blanc */
+ }
+
+.menu-item {
+    -fx-background-radius: 4px;
+    -fx-padding: 8px 15px;
+}
+
+.menu-item .label {
+    -fx-text-fill: -color-text-primary;
+}
+
+
+#btnReset{
+    -fx-background-color: red;
+}

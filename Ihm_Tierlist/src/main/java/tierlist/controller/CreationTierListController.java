@@ -32,6 +32,7 @@ public class CreationTierListController {
     private Button buttonTheme;
     @FXML
     private Button btnAccueil;
+    @FXML private Button btnCommencer;
 
     private byte[] coverImageData;
     private PersistenceService persistenceService = new PersistenceService();
@@ -79,26 +80,42 @@ public class CreationTierListController {
     }
 
     @FXML
-    private void onCommencer() {
-        String nom = nomField.getText().trim();
-        if (nom.isEmpty()) {
-            nomField.setStyle("-fx-border-color: red;");
-            return;
-        }
-        TierList tl = new TierList(nom);
-        tl.setDescription(descriptionArea.getText().trim());
-        tl.setCoverImageData(coverImageData);
-        persistenceService.save(tl);
 
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/TierListEditor.fxml"));
-            Stage stage = (Stage) nomField.getScene().getWindow();
-            stage.setScene(new Scene(loader.load()));
-            TierListEditorController ctrl = loader.getController();
-            ctrl.setTierList(tl);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        private void onCommencer() {
+            String nom = nomField.getText().trim();
+            if (nom.isEmpty()) {
+                nomField.setStyle("-fx-border-color: red;");
+                return;
+            }
+
+            // 1. Création et sauvegarde du modèle
+            TierList tl = new TierList(nom);
+            tl.setDescription(descriptionArea.getText().trim());
+            tl.setCoverImageData(coverImageData);
+            persistenceService.save(tl);
+
+            try {
+                // 2. Chargement de la vue de l'éditeur
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/TierListEditor.fxml"));
+                Parent root = loader.load();
+
+                // 3. Récupération du BON contrôleur et transmission des données
+                TierListEditorController ctrl = loader.getController();
+                ctrl.setTierList(tl);
+                ctrl.setDarkTheme(this.isDarkTheme); // Transmet le thème actuel (true ou false)
+
+                // 4. Création de la scène et application immédiate du CSS correspondant
+                Scene nextScene = new Scene(root);
+                String cssPath = this.isDarkTheme ? "/css/dark.css" : "/css/light.css";
+                nextScene.getStylesheets().add(getClass().getResource(cssPath).toExternalForm());
+
+                // 5. Affichage sur la fenêtre
+                Stage stage = (Stage) nomField.getScene().getWindow();
+                stage.setScene(nextScene);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
     }
 
     @FXML

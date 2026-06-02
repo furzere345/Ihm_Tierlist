@@ -13,28 +13,28 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="750.0" prefWidth="560.0" style="-fx-background-color: #1a1a1a;" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tierlist.controller.TierListEditorController">
+<BorderPane prefHeight="750.0" prefWidth="560.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tierlist.controller.TierListEditorController">
 
     <top>
-        <HBox alignment="CENTER" prefHeight="55.0" spacing="130.0" style="-fx-background-color: #1a1a1a; -fx-border-color: #333333; -fx-border-width: 0 0 1 0;">
+        <HBox alignment="CENTER" prefHeight="55.0" spacing="130.0">
             <padding><Insets left="10.0" right="10.0" /></padding>
 
-            <Button fx:id="btnBack" alignment="CENTER" mnemonicParsing="false" onAction="#onBack" prefHeight="32.0" prefWidth="150.0" style="-fx-background-color: #3D81FF; -fx-background-radius: 6;" text="Accueil" textFill="WHITE">
+            <Button fx:id="btnBack" alignment="CENTER" mnemonicParsing="false" onAction="#onBack" prefHeight="32.0" prefWidth="150.0" text="Accueil" textFill="WHITE">
                 <font><Font size="13.0" /></font>
             </Button>
 
-               <Button fx:id="btnReset" mnemonicParsing="false" onAction="#onReset" prefHeight="32.0" prefWidth="150.0" style="-fx-background-color: #CC3333; -fx-background-radius: 4; -fx-border-radius: 4;" text="Réinitialiser la tierlist" textFill="WHITE">
+               <Button fx:id="btnReset" mnemonicParsing="false" onAction="#onReset" prefHeight="32.0" prefWidth="150.0" text="Réinitialiser la tierlist" textFill="WHITE">
                    <font>
                <Font size="12.0" />
             </font>
                </Button>
-         <Button fx:id="btnRename" mnemonicParsing="false" onAction="#onModifierTierList" prefHeight="32.0" prefWidth="150.0" style="-fx-background-color: #3D81FF; -fx-background-radius: 4; -fx-border-radius: 4;" text="Renommer la tierlist" textFill="WHITE" />
+         <Button fx:id="btnRename" mnemonicParsing="false" onAction="#onModifierTierList" prefHeight="32.0" prefWidth="150.0" text="Renommer la tierlist" textFill="WHITE" />
 
-            <Button fx:id="btnSave" mnemonicParsing="false" onAction="#onSave" prefHeight="32.0" prefWidth="150.0" style="-fx-background-color: #3D81FF; -fx-background-radius: 6;" text="Exporter la tierlist" textFill="WHITE">
+            <Button fx:id="btnSave" mnemonicParsing="false" onAction="#onSave" prefHeight="32.0" prefWidth="150.0" text="Exporter la tierlist" textFill="WHITE">
                 <font><Font size="13.0" /></font>
             </Button>
 
-            <Button fx:id="btnTheme" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onToggleTheme" prefHeight="35.0" prefWidth="35.0" style="-fx-background-color: #2a2a2a; -fx-background-radius: 20; -fx-border-color: #555555; -fx-border-radius: 20;" text="☀" textFill="WHITE">
+            <Button fx:id="btnTheme" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onToggleTheme" prefHeight="35.0" prefWidth="35.0" text="☀" textFill="WHITE">
                 <font><Font size="14.0" /></font>
             </Button>
 
@@ -42,11 +42,11 @@
     </top>
 
     <center>
-        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" style="-fx-background-color: #1a1a1a; -fx-background: #1a1a1a;">
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER">
             <content>
-                <VBox spacing="0" style="-fx-background-color: #1a1a1a;">
+                <VBox spacing="0">
 
-                    <HBox spacing="15.0" style="-fx-background-color: #1a1a1a; -fx-border-color: #333333; -fx-border-width: 0 0 1 0;">
+                    <HBox spacing="15.0">
                         <padding><Insets bottom="15.0" left="10.0" right="10.0" top="15.0" /></padding>
 
                         <StackPane>
@@ -73,16 +73,16 @@
 
                     </HBox>
 
-                    <VBox fx:id="tiersContainer" spacing="0" style="-fx-background-color: #1a1a1a;" />
+                    <VBox fx:id="tiersContainer" spacing="0" />
 
-                    <HBox alignment="CENTER_LEFT" prefHeight="40.0" style="-fx-background-color: #111111; -fx-border-color: #333333; -fx-border-width: 1 0 0 0;">
+                    <HBox alignment="CENTER_LEFT" prefHeight="40.0">
                         <padding><Insets left="10.0" /></padding>
-                        <Button fx:id="btnAddTier" mnemonicParsing="false" onAction="#onAddTier" prefHeight="26.0" style="-fx-background-color: #2a2a2a; -fx-border-color: #666666; -fx-border-radius: 4; -fx-background-radius: 4;" text="+ Ajouter un tier" textFill="WHITE">
+                        <Button fx:id="btnAddTier" mnemonicParsing="false" onAction="#onAddTier" prefHeight="26.0" text="+ Ajouter un tier" textFill="WHITE">
                             <font><Font size="12.0" /></font>
                         </Button>
                     </HBox>
 
-                    <VBox spacing="8.0" style="-fx-background-color: #1a1a1a; -fx-border-color: #333333; -fx-border-width: 1 0 0 0;">
+                    <VBox spacing="8.0">
                         <padding><Insets bottom="15.0" left="10.0" right="10.0" top="10.0" /></padding>
 
                         <HBox alignment="CENTER_LEFT" spacing="10.0">
@@ -91,20 +91,20 @@
                             </Label>
                             <Region HBox.hgrow="ALWAYS" />
    
-                           <Button fx:id="btnAddItem" mnemonicParsing="false" onAction="#onAddItem" prefHeight="28.0" prefWidth="120.0" style="-fx-background-color: #2a2a2a; -fx-border-color: #666666; -fx-border-radius: 4; -fx-background-radius: 4;" text="+ Ajouter item" textFill="WHITE">
+                           <Button fx:id="btnAddItem" mnemonicParsing="false" onAction="#onAddItem" prefHeight="28.0" prefWidth="120.0" style="-fx-border-radius: 4; -fx-background-radius: 4;" text="+ Ajouter item" textFill="WHITE">
                                <font><Font size="12.0" /></font>
                            </Button>
-                            <Button fx:id="btnAddImageItem" mnemonicParsing="false" onAction="#onAddImageItem" prefHeight="26.0" prefWidth="120.0" style="-fx-background-color: #2a2a2a; -fx-border-color: #555555; -fx-border-radius: 4; -fx-background-radius: 4;" text="+ Ajouter image" textFill="WHITE">
+                            <Button fx:id="btnAddImageItem" mnemonicParsing="false" onAction="#onAddImageItem" prefHeight="26.0" prefWidth="120.0" style="-fx-border-radius: 4; -fx-background-radius: 4;" text="+ Ajouter image" textFill="WHITE">
                                 <font><Font size="12.0" /></font>
                             </Button>
-                            <Button fx:id="btnImportApi" mnemonicParsing="false" onAction="#onImportApi" prefHeight="26.0" prefWidth="140.0" style="-fx-background-color: #2a2a2a; -fx-border-color: #555555; -fx-border-radius: 4; -fx-background-radius: 4;" text="+ Importer RAWG" textFill="WHITE">
+                            <Button fx:id="btnImportApi" mnemonicParsing="false" onAction="#onImportApi" prefHeight="26.0" prefWidth="140.0" style="-fx-border-radius: 4; -fx-background-radius: 4;" text="+ Importer RAWG" textFill="WHITE">
                                 <font><Font size="12.0" /></font>
                             </Button>
                         </HBox>
-                  <ScrollPane fitToWidth="true" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #1a1a1a;">
+                  <ScrollPane fitToWidth="true" prefHeight="200.0" prefWidth="200.0">
                      <content>
       
-                              <FlowPane fx:id="unclassifiedPane" hgap="6.0" prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: #222222; -fx-border-color: #444444; -fx-border-radius: 5; -fx-background-radius: 5;" vgap="6.0">
+                              <FlowPane fx:id="unclassifiedPane" hgap="6.0" prefHeight="100.0" prefWidth="600.0" style="-fx-border-radius: 5; -fx-background-radius: 5;" vgap="6.0">
                                   <padding>
                               <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                            </padding>

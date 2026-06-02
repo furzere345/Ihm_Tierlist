@@ -97,10 +97,19 @@ public class TierListEditorController {
     @FXML
     private void onToggleTheme() {
         isDarkTheme = !isDarkTheme;
-        Scene scene = btnTheme.getScene();
-        scene.getStylesheets().clear();
         String css = isDarkTheme ? "/css/dark.css" : "/css/light.css";
-        scene.getStylesheets().add(getClass().getResource(css).toExternalForm());
+        String cssUrl = getClass().getResource(css).toExternalForm();
+
+        Scene scene = btnTheme.getScene();
+        if (scene != null) {
+            // 1. On applique sur la scène globale
+            scene.getStylesheets().setAll(cssUrl);
+
+            // 2. CORRECTION : On force le FXML racine à vider son CSS et à prendre le nouveau
+            if (scene.getRoot() != null) {
+                scene.getRoot().getStylesheets().setAll(cssUrl);
+            }
+        }
     }
 
     // =========================================================================
@@ -577,5 +586,8 @@ public class TierListEditorController {
         tierList.getUnclassifiedItems().remove(item);
         for (Tier tier : tierList.getTiers())
             tier.getItems().remove(item);
+    }
+
+    public void setDarkTheme(boolean isDarkTheme) { this.isDarkTheme=isDarkTheme;
     }
 }
