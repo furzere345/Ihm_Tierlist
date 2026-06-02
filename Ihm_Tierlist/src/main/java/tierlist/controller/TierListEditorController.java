@@ -23,7 +23,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
-import java.util.Optional;
 
 public class TierListEditorController {
 
@@ -54,7 +53,7 @@ public class TierListEditorController {
     @FXML
     private Label coverPlaceholder;
     @FXML
-    private Button btnTheme;
+    private Button buttonTheme;
     @FXML  private Button btnRename;
 
     private TierList tierList;
@@ -100,7 +99,7 @@ public class TierListEditorController {
         String css = isDarkTheme ? "/css/dark.css" : "/css/light.css";
         String cssUrl = getClass().getResource(css).toExternalForm();
 
-        Scene scene = btnTheme.getScene();
+        Scene scene = buttonTheme.getScene();
         if (scene != null) {
             // 1. On applique sur la scène globale
             scene.getStylesheets().setAll(cssUrl);
@@ -150,7 +149,7 @@ public class TierListEditorController {
         itemsPane.setPrefHeight(tier.getHeight());
         itemsPane.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
 
-        // CORRECTION : Utilise la classe CSS pour la zone de dépôt
+        //Utilise la classe CSS pour la zone de dépôt
         itemsPane.getStyleClass().add("tier-row-content");
         HBox.setHgrow(itemsPane, Priority.ALWAYS);
 
@@ -490,26 +489,19 @@ public class TierListEditorController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/RenommerTierList.fxml"));
             Parent root = loader.load();
-
-            // 1. On passe le modèle ET le thème actuel au contrôleur de la pop-up
             RenommerTierListController controller = loader.getController();
-
-            // 2. Création de la scène pour la pop-up
+            controller.setTierList(tierList);
             Scene scene = new Scene(root);
 
             // 3. Application du CSS correspondant au thème actuel
             String cssPath = this.isDarkTheme ? "/css/dark.css" : "/css/light.css";
             scene.getStylesheets().setAll(getClass().getResource(cssPath).toExternalForm());
 
-            // 4. Configuration et affichage de la fenêtre modale
             Stage stage = new Stage();
             stage.setTitle("Modifier la Tier-List");
             stage.setScene(scene);
             stage.initModality(javafx.stage.Modality.APPLICATION_MODAL);
-
             stage.showAndWait();
-
-            // Rafraîchissement de la page principale après fermeture
             setTierList(this.tierList);
 
         } catch (IOException e) {
