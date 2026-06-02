@@ -1,35 +1,20 @@
 
 .root {
-    /* --- Fonds --- */
     -color-bg-primary:      #F5F4F0;
     -color-bg-secondary:    #ECEAE4;
     -color-bg-hover:        #E2E0D8;
-
-    /* --- Texte --- */
     -color-text-primary:    #1A1A1A;
     -color-text-muted:      #666666;
-
-    /* --- Accent (boutons principaux) --- */
     -color-accent:          #3D81FF;
     -color-accent-hover:    #2670FF;
     -color-accent-text:     #FFFFFF;
-
-    /* --- Bordures --- */
     -color-border:          #CCCCCC;
     -color-border-input:    #BBBBBB;
-
-    /* --- Bouton Importer --- */
     -color-btn-import:      #FFFFFF;
     -color-btn-import-text: #1A1A1A;
-
-    /* --- Bouton Thème --- */
     -color-btn-theme:       #1A1A1A;
 }
 
-
-/* ============================================================
-   RESET — Fonds de base
-   ============================================================ */
 .root,
 .border-pane,
 .vbox,
@@ -42,10 +27,6 @@
     -fx-background: -color-bg-primary;
 }
 
-
-/* ============================================================
-   SÉPARATEURS (Navbar, sections)
-   ============================================================ */
 #navbar,
 #vosTierList,
 .hbox {
@@ -54,17 +35,11 @@
 }
 
 
-/* ============================================================
-   LABELS / TEXTES
-   ============================================================ */
+
 .label {
     -fx-text-fill: -color-text-primary;
 }
 
-
-/* ============================================================
-   BOUTONS PRINCIPAUX (accent bleu)
-   ============================================================ */
 #buttonCrreTierlist,
 #btnAccueil,
 #btnCommencer {
@@ -80,9 +55,6 @@
 }
 
 
-/* ============================================================
-   BOUTON IMPORTER
-   ============================================================ */
 #buttonImporter {
     -fx-background-color: -color-btn-import;
     -fx-text-fill: -color-btn-import-text;
@@ -96,9 +68,6 @@
 }
 
 
-/* ============================================================
-   BOUTON CHANGEMENT DE THÈME (rond)
-   ============================================================ */
 #buttonTheme {
     -fx-background-color: -color-btn-theme;
     -fx-background-radius: 20;
@@ -106,9 +75,6 @@
 }
 
 
-/* ============================================================
-   ZONE IMAGE DE COUVERTURE
-   ============================================================ */
 #coverImagePane {
     -fx-background-color: -color-bg-secondary;
     -fx-border-color: -color-accent;
@@ -117,9 +83,6 @@
 }
 
 
-/* ============================================================
-   CHAMPS DE SAISIE (TextField, TextArea)
-   ============================================================ */
 .text-input,
 .text-field,
 .text-area,
@@ -133,39 +96,37 @@
     -fx-background-radius: 5;
 
 }
-/* Style du conteneur de la popup (le rectangle de fond) */
+
 .context-menu, .popup, .menu-button .context-menu {
-    -fx-background-color: -color-bg-secondary; /* Fond gris foncé assorti à tes cartes */
-    -fx-border-color: -color-border-input;      /* Bordure fine pour le détacher du fond noir */
+    -fx-background-color: -color-bg-secondary;
+    -fx-border-color: -color-border-input;
     -fx-border-width: 1px;
     -fx-border-radius: 5px;
     -fx-background-radius: 5px;
-    -fx-padding: 0;                /* Nettoie les marges internes par défaut */
+    -fx-padding: 0;
 }
 
-/* Style des éléments textuels à l'intérieur (comme "Dupliquer") */
+
 .menu-item .label {
-    -fx-text-fill: -color-text-primary ; /* Texte écrit en blanc */
+    -fx-text-fill: -color-text-primary ;
     -fx-font-size: 14px;
 }
 
 .tierlist-card {
     -fx-background-color: -color-bg-secondary;
-    -fx-border-color: -color-bg-secondary; /* Tu peux mettre -color-border-input si tu veux que ça change */
+    -fx-border-color: -color-bg-secondary;
     -fx-border-radius: 8;
     -fx-background-radius: 8;
     -fx-cursor: hand;
     -fx-padding: 10;
 }
 
-/* Titre de la carte (Label) */
 .tierlist-card-title {
     -fx-text-fill: -color-text-primary;
     -fx-font-size: 14px;
     -fx-font-weight: bold;
 }
 
-/* Conteneur de l'image (StackPane) */
 .tierlist-card-image-container {
     -fx-background-color: -color-bg-primary;
     -fx-border-color: -color-bg-primary;
@@ -173,22 +134,19 @@
     -fx-background-radius: 4;
 }
 
-/* Texte "Aucune image" (Label) */
 .tierlist-card-placeholder {
     -fx-text-fill: -color-text-muted;
     -fx-font-size: 12px;
 }
 
-/* Bouton ". . ." */
 .tierlist-card-menu-button {
-    -fx-background-color: #ECEAE4; /* Reste en dur si tu veux ce gris spécifique */
+    -fx-background-color: #ECEAE4;
     -fx-border-color: -color-text-muted;
     -fx-border-radius: 4;
     -fx-background-radius: 4;
     -fx-text-fill: -color-text-primary;
 }
 
-/* Optionnel : Le menu contextuel "Dupliquer" avec tes variables */
 .context-menu, .popup {
     -fx-background-color: -color-bg-secondary;
     -fx-border-color: -color-border-input;
@@ -196,27 +154,20 @@
 .menu-item .label {
     -fx-text-fill: -color-text-primary;
 }
-/* ==========================================================================
-   STYLE COMPLÉMENTAIRE DE L'ÉDITEUR - MODE SOMBRE
-   ========================================================================== */
 
-/* Style par défaut des boutons gris de l'éditeur (+ Ajouter tier, + Ajouter item...) */
 .button {
     -fx-text-fill: -color-text-primary;
 }
 
-/* On force la visibilité du texte dans le ScrollPane en mode sombre */
 .scroll-pane *.label {
     -fx-text-fill: -color-text-primary;
 }
 
-/* Nettoyage des bordures blanches par défaut de JavaFX sur le ScrollPane */
 .scroll-pane {
     -fx-background-color: transparent;
     -fx-viewport-background-color: transparent;
 }
 
-/* Rendre les barres de défilement (ScrollBars) plus discrètes et sombres */
 .scroll-pane .scroll-bar:vertical,
 .scroll-pane .scroll-bar:horizontal {
     -fx-background-color: -color-bg-primary;
@@ -226,7 +177,6 @@
     -fx-background-color: -color-bg-secondary;
     -fx-background-radius: 4;
 }
-/* Boutons standards de l'éditeur (+ Ajouter item, + Ajouter image, etc.) */
 .button {
     -fx-background-color: -color-bg-secondary;
     -fx-border-color: -color-border-input;
@@ -239,7 +189,6 @@
     -fx-background-color: -color-bg-hover;
 }
 
-/* Fix pour le ScrollPane de la zone "À classer" */
 .scroll-pane {
     -fx-background-color: transparent;
     -fx-viewport-background-color: transparent;
@@ -250,7 +199,7 @@
      -fx-border-width: 1px;
      -fx-border-radius: 4px;
      -fx-background-radius: 4px;
-     -fx-padding: 0; /* Supprime l'espace vide interne qui crée le bloc blanc */
+     -fx-padding: 0;
  }
 
 .menu-item {
@@ -266,9 +215,7 @@
 #btnReset{
     -fx-background-color: #E53935FF;
 }
-/* ==========================================================================
-   STYLE DES LIGNES DYNAMIQUES DE TIER
-   ========================================================================== */
+
 
 /* Ligne complète (HBox) */
 .tier-full-row {
@@ -276,7 +223,6 @@
     -fx-border-width: 0 0 1 0;
 }
 
-/* Label de gauche (ex: "Tier S") */
 .tier-label {
     -fx-alignment: center;
     -fx-font-size: 14px;
@@ -285,17 +231,13 @@
     -fx-padding: 5;
 }
 
-/* Zone centrale de dépôt des items (FlowPane) */
 .tier-row-content {
-    -fx-background-color: -color-bg-secondary; /* S'adapte au thème */
+    -fx-background-color: -color-bg-secondary;
 }
 
-/* Zone noire de droite contenant les 3 boutons (VBox) */
 .tier-controls-box {
-    -fx-background-color: -color-bg-primary; /* Rejoint la couleur du fond global */
+    -fx-background-color: -color-bg-primary;
 }
-
-/* Les petits boutons d'action (⚙, ∧, ∨) */
 .tier-control-button {
     -fx-background-color: -color-bg-secondary;
     -fx-border-color: -color-border-input;
@@ -308,27 +250,25 @@
 .tier-control-button:hover {
     -fx-background-color: -color-bg-hover;
 }
-/* Le carré de l'item (VBox) */
+
 .tierlist-item {
-    -fx-background-color: -color-bg-secondary; /* S'adapte : sombre ou clair */
+    -fx-background-color: -color-bg-secondary;
     -fx-border-color: -color-border-input;
     -fx-border-radius: 4;
     -fx-background-radius: 4;
     -fx-cursor: hand;
 }
 
-/* Changement de couleur léger au survol de la souris */
 .tierlist-item:hover {
     -fx-background-color: -color-bg-hover;
 }
 
-/* Le texte à l'intérieur de l'item s'il n'y a pas d'image */
 .tierlist-item-label {
-    -fx-text-fill: -color-text-primary; /* Blanc en mode sombre, noir en mode clair */
+    -fx-text-fill: -color-text-primary;
     -fx-text-alignment: center;
     -fx-alignment: center;
 }
-/* Zone "À classer" (unclassifiedPane) */
+
 .unclassified-pane {
     -fx-background-color: -color-bg-secondary;
     -fx-border-color: -color-border-input;
@@ -336,7 +276,6 @@
     -fx-background-radius: 5;
 }
 
-/* Zone centrale des lignes de Tier */
 .tier-row-content {
     -fx-background-color: -color-bg-secondary;
 }
