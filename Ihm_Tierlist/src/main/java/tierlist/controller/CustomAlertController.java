@@ -9,7 +9,6 @@ public class CustomAlertController {
     @FXML private Label labelTitre;
     @FXML private Label labelMessage;
 
-    // Permet de personnaliser le texte selon le succès (Import ou Export)
     public void configurer(String titre, String message) {
         labelTitre.setText(titre);
         labelMessage.setText(message);

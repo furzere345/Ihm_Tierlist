@@ -17,14 +17,10 @@ import java.util.function.Consumer;
 
 public class OverlayApiController {
 
-    @FXML
-    private TextField searchField;
-    @FXML
-    private Button searchButton;
-    @FXML
-    private FlowPane resultsPane;
-    @FXML
-    private Label statusLabel;
+    @FXML private TextField searchField;
+    @FXML private Button searchButton;
+    @FXML private FlowPane resultsPane;
+    @FXML private Label statusLabel;
 
     private RawgApiService apiService = new RawgApiService();
     private Consumer<List<Item>> onImport;
@@ -65,13 +61,12 @@ public class OverlayApiController {
         }).start();
     }
 
-    //Carte visuelle pour un jeu dans les résultats
+    //Carte visuelle pour un jeu dans résultat
     private VBox buildGameCard(RawgApiService.GameResult game) {
         VBox card = new VBox(6);
         card.setAlignment(Pos.CENTER);
         card.setPrefSize(130, 150);
-        card.setStyle(
-                "-fx-background-color: #2a2a2a;" +
+        card.setStyle("-fx-background-color: #2a2a2a;" +
                         "-fx-border-color: #555555;" +
                         "-fx-border-radius: 6;" +
                         "-fx-background-radius: 6;" +
@@ -104,7 +99,6 @@ public class OverlayApiController {
         nom.setWrapText(true);
         nom.setMaxWidth(118);
 
-        //Clic → importer ce jeu comme item
         card.setOnMouseClicked(e -> importGame(game, card));
 
         card.getChildren().addAll(iv, nom);

@@ -37,13 +37,28 @@ public class Item implements Serializable {
         return copy;
     }
 
-    //Getters / Setters
-    public String getId() { return id; }
-    public String getLabel() { return label; }
-    public void setLabel(String label) { this.label = label; }
-    public ItemType getType() { return type; }
-    public byte[] getImageData() { return imageData; }
-    public void setImageData(byte[] data) { this.imageData = data; this.type = ItemType.IMAGE; }
-    public double getSize() { return size; }
-    public void setSize(double size) { this.size = size; }
+    public String getId() {
+        return id;
+    }
+    public String getLabel() {
+        return label;
+    }
+    public void setLabel(String label) {
+        this.label = label;
+    }
+    public ItemType getType() {
+        return type;
+    }
+    public byte[] getImageData() {
+        return imageData;
+    }
+    public void setImageData(byte[] data) {
+        this.imageData = data; this.type = ItemType.IMAGE;
+    }
+    public double getSize() {
+        return size;
+    }
+    public void setSize(double size) {
+        this.size = size;
+    }
 }

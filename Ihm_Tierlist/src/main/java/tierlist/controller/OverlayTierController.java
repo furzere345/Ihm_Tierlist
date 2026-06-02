@@ -26,7 +26,6 @@ public class OverlayTierController {
     private Color selectedColor;
     private Circle selectedCircle;
 
-    //Appele par le parent pour pré-remplir les champs (mode édition)
     public void setTier(Tier tier, Consumer<Tier> onConfirm, Runnable onDelete) {
         this.tierToEdit = tier;
         this.onConfirm  = onConfirm;
@@ -36,7 +35,7 @@ public class OverlayTierController {
             tierField.setText(tier.getName());
             hexField.setText(tier.getColorHex());
         }
-        //Mode creation : champs vides -> pas de bouton Supprimer
+        //si creation alors suppretion du btn supprimer
         deleteButton.setVisible(tier != null);
     }
 
@@ -44,17 +43,14 @@ public class OverlayTierController {
     private void handleColorClick(MouseEvent event) {
         Circle circle = (Circle) event.getSource();
 
-        //reset ancien cercle
         if (selectedCircle != null) {
             selectedCircle.setStroke(null);
         }
 
-        //selectionner le nouveau
         selectedCircle = circle;
         selectedCircle.setStroke(javafx.scene.paint.Color.WHITE);
         selectedCircle.setStrokeWidth(2);
 
-        //couleur selectionne
         Color color = (Color) circle.getFill();
         selectedColor = color;
 

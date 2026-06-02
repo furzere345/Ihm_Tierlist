@@ -23,7 +23,7 @@ public class TierList implements Serializable {
         this.unclassifiedItems = new ArrayList<>();
     }
 
-    //Dupliquer une tier-list (nouveau id, même contenu)
+    //Dupliquer une tier-list
     public TierList duplicate() {
         TierList copy = new TierList("Copie de " + this.name);
         copy.description = this.description;
@@ -37,7 +37,7 @@ public class TierList implements Serializable {
         return copy;
     }
 
-    //Reinitialiser : remettre tous les items dans unclassifiedItems
+    //remettre tous les items dans unclassifiedItems
     public void reset() {
         for (Tier t : tiers) {
             unclassifiedItems.addAll(t.getItems());
@@ -45,15 +45,34 @@ public class TierList implements Serializable {
         }
     }
 
-    //Getters / Setters
-    public String getId() { return id; }
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
-    public String getDescription() { return description; }
-    public void setDescription(String d) { this.description = d; }
-    public List<Tier> getTiers() { return tiers; }
-    public void setTiers(List<Tier> tiers) { this.tiers = tiers; }
-    public List<Item> getUnclassifiedItems() { return unclassifiedItems; }
-    public byte[] getCoverImageData() { return coverImageData; }
-    public void setCoverImageData(byte[] data) { this.coverImageData = data; }
+    public String getId() {
+        return id;
+    }
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getDescription() {
+        return description;
+    }
+    public void setDescription(String d) {
+        this.description = d;
+    }
+    public List<Tier> getTiers() {
+        return tiers;
+    }
+    public void setTiers(List<Tier> tiers) {
+        this.tiers = tiers;
+    }
+    public List<Item> getUnclassifiedItems() {
+        return unclassifiedItems;
+    }
+    public byte[] getCoverImageData() {
+        return coverImageData;
+    }
+    public void setCoverImageData(byte[] data) {
+        this.coverImageData = data;
+    }
 }

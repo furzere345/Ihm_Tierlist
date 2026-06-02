@@ -14,7 +14,6 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tierlist.controller.OverlaySaveController">
 
-   <!-- ================= TOP BAR ================= -->
    <top>
       <HBox alignment="TOP_CENTER" style="-fx-padding: 12;">
          <children>
@@ -28,7 +27,6 @@
       </HBox>
    </top>
 
-   <!-- ================= CENTER ================= -->
    <center>
       <ScrollPane fitToWidth="true">
 
@@ -38,7 +36,6 @@
                   <Insets bottom="20" left="20" right="20" top="20" />
                </padding>
 
-               <!-- ACTION BUTTONS -->
                <HBox alignment="TOP_CENTER" spacing="15">
 
                   <Button fx:id="downloadButton" onAction="#onDownload" prefWidth="220" style="-fx-background-color: #3D81FF;                                        -fx-text-fill: white;                                        -fx-background-radius: 8;                                        -fx-font-size: 14px;" text="Exporter en .png" />
@@ -46,10 +43,8 @@
                   <Button fx:id="exportTlButton" onAction="#onExportTl" prefWidth="220" style="-fx-background-color: #3D81FF;                                        -fx-text-fill: white;                                        -fx-background-radius: 8;                                        -fx-font-size: 14px;" text="Exporter en .tl" />
                </HBox>
 
-               <!-- TITLE -->
                <Label text="Aperçu" />
 
-               <!-- PREVIEW -->
                <VBox style="-fx-background-radius: 10; -fx-padding: 15;">
 
                   <ImageView fx:id="previewImage" fitHeight="750" fitWidth="750" pickOnBounds="true" preserveRatio="true">

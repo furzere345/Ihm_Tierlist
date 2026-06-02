@@ -87,7 +87,7 @@ public class AccueilController {
     //evite les conflits d'ID si on importe 2x le meme fichier
     private TierList reIdTierList(TierList tl) {
         TierList copy = tl.duplicate();
-        copy.setName(tl.getName()); //duplicate() prefixe "Copie de", on remet le vrai nom
+        copy.setName(tl.getName());
         return copy;
 
     }
@@ -100,7 +100,6 @@ public class AccueilController {
             stage.initModality(Modality.APPLICATION_MODAL);
 
             CustomAlertController ctrl = loader.getController();
-            // On intègre dynamiquement le nom de la tier-list importée
             ctrl.configurer("Importation réussie", "La Tier-List \"" + tierListName + "\" a été importée avec succès !");
 
             stage.showAndWait();
@@ -117,7 +116,6 @@ public class AccueilController {
             stage.initModality(Modality.APPLICATION_MODAL);
 
             CustomAlertController ctrl = loader.getController();
-            // On réutilise la même fenêtre mais avec un message d'erreur
             ctrl.configurer("Échec de l'import", "Impossible de lire le fichier. Assurez-vous qu'il s'agit d'un fichier .tl valide.");
 
             stage.showAndWait();
@@ -128,20 +126,16 @@ public class AccueilController {
 
     //Basculer theme clair/sombre
 
-        @FXML
-        private void onToggleTheme() {
-            isDarkTheme = !isDarkTheme;
-            String css = isDarkTheme ? "/css/dark.css" : "/css/light.css";
-            String cssUrl = getClass().getResource(css).toExternalForm();
+    @FXML
+    private void onToggleTheme() {
+        isDarkTheme = !isDarkTheme;
+        String css = isDarkTheme ? "/css/dark.css" : "/css/light.css";
+        String cssUrl = getClass().getResource(css).toExternalForm();
 
-            // 1. On récupère la scène
-            Scene scene = buttonTheme.getScene();
-                // On nettoie la scène ET on applique le nouveau CSS
-                scene.getStylesheets().clear();
-                scene.getStylesheets().add(cssUrl);
-
-
-        }
+        Scene scene = buttonTheme.getScene();
+        scene.getStylesheets().clear();
+        scene.getStylesheets().add(cssUrl);
+    }
 
 
     //Genérer dynamiquement les cartes
@@ -155,19 +149,19 @@ public class AccueilController {
     private VBox createCard(TierList tl) {
         VBox card = new VBox(10);
         card.setPrefSize(220, 250);
-        card.getStyleClass().add("tierlist-card"); // Classe de la carte globale
+        card.getStyleClass().add("tierlist-card");
 
         Label nom = new Label(tl.getName());
-        nom.getStyleClass().add("tierlist-card-title"); // Classe du titre
+        nom.getStyleClass().add("tierlist-card-title");
         nom.setMaxWidth(200);
         nom.setWrapText(true);
 
-        // Image de couverture
+        //Image de couverture
         StackPane imageContainer = new StackPane();
         imageContainer.setPrefSize(200, 160);
         imageContainer.setMinSize(200, 160);
         imageContainer.setMaxSize(200, 160);
-        imageContainer.getStyleClass().add("tierlist-card-image-container"); // Classe du conteneur d'image
+        imageContainer.getStyleClass().add("tierlist-card-image-container");
 
         if (tl.getCoverImageData() != null) {
             ImageView iv = new ImageView(new Image(new java.io.ByteArrayInputStream(tl.getCoverImageData())));
@@ -176,14 +170,14 @@ public class AccueilController {
             iv.setPreserveRatio(true);
             imageContainer.getChildren().add(iv);
         } else {
-            // Placeholder si pas d'image
+            //Placeholder si pas d'image
             Label placeholder = new Label("Aucune image");
-            placeholder.getStyleClass().add("tierlist-card-placeholder"); // Classe du texte d'absence d'image
+            placeholder.getStyleClass().add("tierlist-card-placeholder");
             imageContainer.getChildren().add(placeholder);
         }
 
         Button menu = new Button(". . .");
-        menu.getStyleClass().add("tierlist-card-menu-button"); // Classe du bouton option
+        menu.getStyleClass().add("tierlist-card-menu-button");
         menu.setMaxWidth(Double.MAX_VALUE);
         menu.setOnAction(e -> showCardMenu(tl, card));
 
@@ -213,8 +207,7 @@ public class AccueilController {
         });
 
         menu.getItems().addAll(dupliquer, supprimer);
-        menu.show(card,
-                javafx.geometry.Side.BOTTOM, 0, 0);
+        menu.show(card, javafx.geometry.Side.BOTTOM, 0, 0);
     }
 
     //Naviguer vers l'éditeur
@@ -223,8 +216,8 @@ public class AccueilController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/TierListEditor.fxml"));
             Parent root = loader.load();
             TierListEditorController ctrl = loader.getController();
-            ctrl.setDarkTheme(this.isDarkTheme); // Si vous voulez garder le thème !
-            ctrl.setTierList(tl); // On passe l'objet AVANT d'afficher
+            ctrl.setDarkTheme(this.isDarkTheme);
+            ctrl.setTierList(tl);
             String cssPath = isDarkTheme ? "/css/dark.css" : "/css/light.css";
             root.getStylesheets().add(getClass().getResource(cssPath).toExternalForm());
             Stage stage = (Stage) buttonCrreTierlist.getScene().getWindow();

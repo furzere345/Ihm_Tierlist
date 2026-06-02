@@ -75,7 +75,6 @@ public class OverlaySaveController {
         }
     }
 
-    //Feedback succes
     private void showSuccess(String message) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/CustomAlert.fxml"));

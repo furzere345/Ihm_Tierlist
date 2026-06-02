@@ -50,17 +50,14 @@ public class TierListEditorController {
         this.tierList = tl;
         labelTierListName.setText(tl.getName());
 
-        //Description
         if (labelDescription != null)
             labelDescription.setText(tl.getDescription() != null ? tl.getDescription() : "");
 
-        //Image de couverture
         if (tl.getCoverImageData() != null && coverImageView != null) {
             coverImageView.setImage(new Image(new ByteArrayInputStream(tl.getCoverImageData())));
             if (coverPlaceholder != null) coverPlaceholder.setVisible(false);
         }
 
-        //Badge compteur
         updateItemCountBadge();
 
         refresh();
@@ -75,8 +72,6 @@ public class TierListEditorController {
 
     @FXML
     public void initialize() {
-        // Les handlers boutons sont déclarés ici
-        // (les @FXML methods suffisent, pas besoin de setOnAction manuel)
     }
 
     @FXML
@@ -87,21 +82,14 @@ public class TierListEditorController {
 
         Scene scene = buttonTheme.getScene();
         if (scene != null) {
-            // 1. On applique sur la scène globale
             scene.getStylesheets().setAll(cssUrl);
 
-            // 2. CORRECTION : On force le FXML racine à vider son CSS et à prendre le nouveau
             if (scene.getRoot() != null) {
                 scene.getRoot().getStylesheets().setAll(cssUrl);
             }
         }
     }
 
-    // =========================================================================
-    // AFFICHAGE
-    // =========================================================================
-
-    //Reconstruit toute la vue depuis le modèele
     private void refresh() {
         buildTiersUI();
         buildUnclassifiedUI();
@@ -116,7 +104,7 @@ public class TierListEditorController {
         }
     }
 
-    //Cree une ligne complete pour un tier : [label color | items | bouton édition]
+    //Cree une ligne complete pour un tier
     private HBox buildTierRow(Tier tier) {
         Label label = new Label(tier.getName());
         label.setPrefWidth(100);
@@ -124,7 +112,6 @@ public class TierListEditorController {
         label.setMinWidth(100);
         label.setWrapText(true);
 
-        // On garde uniquement la couleur de fond dynamique propre au tier, le reste va en CSS
         label.getStyleClass().add("tier-label");
         label.setStyle("-fx-background-color: " + tier.getColorHex() + "; -fx-text-fill: black;");
 
@@ -135,7 +122,6 @@ public class TierListEditorController {
         itemsPane.setPrefHeight(tier.getHeight());
         itemsPane.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
 
-        //Utilise la classe CSS pour la zone de dépôt
         itemsPane.getStyleClass().add("tier-row-content");
         HBox.setHgrow(itemsPane, Priority.ALWAYS);
 
@@ -144,19 +130,18 @@ public class TierListEditorController {
         }
         enableDrop(itemsPane, tier);
 
-        // Boutons droite : edition + monter + descendre
         Button editBtn = new Button("⚙");
-        editBtn.setPrefSize(32, 32);
+        editBtn.setPrefSize(35, 35);
         editBtn.getStyleClass().add("tier-control-button"); // Classe CSS
         editBtn.setOnAction(e -> openOverlayTier(tier));
 
         Button upBtn = new Button("∧");
-        upBtn.setPrefSize(32, 32);
+        upBtn.setPrefSize(35, 35);
         upBtn.getStyleClass().add("tier-control-button");   // Classe CSS
         upBtn.setOnAction(e -> moveTier(tier, -1));
 
         Button downBtn = new Button("∨");
-        downBtn.setPrefSize(32, 32);
+        downBtn.setPrefSize(35, 35);
         downBtn.getStyleClass().add("tier-control-button"); // Classe CSS
         downBtn.setOnAction(e -> moveTier(tier, +1));
 
@@ -164,12 +149,10 @@ public class TierListEditorController {
         controls.setAlignment(javafx.geometry.Pos.CENTER);
         controls.setPadding(new Insets(4));
 
-        // CORRECTION : Classe CSS pour le petit conteneur des boutons à droite
         controls.getStyleClass().add("tier-controls-box");
 
         HBox row = new HBox(label, itemsPane, controls);
 
-        // CORRECTION : Classe CSS pour la ligne complète
         row.getStyleClass().add("tier-full-row");
 
         return row;
@@ -180,10 +163,8 @@ public class TierListEditorController {
         int index = tiers.indexOf(tier);
         int newIndex = index + direction;
 
-        //Verifier qu'on reste dans les bornes
         if (newIndex < 0 || newIndex >= tiers.size()) return;
 
-        //Echanger les deux tiers
         tiers.remove(index);
         tiers.add(newIndex, tier);
 
@@ -193,7 +174,7 @@ public class TierListEditorController {
         }
 
         persistenceService.save(tierList);
-        buildTiersUI(); //rafraichir uniquement les tiers
+        buildTiersUI();
     }
 
     //Construire la zone "a classer"
@@ -202,20 +183,16 @@ public class TierListEditorController {
         for (Item item : tierList.getUnclassifiedItems()) {
             unclassifiedPane.getChildren().add(buildItemNode(item, null, unclassifiedPane));
         }
-        enableDrop(unclassifiedPane, null); // null = zone non classifiée
+        enableDrop(unclassifiedPane, null);
     }
 
-    // =========================================================================
-    // ITEMS
-    // =========================================================================
-
-    //Cree le nœud visuel d'un item (texte ou image)
+    //Cree le visuel d'un item
     private Node buildItemNode(Item item, Tier sourceTier, FlowPane sourcePane) {
         VBox box = new VBox();
         box.setAlignment(javafx.geometry.Pos.CENTER);
         box.setPrefSize(item.getSize(), item.getSize());
         box.getStyleClass().add("tierlist-item");
-        box.setUserData(item.getId()); // utilisé par le drag & drop
+        box.setUserData(item.getId());
 
         if (item.getType() == Item.ItemType.IMAGE && item.getImageData() != null) {
             ImageView iv = new ImageView(new Image(new ByteArrayInputStream(item.getImageData())));
@@ -231,10 +208,8 @@ public class TierListEditorController {
             box.getChildren().add(lbl);
         }
 
-        //Clic droit -> menu contextuel (modifier / supprimer)
         box.setOnContextMenuRequested(e -> showItemContextMenu(box, item, sourceTier));
 
-        //Drag
         enableDrag(box, item, sourceTier);
 
         return box;
@@ -347,10 +322,6 @@ public class TierListEditorController {
         menu.show(box, Side.BOTTOM, 0, 0);
     }
 
-    // =========================================================================
-    // TIERS
-    // =========================================================================
-
     //Ajouter un tier
     @FXML
     private void onAddTier() {
@@ -363,7 +334,6 @@ public class TierListEditorController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Overlay.fxml"));
             Parent root = loader.load();
 
-            // 1. Récupération du contrôleur et envoi des callbacks + du thème
             OverlayTierController ctrl = loader.getController();
             ctrl.setTier(
                     tierToEdit,
@@ -385,7 +355,6 @@ public class TierListEditorController {
                     }
             );
 
-            // 2. Création de la scène avec le parent chargé
             Scene scene = new Scene(root);
 
             if (isDarkTheme==true){
@@ -406,25 +375,17 @@ public class TierListEditorController {
         }
     }
 
-    // =========================================================================
-    // ACTIONS GLOBALES
-    // =========================================================================
-
     //Reinitialiser la tier-list
-
     @FXML
     private void onReset() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/CustomConfirm.fxml"));
             Parent root = loader.load();
 
-            // 1. Récupération du contrôleur et envoi du texte + du thème
             CustomConfirmController ctrl = loader.getController();
             ctrl.configurer("Remettre tous les items dans la zone à classer ?");
-            // 2. Création de la scène pour la modale
             Scene scene = new Scene(root);
 
-            // 3. Application dynamique du CSS
             if (isDarkTheme==true){
                 scene.getStylesheets().add(getClass().getResource("/css/dark.css").toExternalForm());
             }
@@ -437,7 +398,6 @@ public class TierListEditorController {
 
             stage.showAndWait();
 
-            // 5. Action après confirmation
             if (ctrl.isConfirmed()) {
                 tierList.reset();
                 persistenceService.save(tierList);
@@ -456,7 +416,6 @@ public class TierListEditorController {
             Parent root = loader.load();
             OverlaySaveController ctrl = loader.getController();
             ctrl.setData(tierList, tiersContainer);
-            // 2. Création de la scène pour la modale
             Scene scene = new Scene(root);
             if (isDarkTheme==true){
                 scene.getStylesheets().add(getClass().getResource("/css/dark.css").toExternalForm());
@@ -479,20 +438,16 @@ public class TierListEditorController {
     @FXML
     private void onBack() {
         try {
-            // 1. Chargement de la vue Accueil
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Accueil.fxml"));
             Parent root = loader.load();
 
-            // 2. Transmission du thème au contrôleur de l'accueil
             AccueilController nextController = loader.getController();
             nextController.setDarkTheme(this.isDarkTheme);
 
-            // 3. Création de la scène et application immédiate du CSS
             Scene nextScene = new Scene(root);
             String cssPath = this.isDarkTheme ? "/css/dark.css" : "/css/light.css";
             nextScene.getStylesheets().setAll(getClass().getResource(cssPath).toExternalForm());
 
-            // 4. Affichage sur la fenêtre principale
             Stage stage = (Stage) btnBack.getScene().getWindow();
             stage.setScene(nextScene);
 
@@ -510,7 +465,6 @@ public class TierListEditorController {
             controller.setTierList(tierList);
             Scene scene = new Scene(root);
 
-            // 3. Application du CSS correspondant au thème actuel
             String cssPath = this.isDarkTheme ? "/css/dark.css" : "/css/light.css";
             scene.getStylesheets().setAll(getClass().getResource(cssPath).toExternalForm());
 
@@ -526,13 +480,10 @@ public class TierListEditorController {
         }
     }
 
-    // =========================================================================
-    // DRAG & DROP
-    // =========================================================================
 
     //Item en cours de drag
     private Item draggedItem = null;
-    private Tier draggedFromTier = null; //null = vient de unclassified
+    private Tier draggedFromTier = null;
 
     private void enableDrag(VBox itemNode, Item item, Tier sourceTier) {
         itemNode.setOnDragDetected(e -> {
@@ -544,13 +495,11 @@ public class TierListEditorController {
             content.putString(item.getId());
             db.setContent(content);
 
-            //Feedback visuel : l'item devient semi-transparent
             itemNode.setOpacity(0.4);
             e.consume();
         });
 
         itemNode.setOnDragDone(e -> {
-            //Remettre l'opacite normale si le drop n'a pas eu lieu
             itemNode.setOpacity(1.0);
             draggedItem = null;
             draggedFromTier = null;
@@ -559,18 +508,15 @@ public class TierListEditorController {
     }
 
     private void enableDrop(FlowPane target, Tier targetTier) {
-
         //Accepter le drag
         target.setOnDragOver(e -> {
             if (e.getDragboard().hasString() && draggedItem != null) {
                 e.acceptTransferModes(javafx.scene.input.TransferMode.MOVE);
-                //Feedback : bordure colore sur la zone cible
                 target.setStyle(target.getStyle().replace("-fx-border-color: #444444;", "") + "-fx-border-color: #3D81FF; -fx-border-width: 2;");
             }
             e.consume();
         });
 
-        //Retirer le feedback quand on quitte la zone
         target.setOnDragExited(e -> {
             resetPaneStyle(target);
             e.consume();
@@ -630,7 +576,6 @@ public class TierListEditorController {
 
         pane.getStyleClass().removeAll("unclassified-pane", "tier-row-content");
 
-        // On applique la bonne classe selon le cas
         if (pane == unclassifiedPane) {
             pane.getStyleClass().add("unclassified-pane");
         } else {

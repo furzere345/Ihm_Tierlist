@@ -6,8 +6,7 @@ import javafx.stage.Stage;
 
 public class CustomConfirmController {
 
-    @FXML
-    private Label labelMessage;
+    @FXML private Label labelMessage;
 
     private boolean isConfirmed = false;
 

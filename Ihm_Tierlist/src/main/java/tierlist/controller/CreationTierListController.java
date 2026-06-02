@@ -22,16 +22,11 @@ import java.nio.file.Files;
 
 public class CreationTierListController {
 
-    @FXML
-    private TextField nomField;
-    @FXML
-    private TextArea descriptionArea;
-    @FXML
-    private StackPane coverImagePane;
-    @FXML
-    private Button buttonTheme;
-    @FXML
-    private Button btnAccueil;
+    @FXML private TextField nomField;
+    @FXML private TextArea descriptionArea;
+    @FXML private StackPane coverImagePane;
+    @FXML private Button buttonTheme;
+    @FXML private Button btnAccueil;
     @FXML private Button btnCommencer;
 
     private byte[] coverImageData;
@@ -50,10 +45,8 @@ public class CreationTierListController {
 
         Scene scene = buttonTheme.getScene();
         if (scene != null) {
-            // 1. On applique sur la scène globale
             scene.getStylesheets().setAll(cssUrl);
 
-            // 2. CORRECTION : On force le FXML racine à vider son CSS et à prendre le nouveau
             if (scene.getRoot() != null) {
                 scene.getRoot().getStylesheets().setAll(cssUrl);
             }
@@ -114,20 +107,16 @@ public class CreationTierListController {
     @FXML
     private void onAccueil() {
         try {
-            // 1. Chargement de l'Accueil
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Accueil.fxml"));
             Parent root = loader.load();
 
-            // 2. Récupération du BON contrôleur (AccueilController) et envoi du thème
             AccueilController nextController = loader.getController();
             nextController.setDarkTheme(this.isDarkTheme);
 
-            // 3. Création de la scène et application du CSS global
             Scene nextScene = new Scene(root);
             String cssPath = this.isDarkTheme ? "/css/dark.css" : "/css/light.css";
             nextScene.getStylesheets().add(getClass().getResource(cssPath).toExternalForm());
 
-            // 4. Affichage
             Stage stage = (Stage) btnAccueil.getScene().getWindow();
             stage.setScene(nextScene);
 

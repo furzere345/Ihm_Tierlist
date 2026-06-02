@@ -30,7 +30,6 @@
     <center>
         <VBox spacing="0">
 
-            <!-- Titre section -->
             <HBox alignment="CENTER_LEFT" prefHeight="55.0">
                 <padding><Insets left="30.0" /></padding>
                 <Label text="Création de Tier-Lists :" textFill="WHITE">
@@ -38,11 +37,9 @@
                 </Label>
             </HBox>
 
-            <!-- Contenu principal -->
             <HBox spacing="25.0">
                 <padding><Insets bottom="30.0" left="30.0" right="30.0" top="40.0" /></padding>
 
-                <!-- Image de couverture -->
                 <StackPane fx:id="coverImagePane" onMouseClicked="#onSelectCover" prefHeight="200.0" prefWidth="200.0">
 
                     <Label fx:id="coverLabel" text="280 × 280" textFill="#888888">
@@ -51,7 +48,6 @@
 
                 </StackPane>
 
-                <!-- Champs texte -->
                 <VBox spacing="15.0" HBox.hgrow="ALWAYS">
 
                     <TextField fx:id="nomField" prefHeight="35.0" promptText="Nom de la Tier-List">

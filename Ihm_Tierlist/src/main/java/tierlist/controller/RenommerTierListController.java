@@ -45,9 +45,7 @@ public class RenommerTierListController {
         descriptionArea.setText(tierList.getDescription());
 
         if (tierList.getCoverImageData() != null) {
-            Image img = new Image(
-                    new java.io.ByteArrayInputStream(tierList.getCoverImageData())
-            );
+            Image img = new Image(new java.io.ByteArrayInputStream(tierList.getCoverImageData()));
 
             ImageView iv = new ImageView(img);
             iv.setFitWidth(200);

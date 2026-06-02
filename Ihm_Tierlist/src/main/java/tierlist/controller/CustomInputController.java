@@ -7,14 +7,11 @@ import javafx.stage.Stage;
 
 public class CustomInputController {
 
-    @FXML
-    private Label labelTitre;
-    @FXML
-    private TextField champSaisie;
+    @FXML private Label labelTitre;
+    @FXML private TextField champSaisie;
 
     private String resultat = null;
 
-    // Méthode pour configurer la fenêtre selon qu'on ajoute ou qu'on renomme
     public void configurer(String titre, String texteInitial) {
         labelTitre.setText(titre);
         if (texteInitial != null) {
@@ -22,7 +19,6 @@ public class CustomInputController {
         }
     }
 
-    // Permet de récupérer la valeur une fois la fenêtre fermée
     public String getResultat() {
         return resultat;
     }
@@ -35,7 +31,7 @@ public class CustomInputController {
 
     @FXML
     private void onAnnuler() {
-        resultat = null; // On annule, donc on renvoie null
+        resultat = null;
         fermerFenetre();
     }
 

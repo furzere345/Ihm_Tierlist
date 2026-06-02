@@ -33,15 +33,34 @@ public class Tier implements Serializable {
         return copy;
     }
 
-    //Getters / Setters
-    public String getId() { return id; }
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
-    public String getColorHex() { return colorHex; }
-    public void setColorHex(String colorHex) { this.colorHex = colorHex; }
-    public double getHeight() { return height; }
-    public void setHeight(double height) { this.height = height; }
-    public int getOrder() { return order; }
-    public void setOrder(int order) { this.order = order; }
-    public List<Item> getItems() { return items; }
+    public String getId() {
+        return id;
+    }
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getColorHex() {
+        return colorHex;
+    }
+    public void setColorHex(String colorHex) {
+        this.colorHex = colorHex;
+    }
+    public double getHeight() {
+        return height;
+    }
+    public void setHeight(double height) {
+        this.height = height;
+    }
+    public int getOrder() {
+        return order;
+    }
+    public void setOrder(int order) {
+        this.order = order;
+    }
+    public List<Item> getItems() {
+        return items;
+    }
 }

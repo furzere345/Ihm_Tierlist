@@ -14,7 +14,7 @@ import java.util.List;
 public class RawgApiService {
 
     private static final String BASE_URL = "https://api.rawg.io/api";
-    private static final String API_KEY = "f1945cb316ca4732a4bd8c7cd62b4e3f";
+    private static final String API_KEY = "CLE_API";
 
     private final HttpClient httpClient = HttpClient.newHttpClient();
     private final ObjectMapper objectMapper = new ObjectMapper();
@@ -25,7 +25,7 @@ public class RawgApiService {
         public String imageUrl;
 
         public GameResult(String name, String imageUrl) {
-            this.name     = name;
+            this.name = name;
             this.imageUrl = imageUrl;
         }
     }
@@ -36,10 +36,7 @@ public class RawgApiService {
                 + "&search=" + java.net.URLEncoder.encode(query, "UTF-8")
                 + "&page_size=20";
 
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(url))
-                .GET()
-                .build();
+        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(url)).GET().build();
 
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
@@ -61,10 +58,7 @@ public class RawgApiService {
 
     //Telecharger une image depuis une URL
     public byte[] downloadImage(String imageUrl) throws IOException, InterruptedException {
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(imageUrl))
-                .GET()
-                .build();
+        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(imageUrl)).GET().build();
 
         HttpResponse<byte[]> response = httpClient.send(request, HttpResponse.BodyHandlers.ofByteArray());
 
