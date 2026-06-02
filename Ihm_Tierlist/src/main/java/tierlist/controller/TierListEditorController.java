@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Side;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -441,13 +442,31 @@ public class TierListEditorController {
     private void onSave() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Overlay-save.fxml"));
+            Parent root = loader.load();
+
+            // 1. Récupération du contrôleur et transmission des données + du thème
+            OverlaySaveController ctrl = loader.getController();
+            ctrl.setData(tierList, tiersContainer);
+            ctrl.setDarkTheme(this.isDarkTheme); // Transmet le thème actuel
+
+            // 2. Création de la scène pour la modale
+            Scene scene = new Scene(root);
+
+            // 3. Application du CSS selon le thème actif
+
+            if (isDarkTheme==true){
+                scene.getStylesheets().add(getClass().getResource("/css/dark.css").toExternalForm());
+            }
+            else{
+                scene.getStylesheets().add(getClass().getResource("/css/light.css").toExternalForm());
+            }
+
+
+            // 4. Configuration et affichage
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setTitle("Sauvegarder");
-            stage.setScene(new Scene(loader.load()));
-
-            OverlaySaveController ctrl = loader.getController();
-            ctrl.setData(tierList, tiersContainer);
+            stage.setScene(scene);
 
             stage.showAndWait();
         } catch (IOException e) {
@@ -471,19 +490,27 @@ public class TierListEditorController {
     private void onModifierTierList() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/RenommerTierList.fxml"));
+            Parent root = loader.load();
 
-            Scene scene = new Scene(loader.load());
-
+            // 1. On passe le modèle ET le thème actuel au contrôleur de la pop-up
             RenommerTierListController controller = loader.getController();
 
-            controller.setTierList(tierList);
+            // 2. Création de la scène pour la pop-up
+            Scene scene = new Scene(root);
 
+            // 3. Application du CSS correspondant au thème actuel
+            String cssPath = this.isDarkTheme ? "/css/dark.css" : "/css/light.css";
+            scene.getStylesheets().setAll(getClass().getResource(cssPath).toExternalForm());
+
+            // 4. Configuration et affichage de la fenêtre modale
             Stage stage = new Stage();
             stage.setTitle("Modifier la Tier-List");
             stage.setScene(scene);
             stage.initModality(javafx.stage.Modality.APPLICATION_MODAL);
 
             stage.showAndWait();
+
+            // Rafraîchissement de la page principale après fermeture
             setTierList(this.tierList);
 
         } catch (IOException e) {
@@ -590,15 +617,16 @@ public class TierListEditorController {
 
     //Remet le style normal d'un FlowPane
     private void resetPaneStyle(FlowPane pane) {
+        pane.setStyle("");
+
+
+        pane.getStyleClass().removeAll("unclassified-pane", "tier-row-content");
+
+        // On applique la bonne classe selon le cas
         if (pane == unclassifiedPane) {
-            pane.setStyle(
-                    "-fx-background-color: #222222;" +
-                            "-fx-border-color: #444444;" +
-                            "-fx-border-radius: 5;" +
-                            "-fx-background-radius: 5;"
-            );
+            pane.getStyleClass().add("unclassified-pane");
         } else {
-            pane.setStyle("-fx-background-color: #2a2a2a;");
+            pane.getStyleClass().add("tier-row-content");
         }
     }
 

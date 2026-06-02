@@ -30,7 +30,7 @@ public class RenommerTierListController {
     private TierList tierList;
 
     private byte[] coverImageData;
-    private boolean isDarkTheme;
+
 
     public void setTierList(TierList tierList) {
         this.tierList = tierList;

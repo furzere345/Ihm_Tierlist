@@ -12,11 +12,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane style="-fx-background-color: #111111;" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tierlist.controller.OverlaySaveController">
+<BorderPane xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tierlist.controller.OverlaySaveController">
 
    <!-- ================= TOP BAR ================= -->
    <top>
-      <HBox alignment="TOP_CENTER" style="-fx-background-color: #1a1a1a; -fx-padding: 12;">
+      <HBox alignment="TOP_CENTER" style="-fx-padding: 12;">
          <children>
             <Label fx:id="tierlistName" text="Titre" textFill="WHITE">
                <font>
@@ -30,10 +30,10 @@
 
    <!-- ================= CENTER ================= -->
    <center>
-      <ScrollPane fitToWidth="true" style="-fx-background: #1a1a1a; -fx-border-color: #333333;">
+      <ScrollPane fitToWidth="true">
 
          <content>
-            <VBox spacing="20" style="-fx-background-color: #1a1a1a;">
+            <VBox spacing="20">
                <padding>
                   <Insets bottom="20" left="20" right="20" top="20" />
                </padding>
@@ -47,10 +47,10 @@
                </HBox>
 
                <!-- TITLE -->
-               <Label style="-fx-text-fill: white;                                   -fx-font-size: 20px;                                   -fx-font-weight: bold;" text="Aperçu" />
+               <Label text="Aperçu" />
 
                <!-- PREVIEW -->
-               <VBox style="-fx-background-color: #1c1c1c;                                  -fx-background-radius: 10;                                  -fx-padding: 15;">
+               <VBox style="-fx-background-radius: 10; -fx-padding: 15;">
 
                   <ImageView fx:id="previewImage" fitHeight="750" fitWidth="750" pickOnBounds="true" preserveRatio="true">
 

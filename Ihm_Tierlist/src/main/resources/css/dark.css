@@ -308,3 +308,15 @@
     -fx-text-alignment: center;
     -fx-alignment: center;
 }
+/* Zone "À classer" (unclassifiedPane) */
+.unclassified-pane {
+    -fx-background-color: -color-bg-secondary;
+    -fx-border-color: -color-border-input;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+/* Zone centrale des lignes de Tier */
+.tier-row-content {
+    -fx-background-color: -color-bg-secondary;
+}
