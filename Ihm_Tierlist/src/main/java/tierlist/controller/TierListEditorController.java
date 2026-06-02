@@ -138,14 +138,10 @@ public class TierListEditorController {
         label.setPrefHeight(tier.getHeight());
         label.setMinWidth(100);
         label.setWrapText(true);
-        label.setStyle(
-                "-fx-background-color: " + tier.getColorHex() + ";" +
-                        "-fx-alignment: center;" +
-                        "-fx-font-size: 14px;" +
-                        "-fx-text-fill: black;" +
-                        "-fx-font-weight: bold;" +
-                        "-fx-padding: 5;"
-        );
+
+        // On garde uniquement la couleur de fond dynamique propre au tier, le reste va en CSS
+        label.getStyleClass().add("tier-label");
+        label.setStyle("-fx-background-color: " + tier.getColorHex() + ";");
 
         FlowPane itemsPane = new FlowPane();
         itemsPane.setHgap(6);
@@ -153,7 +149,9 @@ public class TierListEditorController {
         itemsPane.setPadding(new Insets(6));
         itemsPane.setPrefHeight(tier.getHeight());
         itemsPane.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
-        itemsPane.setStyle("-fx-background-color: #2a2a2a;");
+
+        // CORRECTION : Utilise la classe CSS pour la zone de dépôt
+        itemsPane.getStyleClass().add("tier-row-content");
         HBox.setHgrow(itemsPane, Priority.ALWAYS);
 
         for (Item item : tier.getItems()) {
@@ -161,29 +159,34 @@ public class TierListEditorController {
         }
         enableDrop(itemsPane, tier);
 
-        //Boutons droite : edition + monter + descendre
+        // Boutons droite : edition + monter + descendre
         Button editBtn = new Button("⚙");
         editBtn.setPrefSize(32, 32);
-        editBtn.setStyle("-fx-background-color: #3a3a3a; -fx-text-fill: white; -fx-font-size: 14;");
+        editBtn.getStyleClass().add("tier-control-button"); // Classe CSS
         editBtn.setOnAction(e -> openOverlayTier(tier));
 
         Button upBtn = new Button("∧");
         upBtn.setPrefSize(32, 32);
-        upBtn.setStyle("-fx-background-color: #3a3a3a; -fx-text-fill: white; -fx-font-size: 12;");
+        upBtn.getStyleClass().add("tier-control-button");   // Classe CSS
         upBtn.setOnAction(e -> moveTier(tier, -1));
 
         Button downBtn = new Button("∨");
         downBtn.setPrefSize(32, 32);
-        downBtn.setStyle("-fx-background-color: #3a3a3a; -fx-text-fill: white; -fx-font-size: 12;");
+        downBtn.getStyleClass().add("tier-control-button"); // Classe CSS
         downBtn.setOnAction(e -> moveTier(tier, +1));
 
         VBox controls = new VBox(2, editBtn, upBtn, downBtn);
         controls.setAlignment(javafx.geometry.Pos.CENTER);
         controls.setPadding(new Insets(4));
-        controls.setStyle("-fx-background-color: #222222;");
+
+        // CORRECTION : Classe CSS pour le petit conteneur des boutons à droite
+        controls.getStyleClass().add("tier-controls-box");
 
         HBox row = new HBox(label, itemsPane, controls);
-        row.setStyle("-fx-border-color: #333333; -fx-border-width: 0 0 1 0;");
+
+        // CORRECTION : Classe CSS pour la ligne complète
+        row.getStyleClass().add("tier-full-row");
+
         return row;
     }
 
@@ -226,13 +229,7 @@ public class TierListEditorController {
         VBox box = new VBox();
         box.setAlignment(javafx.geometry.Pos.CENTER);
         box.setPrefSize(item.getSize(), item.getSize());
-        box.setStyle(
-                "-fx-background-color: #2a2a2a;" +
-                        "-fx-border-color: #555;" +
-                        "-fx-border-radius: 4;" +
-                        "-fx-background-radius: 4;" +
-                        "-fx-cursor: hand;"
-        );
+        box.getStyleClass().add("tierlist-item");
         box.setUserData(item.getId()); // utilisé par le drag & drop
 
         if (item.getType() == Item.ItemType.IMAGE && item.getImageData() != null) {
@@ -301,7 +298,6 @@ public class TierListEditorController {
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setTitle("Importer depuis RAWG");
             stage.setScene(new Scene(loader.load()));
-
             OverlayApiController ctrl = loader.getController();
             ctrl.setOnImport(items -> {
                 tierList.getUnclassifiedItems().addAll(items);

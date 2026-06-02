@@ -246,3 +246,65 @@
 #btnReset{
     -fx-background-color: red;
 }
+/* ==========================================================================
+   STYLE DES LIGNES DYNAMIQUES DE TIER
+   ========================================================================== */
+
+/* Ligne complète (HBox) */
+.tier-full-row {
+    -fx-border-color: -color-border-input;
+    -fx-border-width: 0 0 1 0;
+}
+
+/* Label de gauche (ex: "Tier S") */
+.tier-label {
+    -fx-alignment: center;
+    -fx-font-size: 14px;
+    -fx-text-fill: black; /* Reste noir pour être lisible sur les couleurs vives */
+    -fx-font-weight: bold;
+    -fx-padding: 5;
+}
+
+/* Zone centrale de dépôt des items (FlowPane) */
+.tier-row-content {
+    -fx-background-color: -color-bg-secondary; /* S'adapte au thème */
+}
+
+/* Zone noire de droite contenant les 3 boutons (VBox) */
+.tier-controls-box {
+    -fx-background-color: -color-bg-primary; /* Rejoint la couleur du fond global */
+}
+
+/* Les petits boutons d'action (⚙, ∧, ∨) */
+.tier-control-button {
+    -fx-background-color: -color-bg-secondary;
+    -fx-border-color: -color-border-input;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-text-fill: -color-text-primary;
+    -fx-font-size: 13px;
+}
+
+.tier-control-button:hover {
+    -fx-background-color: -color-bg-hover;
+}
+/* Le carré de l'item (VBox) */
+.tierlist-item {
+    -fx-background-color: -color-bg-secondary; /* S'adapte : sombre ou clair */
+    -fx-border-color: -color-border-input;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-cursor: hand;
+}
+
+/* Changement de couleur léger au survol de la souris */
+.tierlist-item:hover {
+    -fx-background-color: -color-bg-hover;
+}
+
+/* Le texte à l'intérieur de l'item s'il n'y a pas d'image */
+.tierlist-item-label {
+    -fx-text-fill: -color-text-primary; /* Blanc en mode sombre, noir en mode clair */
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+}
