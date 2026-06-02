@@ -247,7 +247,6 @@ public class TierListEditorController {
             stage.setScene(scene);
             stage.initModality(Modality.APPLICATION_MODAL);
 
-            CustomInputController ctrl = loader.getController();
             ctrl.configurer("Nouvel item", "");
 
             stage.showAndWait();
@@ -325,7 +324,6 @@ public class TierListEditorController {
                 stage.setScene(scene);
                 stage.initModality(Modality.APPLICATION_MODAL);
 
-                CustomInputController ctrl = loader.getController();
                 ctrl.configurer("Renommer l'item", item.getLabel());
 
                 stage.showAndWait();
@@ -639,4 +637,7 @@ public class TierListEditorController {
     }
 
 
+    public void setDarkTheme(boolean isDarkTheme) {
+        this.isDarkTheme=isDarkTheme;
+    }
 }
