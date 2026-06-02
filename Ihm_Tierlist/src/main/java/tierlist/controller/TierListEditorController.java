@@ -634,7 +634,4 @@ public class TierListEditorController {
     }
 
 
-    public void setDarkTheme(boolean isDarkTheme) {
-        this.isDarkTheme=isDarkTheme;
-    }
 }
