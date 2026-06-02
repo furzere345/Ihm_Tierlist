@@ -140,7 +140,7 @@ public class TierListEditorController {
 
         // On garde uniquement la couleur de fond dynamique propre au tier, le reste va en CSS
         label.getStyleClass().add("tier-label");
-        label.setStyle("-fx-background-color: " + tier.getColorHex() + ";");
+        label.setStyle("-fx-background-color: " + tier.getColorHex() + "; -fx-text-fill: black;");
 
         FlowPane itemsPane = new FlowPane();
         itemsPane.setHgap(6);
