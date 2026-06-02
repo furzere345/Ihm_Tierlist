@@ -95,12 +95,15 @@ public class AccueilController {
     private void showImportSuccess(String tierListName) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/CustomAlert.fxml"));
-            Stage stage = new Stage();
-            stage.setScene(new Scene(loader.load()));
-            stage.initModality(Modality.APPLICATION_MODAL);
-
+            Parent root = loader.load();
             CustomAlertController ctrl = loader.getController();
             ctrl.configurer("Importation réussie", "La Tier-List \"" + tierListName + "\" a été importée avec succès !");
+            Scene scene = new Scene(root);
+            String cssPath = this.isDarkTheme ? "/css/dark.css" : "/css/light.css";
+            scene.getStylesheets().setAll(getClass().getResource(cssPath).toExternalForm());
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.initModality(Modality.APPLICATION_MODAL);
 
             stage.showAndWait();
         } catch (IOException e) {

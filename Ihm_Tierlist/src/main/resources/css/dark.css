@@ -233,3 +233,9 @@
 .tier-row-content {
     -fx-background-color: -color-bg-secondary;
 }
+#labelTitre{
+    -fx-text-fill: -color-text-primary;
+}
+#labelMessage{
+    -fx-text-fill: -color-text-primary;
+}

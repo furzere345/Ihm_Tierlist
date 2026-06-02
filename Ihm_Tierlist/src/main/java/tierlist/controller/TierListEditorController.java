@@ -446,6 +446,7 @@ public class TierListEditorController {
             Parent root = loader.load();
             OverlaySaveController ctrl = loader.getController();
             ctrl.setData(tierList, tiersContainer);
+            ctrl.setDarkTheme(this.isDarkTheme);
             // 2. Création de la scène pour la modale
             Scene scene = new Scene(root);
             String cssPath = this.isDarkTheme ? "/css/dark.css" : "/css/light.css";
@@ -634,4 +635,6 @@ public class TierListEditorController {
     }
 
 
+    public void setDarkTheme(boolean isDarkTheme) {this.isDarkTheme=isDarkTheme;
+    }
 }

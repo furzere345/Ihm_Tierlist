@@ -3,6 +3,7 @@ package tierlist.controller;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
@@ -30,7 +31,7 @@ public class OverlaySaveController {
     private TierList tierList;
     private Pane tierListPane;
     private PersistenceService persistenceService = new PersistenceService();
-
+    private boolean isDarkTheme;
 
     public void setData(TierList tl, Pane pane) {
         this.tierList = tl;
@@ -78,13 +79,15 @@ public class OverlaySaveController {
     private void showSuccess(String message) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/CustomAlert.fxml"));
-            Stage stage = new Stage();
-            stage.setScene(new Scene(loader.load()));
-
-            stage.initModality(Modality.APPLICATION_MODAL);
-
+            Parent root = loader.load();
             CustomAlertController ctrl = loader.getController();
             ctrl.configurer("Succès", message);
+            Scene scene = new Scene(root);
+            String cssPath = this.isDarkTheme ? "/css/dark.css" : "/css/light.css";
+            scene.getStylesheets().setAll(getClass().getResource(cssPath).toExternalForm());
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.initModality(Modality.APPLICATION_MODAL);
 
             stage.showAndWait();
         } catch (IOException e) {
@@ -97,4 +100,6 @@ public class OverlaySaveController {
     }
 
 
+    public void setDarkTheme(boolean isDarkTheme) {this.isDarkTheme=isDarkTheme;
+    }
 }

@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="180.0" prefWidth="350.0" spacing="20.0" style="-fx-background-color: #2b2b2b; -fx-border-color: #444444; -fx-border-width: 2;" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tierlist.controller.CustomAlertController">
+<VBox alignment="CENTER" prefHeight="180.0" prefWidth="350.0" spacing="20.0" style="-fx-border-width: 2;" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tierlist.controller.CustomAlertController">
 
     <padding>
         <Insets bottom="20.0" left="25.0" right="25.0" top="20.0" />
@@ -24,6 +24,6 @@
         </font>
     </Label>
 
-    <Button defaultButton="true" mnemonicParsing="false" onAction="#onFermer" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #3D81FF; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-background-radius: 4;" text="OK" />
+    <Button defaultButton="true" mnemonicParsing="false" onAction="#onFermer" prefHeight="30.0" prefWidth="100.0" style="-fx-font-weight: bold; -fx-background-radius: 4;" text="OK" />
 
 </VBox>
