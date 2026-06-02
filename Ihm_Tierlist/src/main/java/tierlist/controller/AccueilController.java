@@ -13,7 +13,6 @@ import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import tierlist.Main;
 import tierlist.model.TierList;
 import tierlist.service.PersistenceService;
 import javafx.scene.Parent;
