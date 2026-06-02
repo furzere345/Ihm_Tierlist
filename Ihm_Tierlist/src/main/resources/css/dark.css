@@ -34,9 +34,7 @@
 }
 
 
-/* ============================================================
-   LABELS / TEXTES
-   ============================================================ */
+
 .label {
     -fx-text-fill: -color-text-primary;
 }
@@ -191,10 +189,10 @@
     -fx-padding: 5;
 }
 .tier-row-content {
-    -fx-background-color: -color-bg-secondary; /* S'adapte au thème */
+    -fx-background-color: -color-bg-secondary;
 }
 .tier-controls-box {
-    -fx-background-color: -color-bg-primary; /* Rejoint la couleur du fond global */
+    -fx-background-color: -color-bg-primary;
 }
 .tier-control-button {
     -fx-background-color: -color-bg-secondary;
@@ -209,7 +207,7 @@
     -fx-background-color: -color-bg-hover;
 }
 .tierlist-item {
-    -fx-background-color: -color-bg-secondary; /* S'adapte : sombre ou clair */
+    -fx-background-color: -color-bg-secondary;
     -fx-border-color: -color-border-input;
     -fx-border-radius: 4;
     -fx-background-radius: 4;
@@ -219,8 +217,8 @@
     -fx-background-color: -color-bg-hover;
 }
 .tierlist-item-label {
-    -fx-text-fill: -color-text-primary; /* Blanc en mode sombre, noir en mode clair */
-    -fx-text-alignment: center;
+    -fx-text-fill: -color-text-primary;
+    fx-text-alignment: center;
     -fx-alignment: center;
 }
 .unclassified-pane {
