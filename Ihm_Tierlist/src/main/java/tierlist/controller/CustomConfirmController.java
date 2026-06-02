@@ -10,10 +10,12 @@ public class CustomConfirmController {
     private Label labelMessage;
 
     private boolean isConfirmed = false;
+    private boolean isDarkTheme;
 
     public void configurer(String message) {
         labelMessage.setText(message);
     }
+
 
     public boolean isConfirmed() {
         return isConfirmed;
@@ -34,5 +36,8 @@ public class CustomConfirmController {
     private void fermerFenetre() {
         Stage stage = (Stage) labelMessage.getScene().getWindow();
         stage.close();
+    }
+
+    public void setDarkTheme(boolean isDarkTheme) { this.isDarkTheme=isDarkTheme;
     }
 }

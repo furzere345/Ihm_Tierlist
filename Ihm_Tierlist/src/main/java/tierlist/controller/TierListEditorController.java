@@ -412,19 +412,33 @@ public class TierListEditorController {
     // =========================================================================
 
     //Reinitialiser la tier-list
+
     @FXML
     private void onReset() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/CustomConfirm.fxml"));
-            Stage stage = new Stage();
-            stage.setScene(new Scene(loader.load()));
-            stage.initModality(Modality.APPLICATION_MODAL);
+            Parent root = loader.load();
 
+            // 1. Récupération du contrôleur et envoi du texte + du thème
             CustomConfirmController ctrl = loader.getController();
             ctrl.configurer("Remettre tous les items dans la zone à classer ?");
+            ctrl.setDarkTheme(this.isDarkTheme); // Transmet le thème actuel
+
+            // 2. Création de la scène pour la modale
+            Scene scene = new Scene(root);
+
+            // 3. Application dynamique du CSS
+            String cssPath = this.isDarkTheme ? "/css/dark.css" : "/css/light.css";
+            scene.getStylesheets().setAll(getClass().getResource(cssPath).toExternalForm());
+
+            // 4. Configuration et affichage de la fenêtre
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.initModality(Modality.APPLICATION_MODAL);
 
             stage.showAndWait();
 
+            // 5. Action après confirmation
             if (ctrl.isConfirmed()) {
                 tierList.reset();
                 persistenceService.save(tierList);
@@ -476,9 +490,23 @@ public class TierListEditorController {
     @FXML
     private void onBack() {
         try {
+            // 1. Chargement de la vue Accueil
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Accueil.fxml"));
+            Parent root = loader.load();
+
+            // 2. Transmission du thème au contrôleur de l'accueil
+            AccueilController nextController = loader.getController();
+            nextController.setDarkTheme(this.isDarkTheme);
+
+            // 3. Création de la scène et application immédiate du CSS
+            Scene nextScene = new Scene(root);
+            String cssPath = this.isDarkTheme ? "/css/dark.css" : "/css/light.css";
+            nextScene.getStylesheets().setAll(getClass().getResource(cssPath).toExternalForm());
+
+            // 4. Affichage sur la fenêtre principale
             Stage stage = (Stage) btnBack.getScene().getWindow();
-            stage.setScene(new Scene(loader.load()));
+            stage.setScene(nextScene);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
