@@ -26,34 +26,20 @@ import java.util.List;
 
 public class TierListEditorController {
 
-    @FXML
-    private Label labelTierListName;
-    @FXML
-    private VBox tiersContainer;
-    @FXML
-    private FlowPane unclassifiedPane;
-    @FXML
-    private Button btnAddTier;
-    @FXML
-    private Button btnReset;
-    @FXML
-    private Button btnSave;
-    @FXML
-    private Button btnBack;
-    @FXML
-    private Button btnAddItem;
-    @FXML
-    private Button btnAddImageItem;
-    @FXML
-    private Label labelDescription;
-    @FXML
-    private Label itemCountBadge;
-    @FXML
-    private ImageView coverImageView;
-    @FXML
-    private Label coverPlaceholder;
-    @FXML
-    private Button buttonTheme;
+    @FXML private Label labelTierListName;
+    @FXML private VBox tiersContainer;
+    @FXML private FlowPane unclassifiedPane;
+    @FXML private Button btnAddTier;
+    @FXML private Button btnReset;
+    @FXML private Button btnSave;
+    @FXML private Button btnBack;
+    @FXML private Button btnAddItem;
+    @FXML private Button btnAddImageItem;
+    @FXML private Label labelDescription;
+    @FXML private Label itemCountBadge;
+    @FXML private ImageView coverImageView;
+    @FXML private Label coverPlaceholder;
+    @FXML private Button buttonTheme;
     @FXML  private Button btnRename;
 
     private TierList tierList;
@@ -140,7 +126,7 @@ public class TierListEditorController {
 
         // On garde uniquement la couleur de fond dynamique propre au tier, le reste va en CSS
         label.getStyleClass().add("tier-label");
-        label.setStyle("-fx-background-color: " + tier.getColorHex() + ";");
+        label.setStyle("-fx-background-color: " + tier.getColorHex() + "; -fx-text-fill: black;");
 
         FlowPane itemsPane = new FlowPane();
         itemsPane.setHgap(6);
@@ -375,11 +361,9 @@ public class TierListEditorController {
     private void openOverlayTier(Tier tierToEdit) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Overlay.fxml"));
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setTitle(tierToEdit == null ? "Nouveau tier" : "Modifier le tier");
-            stage.setScene(new Scene(loader.load()));
+            Parent root = loader.load();
 
+            // 1. Récupération du contrôleur et envoi des callbacks + du thème
             OverlayTierController ctrl = loader.getController();
             ctrl.setTier(
                     tierToEdit,
@@ -401,6 +385,21 @@ public class TierListEditorController {
                     }
             );
 
+            // 2. Création de la scène avec le parent chargé
+            Scene scene = new Scene(root);
+
+            if (isDarkTheme==true){
+                scene.getStylesheets().add(getClass().getResource("/css/dark.css").toExternalForm());
+            }
+            else{
+                scene.getStylesheets().add(getClass().getResource("/css/light.css").toExternalForm());
+            }
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle(tierToEdit == null ? "Nouveau tier" : "Modifier le tier");
+            stage.setScene(scene);
+
             stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
@@ -412,19 +411,33 @@ public class TierListEditorController {
     // =========================================================================
 
     //Reinitialiser la tier-list
+
     @FXML
     private void onReset() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/CustomConfirm.fxml"));
-            Stage stage = new Stage();
-            stage.setScene(new Scene(loader.load()));
-            stage.initModality(Modality.APPLICATION_MODAL);
+            Parent root = loader.load();
 
+            // 1. Récupération du contrôleur et envoi du texte + du thème
             CustomConfirmController ctrl = loader.getController();
             ctrl.configurer("Remettre tous les items dans la zone à classer ?");
+            // 2. Création de la scène pour la modale
+            Scene scene = new Scene(root);
+
+            // 3. Application dynamique du CSS
+            if (isDarkTheme==true){
+                scene.getStylesheets().add(getClass().getResource("/css/dark.css").toExternalForm());
+            }
+            else{
+                scene.getStylesheets().add(getClass().getResource("/css/light.css").toExternalForm());
+            }
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.initModality(Modality.APPLICATION_MODAL);
 
             stage.showAndWait();
 
+            // 5. Action après confirmation
             if (ctrl.isConfirmed()) {
                 tierList.reset();
                 persistenceService.save(tierList);
@@ -441,26 +454,16 @@ public class TierListEditorController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Overlay-save.fxml"));
             Parent root = loader.load();
-
-            // 1. Récupération du contrôleur et transmission des données + du thème
             OverlaySaveController ctrl = loader.getController();
             ctrl.setData(tierList, tiersContainer);
-            ctrl.setDarkTheme(this.isDarkTheme); // Transmet le thème actuel
-
             // 2. Création de la scène pour la modale
             Scene scene = new Scene(root);
-
-            // 3. Application du CSS selon le thème actif
-
             if (isDarkTheme==true){
                 scene.getStylesheets().add(getClass().getResource("/css/dark.css").toExternalForm());
             }
             else{
                 scene.getStylesheets().add(getClass().getResource("/css/light.css").toExternalForm());
             }
-
-
-            // 4. Configuration et affichage
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setTitle("Sauvegarder");
@@ -476,9 +479,23 @@ public class TierListEditorController {
     @FXML
     private void onBack() {
         try {
+            // 1. Chargement de la vue Accueil
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Accueil.fxml"));
+            Parent root = loader.load();
+
+            // 2. Transmission du thème au contrôleur de l'accueil
+            AccueilController nextController = loader.getController();
+            nextController.setDarkTheme(this.isDarkTheme);
+
+            // 3. Création de la scène et application immédiate du CSS
+            Scene nextScene = new Scene(root);
+            String cssPath = this.isDarkTheme ? "/css/dark.css" : "/css/light.css";
+            nextScene.getStylesheets().setAll(getClass().getResource(cssPath).toExternalForm());
+
+            // 4. Affichage sur la fenêtre principale
             Stage stage = (Stage) btnBack.getScene().getWindow();
-            stage.setScene(new Scene(loader.load()));
+            stage.setScene(nextScene);
+
         } catch (IOException e) {
             e.printStackTrace();
         }

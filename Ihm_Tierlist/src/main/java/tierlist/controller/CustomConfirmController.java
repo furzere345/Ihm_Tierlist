@@ -15,6 +15,7 @@ public class CustomConfirmController {
         labelMessage.setText(message);
     }
 
+
     public boolean isConfirmed() {
         return isConfirmed;
     }
@@ -35,4 +36,6 @@ public class CustomConfirmController {
         Stage stage = (Stage) labelMessage.getScene().getWindow();
         stage.close();
     }
+
+
 }

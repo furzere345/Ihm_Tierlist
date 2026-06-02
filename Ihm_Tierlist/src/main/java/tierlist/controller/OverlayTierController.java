@@ -97,4 +97,6 @@ public class OverlayTierController {
     private void closeStage() {
         ((Stage) confirmButton.getScene().getWindow()).close();
     }
+
+
 }

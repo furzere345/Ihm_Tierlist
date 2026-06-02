@@ -280,7 +280,7 @@
 .tier-label {
     -fx-alignment: center;
     -fx-font-size: 14px;
-    -fx-text-fill: black; /* Reste noir pour être lisible sur les couleurs vives */
+    -fx-text-fill: black;
     -fx-font-weight: bold;
     -fx-padding: 5;
 }
