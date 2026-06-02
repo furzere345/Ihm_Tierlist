@@ -12,12 +12,12 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="230.0" prefWidth="400.0" style="-fx-background-color: #111111;" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tierlist.controller.OverlayTierController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="230.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tierlist.controller.OverlayTierController">
 
    <!-- CENTRE -->
    <center>
 
-      <HBox prefHeight="180.0" prefWidth="400.0" spacing="25.0" style="-fx-background-color: #111111;">
+      <HBox prefHeight="180.0" prefWidth="400.0" spacing="25.0">
 
          <!-- ROUE -->
          <children>
@@ -164,12 +164,12 @@
    <!-- BARRE BAS -->
    <bottom>
 
-      <HBox alignment="CENTER" prefHeight="50.0" prefWidth="400.0" style="-fx-background-color: #2B2727;">
+      <HBox alignment="CENTER" prefHeight="50.0" prefWidth="400.0">
 
          <children>
 
             <!-- SUPPRIMER -->
-            <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#onDelete" prefHeight="30.0" prefWidth="90.0" style="-fx-background-color: white;                                -fx-background-radius: 8;" text="Supprimer" textFill="#333333">
+            <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#onDelete" prefHeight="30.0" prefWidth="90.0" style="-fx-background-radius: 8;" text="Supprimer" textFill="#333333">
 
                <HBox.margin>
                   <Insets left="15.0" />
@@ -181,7 +181,7 @@
             <Region HBox.hgrow="ALWAYS" />
 
             <!-- CONFIRMER -->
-            <Button fx:id="confirmButton" mnemonicParsing="false" onAction="#onConfirm" prefHeight="30.0" prefWidth="90.0" style="-fx-background-color: #3D81FF;                                -fx-background-radius: 8;" text="Confirmer" textFill="WHITE">
+            <Button fx:id="confirmButton" mnemonicParsing="false" onAction="#onConfirm" prefHeight="30.0" prefWidth="90.0" style="-fx-background-radius: 8;" text="Confirmer" textFill="WHITE">
 
                <HBox.margin>
                   <Insets right="15.0" />

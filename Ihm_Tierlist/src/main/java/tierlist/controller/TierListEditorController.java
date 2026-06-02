@@ -26,34 +26,20 @@ import java.util.List;
 
 public class TierListEditorController {
 
-    @FXML
-    private Label labelTierListName;
-    @FXML
-    private VBox tiersContainer;
-    @FXML
-    private FlowPane unclassifiedPane;
-    @FXML
-    private Button btnAddTier;
-    @FXML
-    private Button btnReset;
-    @FXML
-    private Button btnSave;
-    @FXML
-    private Button btnBack;
-    @FXML
-    private Button btnAddItem;
-    @FXML
-    private Button btnAddImageItem;
-    @FXML
-    private Label labelDescription;
-    @FXML
-    private Label itemCountBadge;
-    @FXML
-    private ImageView coverImageView;
-    @FXML
-    private Label coverPlaceholder;
-    @FXML
-    private Button buttonTheme;
+    @FXML private Label labelTierListName;
+    @FXML private VBox tiersContainer;
+    @FXML private FlowPane unclassifiedPane;
+    @FXML private Button btnAddTier;
+    @FXML private Button btnReset;
+    @FXML private Button btnSave;
+    @FXML private Button btnBack;
+    @FXML private Button btnAddItem;
+    @FXML private Button btnAddImageItem;
+    @FXML private Label labelDescription;
+    @FXML private Label itemCountBadge;
+    @FXML private ImageView coverImageView;
+    @FXML private Label coverPlaceholder;
+    @FXML private Button buttonTheme;
     @FXML  private Button btnRename;
 
     private TierList tierList;
@@ -375,11 +361,9 @@ public class TierListEditorController {
     private void openOverlayTier(Tier tierToEdit) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Overlay.fxml"));
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setTitle(tierToEdit == null ? "Nouveau tier" : "Modifier le tier");
-            stage.setScene(new Scene(loader.load()));
+            Parent root = loader.load();
 
+            // 1. Récupération du contrôleur et envoi des callbacks + du thème
             OverlayTierController ctrl = loader.getController();
             ctrl.setTier(
                     tierToEdit,
@@ -400,6 +384,21 @@ public class TierListEditorController {
                         refresh();
                     }
             );
+
+            // 2. Création de la scène avec le parent chargé
+            Scene scene = new Scene(root);
+
+            if (isDarkTheme==true){
+                scene.getStylesheets().add(getClass().getResource("/css/dark.css").toExternalForm());
+            }
+            else{
+                scene.getStylesheets().add(getClass().getResource("/css/light.css").toExternalForm());
+            }
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle(tierToEdit == null ? "Nouveau tier" : "Modifier le tier");
+            stage.setScene(scene);
 
             stage.showAndWait();
         } catch (IOException e) {
@@ -422,16 +421,16 @@ public class TierListEditorController {
             // 1. Récupération du contrôleur et envoi du texte + du thème
             CustomConfirmController ctrl = loader.getController();
             ctrl.configurer("Remettre tous les items dans la zone à classer ?");
-            ctrl.setDarkTheme(this.isDarkTheme); // Transmet le thème actuel
-
             // 2. Création de la scène pour la modale
             Scene scene = new Scene(root);
 
             // 3. Application dynamique du CSS
-            String cssPath = this.isDarkTheme ? "/css/dark.css" : "/css/light.css";
-            scene.getStylesheets().setAll(getClass().getResource(cssPath).toExternalForm());
-
-            // 4. Configuration et affichage de la fenêtre
+            if (isDarkTheme==true){
+                scene.getStylesheets().add(getClass().getResource("/css/dark.css").toExternalForm());
+            }
+            else{
+                scene.getStylesheets().add(getClass().getResource("/css/light.css").toExternalForm());
+            }
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.initModality(Modality.APPLICATION_MODAL);
@@ -455,26 +454,16 @@ public class TierListEditorController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Overlay-save.fxml"));
             Parent root = loader.load();
-
-            // 1. Récupération du contrôleur et transmission des données + du thème
             OverlaySaveController ctrl = loader.getController();
             ctrl.setData(tierList, tiersContainer);
-            ctrl.setDarkTheme(this.isDarkTheme); // Transmet le thème actuel
-
             // 2. Création de la scène pour la modale
             Scene scene = new Scene(root);
-
-            // 3. Application du CSS selon le thème actif
-
             if (isDarkTheme==true){
                 scene.getStylesheets().add(getClass().getResource("/css/dark.css").toExternalForm());
             }
             else{
                 scene.getStylesheets().add(getClass().getResource("/css/light.css").toExternalForm());
             }
-
-
-            // 4. Configuration et affichage
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setTitle("Sauvegarder");

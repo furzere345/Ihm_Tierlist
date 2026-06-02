@@ -30,7 +30,6 @@ public class OverlaySaveController {
     private TierList tierList;
     private Pane tierListPane;
     private PersistenceService persistenceService = new PersistenceService();
-    private boolean isDarkTheme = true;
 
 
     public void setData(TierList tl, Pane pane) {
@@ -98,7 +97,5 @@ public class OverlaySaveController {
         ((Stage) downloadButton.getScene().getWindow()).close();
     }
 
-    public void setDarkTheme(boolean isDarkTheme) {
-        this.isDarkTheme=isDarkTheme;
-    }
+
 }

@@ -10,7 +10,6 @@ public class CustomConfirmController {
     private Label labelMessage;
 
     private boolean isConfirmed = false;
-    private boolean isDarkTheme;
 
     public void configurer(String message) {
         labelMessage.setText(message);
@@ -38,6 +37,5 @@ public class CustomConfirmController {
         stage.close();
     }
 
-    public void setDarkTheme(boolean isDarkTheme) { this.isDarkTheme=isDarkTheme;
-    }
+
 }
