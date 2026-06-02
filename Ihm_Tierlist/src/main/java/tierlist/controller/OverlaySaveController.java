@@ -2,6 +2,8 @@ package tierlist.controller;
 
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -9,6 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import tierlist.model.TierList;
 import tierlist.service.PersistenceService;
@@ -50,6 +53,7 @@ public class OverlaySaveController {
         File file = fc.showSaveDialog(downloadButton.getScene().getWindow());
         if (file != null) {
             WritableImage img = tierListPane.snapshot(new SnapshotParameters(), null);
+            showSuccess("Tier-list exportée avec succès !");
             try {
                 ImageIO.write(SwingFXUtils.fromFXImage(img, null), "png", file);
             } catch (IOException e) {
@@ -74,11 +78,20 @@ public class OverlaySaveController {
 
     //Feedback succes
     private void showSuccess(String message) {
-        javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.INFORMATION);
-        alert.setTitle("Succès");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/CustomAlert.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(loader.load()));
+
+            stage.initModality(Modality.APPLICATION_MODAL);
+
+            CustomAlertController ctrl = loader.getController();
+            ctrl.configurer("Succès", message);
+
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void closeStage() {

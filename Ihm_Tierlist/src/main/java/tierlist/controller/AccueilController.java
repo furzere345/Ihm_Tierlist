@@ -83,6 +83,8 @@ public class AccueilController {
         }
     }
 
+
+
     //evite les conflits d'ID si on importe 2x le meme fichier
     private TierList reIdTierList(TierList tl) {
         TierList copy = tl.duplicate();
@@ -91,20 +93,38 @@ public class AccueilController {
 
     }
 
-    private void showImportSuccess(String name) {
-        javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.INFORMATION);
-        alert.setTitle("Import réussi");
-        alert.setHeaderText(null);
-        alert.setContentText("\"" + name + "\" importée avec succès !");
-        alert.showAndWait();
+    private void showImportSuccess(String tierListName) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/CustomAlert.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(loader.load()));
+            stage.initModality(Modality.APPLICATION_MODAL);
+
+            CustomAlertController ctrl = loader.getController();
+            // On intègre dynamiquement le nom de la tier-list importée
+            ctrl.configurer("Importation réussie", "La Tier-List \"" + tierListName + "\" a été importée avec succès !");
+
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void showImportError() {
-        javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.ERROR);
-        alert.setTitle("Erreur d'import");
-        alert.setHeaderText(null);
-        alert.setContentText("Le fichier sélectionné n'est pas valide.");
-        alert.showAndWait();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/CustomAlert.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(loader.load()));
+            stage.initModality(Modality.APPLICATION_MODAL);
+
+            CustomAlertController ctrl = loader.getController();
+            // On réutilise la même fenêtre mais avec un message d'erreur
+            ctrl.configurer("Échec de l'import", "Impossible de lire le fichier. Assurez-vous qu'il s'agit d'un fichier .tl valide.");
+
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     //Basculer theme clair/sombre
