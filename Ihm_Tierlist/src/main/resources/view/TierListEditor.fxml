@@ -19,22 +19,22 @@
         <HBox alignment="CENTER" prefHeight="55.0" spacing="130.0">
             <padding><Insets left="10.0" right="10.0" /></padding>
 
-            <Button fx:id="btnBack" alignment="CENTER" mnemonicParsing="false" onAction="#onBack" prefHeight="32.0" prefWidth="150.0" text="Accueil" textFill="WHITE">
+            <Button fx:id="btnBack" alignment="CENTER" mnemonicParsing="false" onAction="#onBack" prefHeight="32.0" prefWidth="32.0" text="Accueil" textFill="WHITE">
                 <font><Font size="13.0" /></font>
             </Button>
 
-               <Button fx:id="btnReset" mnemonicParsing="false" onAction="#onReset" prefHeight="32.0" prefWidth="150.0" text="Réinitialiser la tierlist" textFill="WHITE">
+               <Button fx:id="btnReset" mnemonicParsing="false" onAction="#onReset" prefHeight="32.0" prefWidth="32.0" text="Réinitialiser la tierlist" textFill="WHITE">
                    <font>
                <Font size="12.0" />
             </font>
                </Button>
-         <Button fx:id="btnRename" mnemonicParsing="false" onAction="#onModifierTierList" prefHeight="32.0" prefWidth="150.0" text="Renommer la tierlist" textFill="WHITE" />
+         <Button fx:id="btnRename" mnemonicParsing="false" onAction="#onModifierTierList" prefHeight="32.0" prefWidth="32.0" text="Renommer la tierlist" textFill="WHITE" />
 
-            <Button fx:id="btnSave" mnemonicParsing="false" onAction="#onSave" prefHeight="32.0" prefWidth="150.0" text="Exporter la tierlist" textFill="WHITE">
+            <Button fx:id="btnSave" mnemonicParsing="false" onAction="#onSave" prefHeight="32.0" prefWidth="32.0" text="Exporter la tierlist" textFill="WHITE">
                 <font><Font size="13.0" /></font>
             </Button>
 
-            <Button fx:id="btnTheme" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onToggleTheme" prefHeight="35.0" prefWidth="35.0" text="☀" textFill="WHITE">
+            <Button fx:id="btnTheme" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onToggleTheme" prefHeight="32.0" prefWidth="32.0" text="☀" textFill="WHITE">
                 <font><Font size="14.0" /></font>
             </Button>
 

@@ -55,8 +55,7 @@ public class TierListEditorController {
     private Label coverPlaceholder;
     @FXML
     private Button btnTheme;
-    @FXML
-    private Button btnRename;
+    @FXML  private Button btnRename;
 
     private TierList tierList;
     private PersistenceService persistenceService = new PersistenceService();

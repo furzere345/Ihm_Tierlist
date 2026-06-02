@@ -222,12 +222,17 @@ public class AccueilController {
     private void ouvrirTierList(TierList tl) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/TierListEditor.fxml"));
-            Stage stage = (Stage) buttonCrreTierlist.getScene().getWindow();
-            Scene scene = new Scene(loader.load(), 1200, 800); // largeur, hauteur
-            stage.setScene(scene);
+            Parent root = loader.load();
             TierListEditorController ctrl = loader.getController();
-            ctrl.setTierList(tl);
+            ctrl.setDarkTheme(this.isDarkTheme); // Si vous voulez garder le thème !
+            ctrl.setTierList(tl); // On passe l'objet AVANT d'afficher
+            String cssPath = isDarkTheme ? "/css/dark.css" : "/css/light.css";
+            root.getStylesheets().add(getClass().getResource(cssPath).toExternalForm());
+            Stage stage = (Stage) buttonCrreTierlist.getScene().getWindow();
+            Scene scene = new Scene(root, 1200, 800);
+            stage.setScene(scene);
         } catch (IOException e) {
+            System.err.println("Impossible de charger l'éditeur de TierList : " + e.getMessage());
             e.printStackTrace();
         }
     }

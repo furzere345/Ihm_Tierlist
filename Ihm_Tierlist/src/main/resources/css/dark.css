@@ -1,35 +1,19 @@
 
 .root {
-    /* --- Fonds --- */
     -color-bg-primary:      #181616;
     -color-bg-secondary:    #2A2A2A;
     -color-bg-hover:        #1E1E1E;
-
-    /* --- Texte --- */
     -color-text-primary:    #FFFFFF;
     -color-text-muted:      #888888;
-
-    /* --- Accent (boutons principaux) --- */
     -color-accent:          #3D81FF;
     -color-accent-hover:    #2670FF;
     -color-accent-text:     #FFFFFF;
-
-    /* --- Bordures --- */
     -color-border:          #FFFFFF;
     -color-border-input:    #555555;
-
-    /* --- Bouton Importer --- */
     -color-btn-import:      #070707;
     -color-btn-import-text: #FFFFFF;
-
-    /* --- Bouton Thème --- */
     -color-btn-theme:       #FFFFFF;
 }
-
-
-/* ============================================================
-   RESET — Fonds de base
-   ============================================================ */
 .root,
 .border-pane,
 .vbox,
@@ -42,10 +26,6 @@
     -fx-background: -color-bg-primary;
 }
 
-
-/* ============================================================
-   SÉPARATEURS (Navbar, sections)
-   ============================================================ */
 #navbar,
 #vosTierList,
 .hbox {
@@ -62,9 +42,6 @@
 }
 
 
-/* ============================================================
-   BOUTONS PRINCIPAUX (accent bleu)
-   ============================================================ */
 #buttonCrreTierlist,
 #btnAccueil,
 #btnCommencer {
@@ -79,10 +56,6 @@
     -fx-background-color: -color-accent-hover;
 }
 
-
-/* ============================================================
-   BOUTON IMPORTER
-   ============================================================ */
 #buttonImporter {
     -fx-background-color: -color-btn-import;
     -fx-text-fill: -color-btn-import-text;
@@ -94,21 +67,12 @@
 #buttonImporter:hover {
     -fx-background-color: -color-bg-hover;
 }
-
-
-/* ============================================================
-   BOUTON CHANGEMENT DE THÈME (rond)
-   ============================================================ */
 #buttonTheme {
     -fx-background-color: -color-btn-theme;
     -fx-background-radius: 20;
     -fx-cursor: hand;
 }
 
-
-/* ============================================================
-   ZONE IMAGE DE COUVERTURE
-   ============================================================ */
 #coverImagePane {
     -fx-background-color: -color-bg-secondary;
     -fx-border-color: -color-accent;
@@ -116,10 +80,6 @@
     -fx-cursor: hand;
 }
 
-
-/* ============================================================
-   CHAMPS DE SAISIE (TextField, TextArea)
-   ============================================================ */
 .text-input,
 .text-field,
 .text-area,
@@ -132,24 +92,22 @@
     -fx-border-radius: 5;
     -fx-background-radius: 5;
 }
-/* Style du conteneur de la popup (le rectangle de fond) */
+
 .context-menu, .popup, .menu-button .context-menu {
-    -fx-background-color: -color-bg-secondary; /* Fond gris foncé assorti à tes cartes */
-    -fx-border-color: -color-border-input;      /* Bordure fine pour le détacher du fond noir */
+    -fx-background-color: -color-bg-secondary;
+    -fx-border-color: -color-border-input;
     -fx-border-width: 1px;
     -fx-border-radius: 5px;
     -fx-background-radius: 5px;
-    -fx-padding: 0;                /* Nettoie les marges internes par défaut */
+    -fx-padding: 0;
 }
-
-/* Style des éléments textuels à l'intérieur (comme "Dupliquer") */
 .menu-item .label {
-    -fx-text-fill: -color-text-primary ; /* Texte écrit en blanc */
+    -fx-text-fill: -color-text-primary ;
     -fx-font-size: 14px;
 }
 .tierlist-card {
     -fx-background-color: -color-bg-secondary;
-    -fx-border-color: #444444; /* Tu peux mettre -color-border-input si tu veux que ça change */
+    -fx-border-color: #444444;
     -fx-border-radius: 8;
     -fx-background-radius: 8;
     -fx-cursor: hand;
