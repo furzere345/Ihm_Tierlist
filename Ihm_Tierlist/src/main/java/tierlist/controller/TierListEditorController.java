@@ -75,8 +75,6 @@ public class TierListEditorController {
 
     @FXML
     public void initialize() {
-        // Les handlers boutons sont déclarés ici
-        // (les @FXML methods suffisent, pas besoin de setOnAction manuel)
     }
 
     @FXML
@@ -87,10 +85,7 @@ public class TierListEditorController {
 
         Scene scene = buttonTheme.getScene();
         if (scene != null) {
-            // 1. On applique sur la scène globale
             scene.getStylesheets().setAll(cssUrl);
-
-            // 2. CORRECTION : On force le FXML racine à vider son CSS et à prendre le nouveau
             if (scene.getRoot() != null) {
                 scene.getRoot().getStylesheets().setAll(cssUrl);
             }
@@ -122,7 +117,6 @@ public class TierListEditorController {
         label.setMinWidth(100);
         label.setWrapText(true);
 
-        // On garde uniquement la couleur de fond dynamique propre au tier, le reste va en CSS
         label.getStyleClass().add("tier-label");
         label.setStyle("-fx-background-color: " + tier.getColorHex() + "; -fx-text-fill: black;");
 
@@ -133,7 +127,6 @@ public class TierListEditorController {
         itemsPane.setPrefHeight(tier.getHeight());
         itemsPane.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
 
-        //Utilise la classe CSS pour la zone de dépôt
         itemsPane.getStyleClass().add("tier-row-content");
         HBox.setHgrow(itemsPane, Priority.ALWAYS);
 
@@ -142,7 +135,6 @@ public class TierListEditorController {
         }
         enableDrop(itemsPane, tier);
 
-        // Boutons droite : edition + monter + descendre
         Button editBtn = new Button("⚙");
         editBtn.setPrefSize(35, 35);
         editBtn.getStyleClass().add("tier-control-button"); // Classe CSS
@@ -179,7 +171,6 @@ public class TierListEditorController {
         //Verifier qu'on reste dans les bornes
         if (newIndex < 0 || newIndex >= tiers.size()) return;
 
-        //Echanger les deux tiers
         tiers.remove(index);
         tiers.add(newIndex, tier);
 
@@ -223,7 +214,6 @@ public class TierListEditorController {
             box.getChildren().add(lbl);
         }
 
-        //Clic droit -> menu contextuel (modifier / supprimer)
         box.setOnContextMenuRequested(e -> showItemContextMenu(box, item, sourceTier));
 
         //Drag
@@ -283,7 +273,7 @@ public class TierListEditorController {
     }
 
     @FXML
- private void onImportApi() {
+    private void onImportApi() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/OverlayApi.fxml"));
             Parent root = loader.load();
@@ -358,7 +348,7 @@ public class TierListEditorController {
         openOverlayTier(null); // null = mode création
     }
 
-    //Ouvrir l'overlay de creation/édition d'un tier
+    //Ouvrir l'overlay tier
     private void openOverlayTier(Tier tierToEdit) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Overlay.fxml"));
@@ -408,10 +398,8 @@ public class TierListEditorController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/CustomConfirm.fxml"));
             Parent root = loader.load();
 
-            // 1. Récupération du contrôleur et envoi du texte + du thème
             CustomConfirmController ctrl = loader.getController();
             ctrl.configurer("Remettre tous les items dans la zone à classer ?");
-            // 2. Création de la scène pour la modale
             Scene scene = new Scene(root);
 
             if (isDarkTheme==true){
@@ -447,7 +435,6 @@ public class TierListEditorController {
             OverlaySaveController ctrl = loader.getController();
             ctrl.setData(tierList, tiersContainer);
             ctrl.setDarkTheme(this.isDarkTheme);
-            // 2. Création de la scène pour la modale
             Scene scene = new Scene(root);
             String cssPath = this.isDarkTheme ? "/css/dark.css" : "/css/light.css";
             scene.getStylesheets().setAll(getClass().getResource(cssPath).toExternalForm());
@@ -466,7 +453,6 @@ public class TierListEditorController {
     @FXML
     private void onBack() {
         try {
-            // 1. Chargement de la vue Accueil
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Accueil.fxml"));
             Parent root = loader.load();
 
@@ -529,7 +515,6 @@ public class TierListEditorController {
         });
 
         itemNode.setOnDragDone(e -> {
-            //Remettre l'opacite normale si le drop n'a pas eu lieu
             itemNode.setOpacity(1.0);
             draggedItem = null;
             draggedFromTier = null;
@@ -543,7 +528,7 @@ public class TierListEditorController {
         target.setOnDragOver(e -> {
             if (e.getDragboard().hasString() && draggedItem != null) {
                 e.acceptTransferModes(javafx.scene.input.TransferMode.MOVE);
-                //Feedback : bordure colore sur la zone cible
+                //feedback
                 target.setStyle(target.getStyle().replace("-fx-border-color: #444444;", "") + "-fx-border-color: #3D81FF; -fx-border-width: 2;");
             }
             e.consume();
@@ -565,7 +550,6 @@ public class TierListEditorController {
             //Calculer la position d'insertion selon la souris
             int insertIndex = getInsertIndex(target, e.getX());
 
-            //Retirer l'item de sa source
             removeItemFromAllLocations(draggedItem);
 
             //Inserer a la bonne position dans la cible
@@ -590,7 +574,6 @@ public class TierListEditorController {
     private int getInsertIndex(FlowPane pane, double mouseX) {
         int index = 0;
         for (javafx.scene.Node child : pane.getChildren()) {
-            //Ignorer l'indicateur de position si présent
             if (child.getUserData() != null && child.getUserData().equals("drop-indicator")) {
                 continue;
             }
@@ -609,7 +592,6 @@ public class TierListEditorController {
 
         pane.getStyleClass().removeAll("unclassified-pane", "tier-row-content");
 
-        // On applique la bonne classe selon le cas
         if (pane == unclassifiedPane) {
             pane.getStyleClass().add("unclassified-pane");
         } else {

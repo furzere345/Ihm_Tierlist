@@ -38,7 +38,6 @@ public class OverlayApiController {
         resultsPane.getChildren().clear();
         searchButton.setDisable(true);
 
-        //Appel API dans un thread separe pour ne pas bloquer l'UI
         new Thread(() -> {
             try {
                 List<RawgApiService.GameResult> games = apiService.searchGames(query);

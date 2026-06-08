@@ -10,7 +10,7 @@ public class Tier implements Serializable {
 
     private String id;
     private String name;
-    private String colorHex;   // ex: "#FF5733"
+    private String colorHex;
     private double height;
     private int order;
     private List<Item> items;

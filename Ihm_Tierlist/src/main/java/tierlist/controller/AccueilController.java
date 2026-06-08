@@ -192,7 +192,7 @@ public class AccueilController {
         return card;
     }
 
-    //Menu contextuel d'une carte (dupliquer / supprimer)
+    //Menu contextuel d'une carte
     private void showCardMenu(TierList tl, VBox card) {
         javafx.scene.control.ContextMenu menu = new javafx.scene.control.ContextMenu();
 

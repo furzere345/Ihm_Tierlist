@@ -62,7 +62,7 @@ public class OverlaySaveController {
         }
     }
 
-    //Exporter en fichier .tl (binaire)
+    //Exporter en fichier .tl
     @FXML
     private void onExportTl() {
         FileChooser fc = new FileChooser();
