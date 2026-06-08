@@ -32,7 +32,7 @@ public class Item implements Serializable {
     public Item duplicate() {
         Item copy = new Item(this.label);
         copy.type = this.type;
-        copy.imageData = this.imageData; // les bytes sont immutables, partage OK
+        copy.imageData = this.imageData;
         copy.size = this.size;
         return copy;
     }

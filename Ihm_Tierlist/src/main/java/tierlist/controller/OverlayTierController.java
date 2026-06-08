@@ -14,7 +14,6 @@ import java.util.function.Consumer;
 
 public class OverlayTierController {
 
-    @FXML private ImageView wheelImage;
     @FXML private TextField tierField;
     @FXML private TextField hexField;
     @FXML private Button confirmButton;
